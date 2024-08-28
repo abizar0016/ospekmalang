@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\AdminController;
 
 // Halaman Utama
 Route::prefix('/')->group(function(){
@@ -38,7 +39,28 @@ Route::prefix('admin')->group(function(){
     Route::get('/', function(){
         return view('admin.index');
     });
+
+    Route::get('/user', function(){
+        return view('admin.user');
+    });
+
+    Route::get('/message', function(){
+        return view('admin.message');
+    });
+
+    Route::get('/help', function(){
+        return view('admin.help');
+    });
+
+    Route::get('/settings', function(){
+        return view('admin.settings');
+    });
+
+    Route::get('/help', function(){
+        return view('admin.help');
+    });
 });
+
 
 // Halaman Produk Guest
 
