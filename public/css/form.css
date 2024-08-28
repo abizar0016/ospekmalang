@@ -1,0 +1,144 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f1f1f1;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Form Container */
+.form-container {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  width: 100%;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  background: #e6e6e6;
+  width: 100%;
+}
+
+.panel-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button-link {
+  padding: 10px 60px;
+  background: #e6e6e6;
+  border: 1px solid #f2f2f2;
+  color: #333;
+  border: none;
+  transition: scale .3s ease-in-out, background .5s ease-in-out;
+  cursor: pointer;
+}
+
+.button-link:hover {
+  background: #888;
+  color: #fff;
+  transition: scale .3s ease-in-out, background .5s ease-in-out;
+}
+
+.button-link.active {
+  scale: 1.08;
+  background: #333;
+  color: #ffffff;
+  transition: scale .3s ease-in-out, background .5s ease-in-out;
+}
+
+.tbl-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.tbl-form > .masuk{
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.tbl-form > .daftar{
+  border-bottom: 1px solid #c4c4c4;
+  display: flex;
+  justify-content: end;
+}
+
+label {
+  position: relative;
+  margin: 20px 0;
+}
+
+.input {
+  width: 90%;
+  padding: 10px 10px 10px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.placeholder {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #f9f9f9;
+  padding: 0 5px;
+  color: #aaa;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.input:focus + .placeholder,
+.input:valid + .placeholder {
+  top: -10px;
+  left: 10px;
+  font-size: 12px;
+  padding: 0 5px;
+  color: #717fe0;
+}
+
+.link{
+  display: flex;
+  justify-content: end;
+  margin: 0 0 15px 0;
+  text-decoration: none;
+  color: #717fe0;
+}
+
+.link:hover{
+  text-decoration: underline;
+}
+
+.action-btn {
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  background: #e6e6e6;
+  color: #222;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: scale .3s ease-in-out, background .5s ease-in-out;
+}
+.action-btn:hover {
+  background: #222;
+  color: #f1f1f1;
+  transition: scale .3s ease-in-out, background .5s ease-in-out;
+}

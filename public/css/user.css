@@ -1,0 +1,426 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  max-width: 100%;
+  background: #ebebeb;
+  overflow-x: hidden;
+}
+
+body.no-scroll {
+    overflow: hidden;
+  }
+  
+
+/* CSS untuk loading screen */
+/* CSS untuk loading screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Pastikan loading screen ada di atas semua konten */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Spinner animation */
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #F16162;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* Spinner animation keyframes */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Untuk menghilangkan loading screen setelah halaman dimuat */
+.loaded #loading-screen {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Untuk menonaktifkan scroll saat loading */
+body.loading {
+    overflow-y: hidden;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  align-items: center;
+  background: #EFD9C8;
+}
+.navbar .logo img {
+  margin-left: 20px;
+  cursor: pointer;
+  width: 70px;
+}
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+}
+.navbar form .navbar-list .navbar-list-item-text a i {
+  margin-left: 5px;
+}
+.navbar form .navbar-list .navbar-list-item-text a:hover {
+  text-decoration: underline;
+}
+.navbar .navbar-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+}
+.navbar .navbar-list .navbar-list-item-text {
+  margin-left: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+}
+.navbar .navbar-list .navbar-list-item-text a {
+  text-decoration: none;
+  text-align: center;
+}
+.navbar .navbar-list .navbar-list-item-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.navbar .navbar-list .navbar-list-item-input i {
+  position: relative;
+  left: 45px;
+}
+.navbar .navbar-list .navbar-list-item-input input[type=text] {
+  border: none;
+  outline: none;
+  width: 200px;
+  height: 30px;
+  border-radius: 20px;
+  font-size: 12px;
+  padding-left: 30px;
+  margin-left: 20px;
+  font-family: "Poppins", sans-serif;
+  background-size: 20px 20px;
+  background-color: #fff;
+}
+.navbar .navbar-list .navbar-list-item-input input[type=submit] {
+  display: none;
+}
+.navbar .navbar-list .navbar-list-item-input input[type=submit]:hover {
+  scale: 1.05;
+  box-shadow: 4px 7px #444;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-list .navbar-list-item-profile a img {
+  width: 35px;
+  margin: 10px 20px 0 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.home {
+  display: flex;
+  margin: 50px 0 0 50px;
+}
+.home .home-right {
+  display: flex;
+  align-items: center;
+}
+.home .home-right img {
+  width: 500px;
+  border-radius: 15px;
+  margin-left: 75px;
+}
+.home .home-left {
+  width: 50%;
+}
+.home .home-left .register {
+  padding: 12px 65px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  background: #F16162;
+  box-shadow: 2px 5px #777;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.home .home-left .register:hover {
+  scale: 1.1;
+  box-shadow: 4px 7px #444;
+  transition: all 0.3s ease-in-out;
+}
+.home .home-left .login {
+  padding: 12px 65px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid black;
+  background: transparent;
+  box-shadow: 2px 5px #777;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.home .home-left .login:hover {
+  scale: 1.1;
+  box-shadow: 4px 7px #444;
+  transition: all 0.3s ease-in-out;
+}
+.home .home-left .welcome {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: 600;
+}
+.home .home-left .description {
+  font-size: 40px;
+  font-weight: bolder;
+  width: 650px;
+}
+.home .home-left a {
+  margin-left: 65px;
+}
+
+.about-section {
+  padding: 20px;
+  margin-top: 20px;
+}
+.about-section h1 {
+  font-size: 30px;
+  margin: 100px 0 50px 100px;
+}
+
+.about-section h2 {
+  margin-bottom: 20px;
+}
+.about-section p {
+  text-align: justify;
+  line-height: 30px;
+}
+.about-section .intro {
+  display: flex;
+  margin-bottom: 20px;
+}
+.about-section .intro img {
+  width: 400px;
+  height: auto;
+  margin: 0px 50px 50px 100px;
+}
+.about-section .intro{
+  width: 90%;
+}
+.about-section .row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.about-section .column {
+  margin: 40px;
+  width: 350px;
+  height: 400px;
+  background: #d9d9d9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #000;
+}
+
+.ProdukBaru {
+  margin-top: 150px;
+}
+.ProdukBaru a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+.ProdukBaru .Judul {
+  margin: 50px 0 20px 100px;
+  font-size: 30px;
+}
+.ProdukPopuler .link {
+  font-size: 12px;
+  position: relative;
+  margin-bottom: 20px;
+  left: 85%;
+}
+.ProdukBaru .card-group {
+  display: flex;
+  flex-direction: row;
+  margin-left: 100px;
+}
+.ProdukBaru .card-group .card {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px;
+  background: #2c2c2c;
+  color: #fff;
+  width: 140px;
+}
+.ProdukBaru .card-group .card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+.ProdukBaru .card-group .card .card-body .card-text {
+  margin: 10px 0 0 10px;
+  font-size: 12px;
+  width: 130px;
+  max-height: 50px; /* Maksimum tinggi yang ditampilkan */
+  white-space: normal; /* Mengizinkan pembungkusan baris */
+  overflow: hidden; /* Sembunyikan konten yang melebihi ukuran elemen */
+  text-overflow: ellipsis; /* Tampilkan elipsis (...) ketika teks terpotong */
+  display: -webkit-box; /* Gunakan fleksibilitas dari box model untuk multi-line ellipsis */
+  -webkit-line-clamp: 2; /* Tentukan jumlah baris sebelum teks dipotong */
+  -webkit-box-orient: vertical; /* Orientasikan box secara vertikal */
+  line-height: 20px; /* Sesuaikan tinggi baris untuk mengontrol jumlah baris */
+}
+
+.ProdukBaru .card-group .card .card-body .nominal {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0 20px 5px;
+}
+.ProdukBaru .card-group .card .card-footer {
+  display: flex;
+  flex-direction: row;
+}
+.ProdukBaru .card-group .card .card-footer .text-body-secondary {
+  font-size: 10px;
+  width: 50%;
+}
+.ProdukBaru .card-group .card .card-footer .rating {
+  font-size: 10px;
+  width: 50%;
+}
+.ProdukBaru .card-group .card img {
+  width: 140px;
+}
+
+.ProdukPopuler {
+  margin-top: 150px;
+}
+.ProdukPopuler a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.ProdukPopuler .link {
+  position: relative;
+  margin-bottom: 20px;
+  left: 85%;
+}
+.ProdukPopuler .card-group {
+  display: flex;
+  flex-direction: row;
+  margin-left: 100px;
+}
+.ProdukPopuler .card-group .card {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+  background: #2c2c2c;
+  color: #fff;
+  width: 140px;
+}
+.ProdukPopuler .card-group .card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+.ProdukPopuler .card-group .card .card-body .card-text {
+  margin: 10px 0 0 10px;
+  font-size: 12px;
+  width: 130px;
+  max-height: 50px; /* Maksimum tinggi yang ditampilkan */
+  white-space: normal; /* Mengizinkan pembungkusan baris */
+  overflow: hidden; /* Sembunyikan konten yang melebihi ukuran elemen */
+  text-overflow: ellipsis; /* Tampilkan elipsis (...) ketika teks terpotong */
+  display: -webkit-box; /* Gunakan fleksibilitas dari box model untuk multi-line ellipsis */
+  -webkit-line-clamp: 2; /* Tentukan jumlah baris sebelum teks dipotong */
+  -webkit-box-orient: vertical; /* Orientasikan box secara vertikal */
+  line-height: 20px; /* Sesuaikan tinggi baris untuk mengontrol jumlah baris */
+
+}
+.ProdukPopuler .card-group .card .card-body .nominal {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 20px 0 20px 5px;
+}
+.ProdukPopuler .card-group .card .card-footer {
+  display: flex;
+  flex-direction: row;
+}
+.ProdukPopuler .card-group .card .card-footer .text-body-secondary {
+  width: 50%;
+  font-size: 10px;
+}
+.ProdukPopuler .card-group .card .card-footer .rating {
+  width: 50%;
+  font-size: 10px;
+}
+.ProdukPopuler .card-group .card img {
+  width: 140px;
+}
+
+.ProdukPopuler .Judul {
+  font-size: 30px;
+  margin: 50px 0 50px 100px;
+}
+
+.category-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.category-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+#itemList {
+  list-style: none;
+  padding: 0;
+}
+
+#itemList li {
+  display: none;
+  padding: 5px;
+  background-color: #f9f9f9;
+  margin-bottom: 5px;
+}
+
+#itemList li.visible {
+  display: block;
+}
