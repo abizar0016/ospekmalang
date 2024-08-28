@@ -2,6 +2,16 @@
 
 <body>
     <div class="container">
+        @if (Session::has('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ Session::get('error') }}
+            </div>
+        @endif
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('success') }}
+            </div>
+        @endif
         <img src="{{ url('images/logo.png') }}" alt="">
         <div class="form-container">
             <div class="panel">
@@ -15,16 +25,7 @@
                 </div>
             </div>
 
-            @if (Session::has('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ Session::get('error') }}
-                </div>
-            @endif
-            @if (Session::has('success'))
-                <div class="alert alert-success" role="alert">
-                    {{ Session::get('success') }}
-                </div>
-            @endif
+
 
             <form action="{{ route('login') }}" method="POST" class="tbl-form">
                 @csrf
@@ -47,7 +48,7 @@
                     <div class="error">{{ $message }}</div>
                 @enderror
 
-                <a href="" class="link">Lupa Kata Sandi?</a>
+                <a href="{{ route('password.request') }}" class="link">Lupa Kata Sandi?</a>
 
                 <input type="submit" value="Masuk" class="action-btn">
             </form>
@@ -56,4 +57,5 @@
 
     <script src="{{ url('js/script.js') }}"></script>
 </body>
+
 </html>

@@ -28,34 +28,15 @@
                             </li>
 
                             <li>
-                                <a href="about.html">Tentang</a>
+                                <a href="{{ url('about') }}">Tentang</a>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Icon header -->
                     <div class="wrap-icon-header flex-w flex-r-m">
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-                            <form action="" class="search">
-                                <input type="search" name="" placeholder="Cari..." id="search"
-                                    class="search-input">
-                                <button type="submit" class="search-btn">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </form>
-
-                        </div>
-
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                            data-notify="3">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </div>
-
-                        <a href="">
-                            <div class="profile-image">
-                                <img src="" alt="">
-                            </div>
-                        </a>
+                        <a href="login"><button class="login-btn">Masuk</button></a>
+                        <a href="register"><button class="reg-btn">Daftar</button></a>
                     </div>
                 </nav>
             </div>
@@ -107,7 +88,7 @@
                 </li>
 
                 <li>
-                    <a href="about.html">Tentang</a>
+                    <a href="{{ url('about') }}">Tentang</a>
                 </li>
 
             </ul>
@@ -468,7 +449,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-01.jpg" alt="IMG-PRODUCT">
+                            <img src="images/baju.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -495,7 +476,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-02.jpg" alt="IMG-PRODUCT">
+                            <img src="images/baju2.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -522,7 +503,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-03.jpg" alt="IMG-PRODUCT">
+                            <img src="images/celana.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -549,7 +530,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-04.jpg" alt="IMG-PRODUCT">
+                            <img src="images/baju3.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -572,11 +553,11 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item baju">
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item sepatu">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-05.jpg" alt="IMG-PRODUCT">
+                            <img src="images/sepatu.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -587,11 +568,11 @@
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
                                 <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Front Pocket Jumper
+                                    Converse All Star Hi Plimsolls
                                 </a>
 
                                 <span class="stext-105 cl3">
-                                    $34.75
+                                    $75.00
                                 </span>
                             </div>
 
@@ -599,11 +580,11 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item aksesoris">
+                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item sepatu">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-06.jpg" alt="IMG-PRODUCT">
+                            <img src="images/sepatu2.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -614,72 +595,17 @@
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
                                 <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Vintage Inspired Classic
+                                    Converse All Star Hi Plimsolls
                                 </a>
 
                                 <span class="stext-105 cl3">
-                                    $93.20
+                                    $75.00
                                 </span>
                             </div>
 
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item baju">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/product-07.jpg" alt="IMG-PRODUCT">
-
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Lihat Cepat
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Shirt in Stretch Cotton
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    $52.66
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item baju">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/product-08.jpg" alt="IMG-PRODUCT">
-
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Lihat Cepat
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Pieces Metallic Printed
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    $18.96
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item sepatu">
                     <!-- Block2 -->
                     <div class="block2">
@@ -707,65 +633,11 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item baju">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/product-10.jpg" alt="IMG-PRODUCT">
-
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Lihat Cepat
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Femme T-Shirt In Stripe
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    $25.85
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item celana">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/product-11.jpg" alt="IMG-PRODUCT">
-
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Lihat Cepat
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Herschel supply
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    $63.16
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item aksesoris">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-12.jpg" alt="IMG-PRODUCT">
+                            <img src="images/dasi.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -788,65 +660,11 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item baju">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/product-13.jpg" alt="IMG-PRODUCT">
-
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Lihat Cepat
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    T-Shirt with Sleeve
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    $18.49
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item baju">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/product-14.jpg" alt="IMG-PRODUCT">
-
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Lihat Cepat
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Pretty Little Thing
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    $54.79
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item aksesoris">
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-15.jpg" alt="IMG-PRODUCT">
+                            <img src="images/sabuk.jpg" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -869,32 +687,6 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item baju">
-                    <!-- Block2 -->
-                    <div class="block2">
-                        <div class="block2-pic hov-img0">
-                            <img src="images/product-16.jpg" alt="IMG-PRODUCT">
-
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                Lihat Cepat
-                            </a>
-                        </div>
-
-                        <div class="block2-txt flex-w flex-t p-t-14">
-                            <div class="block2-txt-child1 flex-col-l ">
-                                <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    Square Neck Back
-                                </a>
-
-                                <span class="stext-105 cl3">
-                                    $29.64
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="flex-c-m flex-w w-full p-t-45">
@@ -909,82 +701,8 @@
 
 
     <!-- Footer -->
-    <footer class="bg3 p-t-75 p-b-32">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-lg-3 p-b-50">
-                    <h4 class="stext-301 cl0 p-b-30">
-                        Kategori
-                    </h4>
 
-                    <ul>
-                        <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Baju
-                            </a>
-                        </li>
-
-                        <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Celana
-                            </a>
-                        </li>
-
-                        <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Sepatu
-                            </a>
-                        </li>
-
-                        <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                Aksesoris
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-sm-6 col-lg-3 p-b-50">
-                    <h4 class="stext-301 cl0 p-b-30">
-                        MENGHUBUNGI
-                    </h4>
-
-                    <p class="stext-107 cl7 size-201">
-                        Ada Pertanyaan? Jl. Danau Surubek, Jawa Timur, Indonesia or call us on (+62) 819-1627-0743
-                    </p>
-
-                </div>
-                <div class="col-sm-6 col-lg-3 p-b-50">
-                    <h4 class="stext-301 cl0 p-b-30">
-                        Buletin
-                    </h4>
-
-                    <form>
-                        <div class="wrap-input1 w-full p-b-4">
-                            <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
-                                placeholder="email@example.com">
-                            <div class="focus-input1 trans-04"></div>
-                        </div>
-
-                        <div class="p-t-18">
-                            <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-                                Subscribe
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-            <div class="p-t-40">
-
-                <p class="stext-107 cl6 txt-center">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    @ospekmalang
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
-                </p>
-            </div>
-    </footer>
+    <x-footer></x-footer>
 
 
     <!-- Back to top -->

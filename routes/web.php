@@ -1,17 +1,23 @@
 <?php
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordResetController;
 
 // Halaman Utama
-Route::get('/', function () {
-    return view('guest.index');
-})->name('guest.index');
+Route::prefix('/')->group(function(){
+    Route::get('/', function () {
+        return view('guest.index');
+    })->name('guest.index');
 
-// Halaman Produk
-Route::get('/components/produk', function () {
-    return view('components.produk');
-})->name('components.produk');
+    Route::get('produk', function () {
+        return view('guest.produk');
+    })->name('guest.produk');
+
+    Route::get('about', function () {
+        return view('guest.about');
+    })->name('guest.about');
+});
 
 // Routes untuk User
 Route::prefix('user')->group(function () {
@@ -28,10 +34,14 @@ Route::prefix('user')->group(function () {
     })->name('user.kategori');
 });
 
+Route::prefix('admin')->group(function(){
+    Route::get('/', function(){
+        return view('admin.index');
+    });
+});
+
 // Halaman Produk Guest
-Route::get('produk', function () {
-    return view('guest.produk');
-})->name('guest.produk');
+
 
 // Halaman Khusus
 Route::get('/your-page', [HomeController::class, 'link'])->name('your-page');
@@ -46,3 +56,15 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 // Product Routes
 Route::post('/product', [AuthController::class, 'addProduct'])->name('product.add');
 Route::get('/product', [AuthController::class, 'product'])->name('product.list');
+
+
+// Route untuk tampilan forgot password
+Route::get('password/reset', [PasswordResetController::class, 'showResetForm'])->name('password.request');
+
+// Route untuk menangani pengiriman link reset password
+Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Route untuk menangani reset password
+Route::get('password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
+

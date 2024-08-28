@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password; // Pastikan ini diimpor
 use App\Models\User;
 
 class AuthController extends Controller
@@ -42,10 +43,16 @@ class AuthController extends Controller
     
     public function postLogin(Request $request)
     {
-        // Validasi input
+        // Validasi input dengan pesan kustom
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/'
+            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/',
+        ], [
+            'email.required' => 'Email harus diisi.', // Jika email tidak diisi
+            'email.email' => 'Format email tidak valid.', // Jika format email salah
+            'password.required' => 'Password harus diisi.', // Jika password tidak diisi
+            'password.min' => 'Password harus memiliki setidaknya 8 karakter.', // Jika panjang password kurang dari 8 karakter
+            'password.regex' => 'Password hanya boleh terdiri dari huruf dan angka.' // Jika password mengandung karakter selain huruf dan angka
         ]);
     
         // Persiapan kredensial untuk login
@@ -57,14 +64,22 @@ class AuthController extends Controller
         // Proses login
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // Regenerasi session untuk keamanan
-            return redirect()->intended('user')->with('success', 'Login successful!');
+    
+            // Periksa status pengguna
+            $user = Auth::user();
+            if ($user->status === 'admin') {
+                return redirect()->intended('admin')->with('success', 'Login berhasil!');
+            } else {
+                return redirect()->intended('user')->with('success', 'Login berhasil!');
+            }
         }
     
         // Jika login gagal
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Kredensial yang diberikan tidak cocok dengan catatan kami.',
         ])->onlyInput('email');
     }
+    
     
 
     public function logout(Request $request)
