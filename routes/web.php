@@ -1,12 +1,15 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PasswordResetController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
+
+
 
 // Halaman Utama
-Route::prefix('/')->group(function(){
+Route::prefix('/')->group(function () {
     Route::get('/', function () {
         return view('guest.index');
     })->name('guest.index');
@@ -35,34 +38,52 @@ Route::prefix('user')->group(function () {
     })->name('user.kategori');
 });
 
-Route::prefix('admin')->group(function(){
-    Route::get('/', function(){
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
         return view('admin.index');
     });
 
-    Route::get('/user', function(){
+    Route::get('/user', function () {
         return view('admin.user');
     });
 
-    Route::get('/message', function(){
+    Route::get('/message', function () {
         return view('admin.message');
     });
 
-    Route::get('/help', function(){
-        return view('admin.help');
-    });
-
-    Route::get('/settings', function(){
+    Route::get('/settings', function () {
         return view('admin.settings');
     });
 
-    Route::get('/help', function(){
-        return view('admin.help');
+    Route::get('/produk', function () {
+        return view('admin.produk');
     });
 });
 
+//halaman admin
 
-// Halaman Produk Guest
+Route::prefix('admin')->group(function () {
+    // Menampilkan pesan
+    Route::get('/message', [MessageController::class, 'showMessages'])->name('admin.message');
+
+    // Menampilkan formulir untuk membuat pesan baru
+    Route::get('message/create', [MessageController::class, 'showMessageForm'])->name('admin.message.create');
+
+    // Menyimpan pesan baru
+    Route::post('message/save', [MessageController::class, 'saveMessage'])->name('admin.message.save');
+
+    // Menampilkan pengguna
+    Route::get('/user', [UserController::class, 'index'])->name('admin.index');
+
+    // Menggunakan resource controller untuk pengguna
+    Route::resource('/user', UserController::class);
+
+    // Menyimpan pengguna baru
+    Route::post('/user', [UserController::class, 'store'])->name('admin.user.store');
+
+    // Menghapus pengguna
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+});
 
 
 // Halaman Khusus
@@ -80,13 +101,6 @@ Route::post('/product', [AuthController::class, 'addProduct'])->name('product.ad
 Route::get('/product', [AuthController::class, 'product'])->name('product.list');
 
 
-// Route untuk tampilan forgot password
-Route::get('password/reset', [PasswordResetController::class, 'showResetForm'])->name('password.request');
-
-// Route untuk menangani pengiriman link reset password
-Route::post('password/email', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
-
-// Route untuk menangani reset password
-Route::get('password/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
-Route::post('password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+});

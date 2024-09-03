@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <a href="{{ url('admin') }}">
-                    <span class="icon"><ion-icon name="logo-apple"></ion-icon></span>
+                    <span class="icon"><img src="{{ url('images/adminicon.png') }}" alt=""></span>
                     <span class="tittle">Ospek Malang</span>
                 </a>
             </li>
@@ -23,19 +23,19 @@
             </li>
 
             <li>
+                <a href="{{ url('admin/produk') }}">
+                    <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
+                    <span class="tittle">Produk</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ url('admin/message') }}">
                     <span class="icon"><ion-icon name="chatbox-outline"></ion-icon></span>
                     <span class="tittle">Pesan</span>
                 </a>
             </li>
-
-            <li>
-                <a href="{{ url('admin/help') }}">
-                    <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
-                    <span class="tittle">Bantuan</span>
-                </a>
-            </li>
-
+            
             <li>
                 <a href="{{ url('admin/settings') }}">
                     <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
@@ -53,7 +53,4 @@
         </ul>
     </div>
 
-    <div class="main-content">
-        @yield('content')
-    </div>
 </div>

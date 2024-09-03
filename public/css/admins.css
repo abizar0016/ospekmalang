@@ -1,0 +1,608 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+html::-webkit-scrollbar{
+    display: none;
+}
+
+html{
+    scroll-behavior:smooth ;
+}
+
+* {
+    font-family: "Ubuntu", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #2a2185;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #333;
+    --black2: #999;
+}
+
+body {
+    height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.navigation {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: var(--black1);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+    background: var(--white);
+}
+
+.navigation ul li a {
+    width: 100%;
+    color: var(--white);
+    display: flex;
+    text-decoration: none;
+
+}
+
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+    color: var(--black1);
+}
+
+.navigation ul li:nth-child(1) {
+    margin-bottom: 40px;
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    height: 60px;
+    min-width: 60px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation ul li a .icon ion-icon {
+    font-size: 1.75rem;
+}
+
+.navigation ul li a .tittle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 60px;
+    min-width: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.navigation.active{
+    width: 70px;
+}
+
+.navigation ul li a span img{
+    width: 30px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.navigation ul li:hover a span img{
+    filter: none;
+}
+
+.main{
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    height: 100vh;
+    background: var(--white);
+    transition: .5s;
+}
+
+.main.active{
+    width: calc(100% - 70px);
+    left: 70px;
+}
+
+.topbar{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.toggle{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.search-admin{
+    position: relative;
+    width: 400px;
+    margin: 0 10px;
+}
+
+.search-admin label{
+    position: relative;
+    width: 100%;
+}
+
+.search-admin label input{
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px 20px 5px 35px;
+    font-size: 18px;
+    outline: none;
+    border: 1px solid var(--black2);
+}
+
+.search-admin label ion-icon{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.2rem;
+}
+
+.user-profil{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.user-profil img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cardBox{
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+
+.cardBox .card{
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px #0008;
+}
+
+.cardBox .card .numbers{
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: var(--blue);
+}
+
+.cardBox .card .cardName{
+    color: var(--black2);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.cardBox .card .iconBox{
+    font-size: 3.5rem;
+    color: var(--black2);
+}
+
+.cardBox .card:hover{
+    background: var(--blue);
+}
+
+.cardBox .card:hover .numbers,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .iconBox{
+    color: var(--white);
+}
+
+.detail{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    gap: 50px;
+}
+
+.detail .recentOrders{
+    position: relative;
+    max-height: 800px;
+    overflow-y: auto;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px #0008;
+    border-radius: 20px;
+}
+
+.detail .cardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cardHeader h2{
+    font-weight: 600;
+    color: var(--blue);
+}
+
+.cardHeader .view-btn{
+    position: relative;
+    padding: 5px 10px;
+    background: var(--blue);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.detail table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.detail table thead td{
+    font-weight: 600;
+}
+
+.detail .recentOrders table tr{
+    color: var(--black1);
+    border-bottom: 1px solid #0001;
+}
+
+.detail .recentOrders table tr:last-child{
+    border-bottom: none;
+}
+
+
+.detail .recentOrders table tr td{
+    padding: 10px;
+}
+
+.detail .recentOrders table tr td:last-child{
+    text-align: end;
+}
+
+.detail .recentOrders table tr td:last-child(2){
+    text-align: end;
+}
+
+.detail .recentOrders table tr td:last-child(3){
+    text-align: center;
+}
+
+.status.delivered{
+    padding: 2px 4px;
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.status.pending{
+    padding: 2px 4px;
+    background: #f9ca3f;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.status.return{
+    padding: 2px 4px;
+    background: #f00;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.status.inProgress{
+    padding: 2px 4px;
+    background: #1795ce;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.user{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+
+    box-shadow: 0 7px 25px #0008;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+.user .cardHeader button{
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--black2);
+}
+
+.user .cardHeader button:hover{
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.user table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user table thead td{
+    font-weight: 600;
+}
+
+
+.user table tr:last-child{
+    border-bottom: none;
+}
+
+
+.user table tr .name-tbl,
+.user table tr .password-tbl,
+.user table tr .email-tbl{
+    padding: 10px;
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;      
+    text-overflow: ellipsis;
+}
+
+.user table tbody tr:hover td{
+    color: var(--blue);
+}
+.detail table tbody tr:hover td{
+    color: var(--blue);
+}
+
+.user table tr td:last-child{
+    text-align: end;
+}
+
+.user table tr td:last-child(2){
+    text-align: end;
+}
+
+.user  table tr td:last-child(3){
+    text-align: center;
+}
+.detail table tr td button{
+    padding: 5px 15px;
+    background: var(--black2);
+    color: var(--white);
+    margin: 5px;
+}
+
+.user table tr td button:hover{
+    background: var(--blue);
+    color: var(--white);
+}
+
+.detail table tr td button:hover{
+    background: var(--blue);
+    color: var(--white);
+}
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.85); /* Darker and more opaque background */
+    backdrop-filter: blur(5px); /* Background blur effect */
+    padding-top: 60px;
+    font-family: 'Poppins', sans-serif; /* Modern font */
+}
+
+/* Modal Content */
+.modal-content {
+    background: linear-gradient(135deg, #fff, #f3f3f3); /* Subtle gradient background */
+    margin: auto;
+    padding: 40px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); /* Deep shadow for depth */
+    animation: zoomIn 0.5s ease-in-out;
+    position: relative;
+}
+
+/* Zoom-in Animation */
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Close Button */
+.close {
+    color: #333;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #ff5757; /* Red on hover */
+    cursor: pointer;
+}
+
+/* Modal Header */
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #717fe0;
+    letter-spacing: 1px;
+}
+
+/* Modal Form */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Labels */
+.modal-content label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Form Inputs */
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="password"],
+.modal-content select,
+.modal-content input[type="number"],
+.modal-content input[type="file"],
+.modal-content textarea {
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+    border-color: #717fe0;
+    box-shadow: 0 0 10px rgba(113, 127, 224, 0.5); /* Soft glow on focus */
+    outline: none;
+}
+
+/* Textarea Styling */
+.modal-content textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Submit Button */
+.modal-content button[type="submit"] {
+    background: linear-gradient(135deg, #717fe0, #5a68c7);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.modal-content button[type="submit"]:hover {
+    background: linear-gradient(135deg, #5a68c7, #404eac); /* Darker on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+/* Submit Button Active State */
+.modal-content button[type="submit"]:active {
+    transform: translateY(1px); /* Press effect */
+}

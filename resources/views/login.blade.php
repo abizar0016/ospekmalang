@@ -48,7 +48,7 @@
                     <div class="error">{{ $message }}</div>
                 @enderror
 
-                <a href="{{ route('password.request') }}" class="link">Lupa Kata Sandi?</a>
+                <a href="" class="link">Lupa Kata Sandi?</a>
 
                 <input type="submit" value="Masuk" class="action-btn">
             </form>

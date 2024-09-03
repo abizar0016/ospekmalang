@@ -5,18 +5,126 @@
 {{-- content --}}
 
 <div class="main">
-    <div class="topbar">
-        <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-        <div class="search-admin">
-            <label class="label-admin">
-                <input type="text" placeholder="Cari...">
-                <ion-icon name="search-outline"></ion-icon>
-            </label>
+    <x-topbaradmin></x-topbaradmin>
+
+
+    {{-- Pengguna --}}
+
+    <div class="cardBox" id="beranda">
+        <div class="card">
+            <div class="">
+                <div class="numbers">1,504</div>
+                <div class="cardName">Pengguna</div>
+            </div>
+
+            <div class="iconBox">
+                <ion-icon name="person-outline"></ion-icon>
+            </div>
         </div>
-        <div class="user">
-            <img src="" alt="">
+
+        <div class="card">
+            <div class="">
+                <div class="numbers">16</div>
+                <div class="cardName">Produk</div>
+            </div>
+
+            <div class="iconBox">
+                <ion-icon name="cart-outline"></ion-icon>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="">
+                <div class="numbers">90</div>
+                <div class="cardName">Pesan</div>
+            </div>
+
+            <div class="iconBox">
+                <ion-icon name="chatbubbles-outline"></ion-icon>
+            </div>
         </div>
     </div>
+
+    <div class="detail">
+        <div class="recentOrders">
+            <div class="cardHeader">
+                <h2>
+                    Pesanan Terbaru
+                </h2>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>Pembeli</td>
+                        <td>Kota</td>
+                        <td>Barang</td>
+                        <td>Harga</td>
+                        <td>Pembayaran</td>
+                        <td>Status</td>
+                        <td colspan="3">Aksi</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Abizar</td>
+                        <td>Malang</td>
+                        <td>Celana</td>
+                        <td>Rp. 45.000</td>
+                        <td>Dibayar</td>
+                        <td><span class="status pending">Tertunda</span></td>
+                        <td>
+                            <button>Lihat</button>
+                            <button>Perbarui</button>
+                            <button>Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Abizar</td>
+                        <td>Malang</td>
+                        <td>Sepatu</td>
+                        <td>Rp. 61.000</td>
+                        <td>Dibayar</td>
+                        <td><span class="status delivered">Terkirim</span></td>
+                        <td>
+                            <button>Lihat</button>
+                            <button>Perbarui</button>
+                            <button>Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Abizar</td>
+                        <td>Malang</td>
+                        <td>Baju</td>
+                        <td>Rp. 74.000</td>
+                        <td>Jatuh Tempo</td>
+                        <td><span class="status inProgress">Dalam Pengerjaan</span></td>
+                        <td>
+                            <button>Lihat</button>
+                            <button>Perbarui</button>
+                            <button>Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Abizar</td>
+                        <td>Malang</td>
+                        <td>Sabuk</td>
+                        <td>Rp. 16.000</td>
+                        <td>Dibayar</td>
+                        <td><span class="status return">Pengembalian</span></td>
+                        <td>
+                            <button>Lihat</button>
+                            <button>Perbarui</button>
+                            <button>Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
 
 </div>
 
