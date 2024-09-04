@@ -14,7 +14,8 @@ class UserController extends Controller
         return view('admin.user', ['users' => $users]); // Kirim data pengguna ke view
     }
 
-    public function store(Request $request)
+    //Create User
+    public function create(Request $request)
     {
         $request->validate([
             'uname' => 'required|string|max:255',
@@ -33,16 +34,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User successfully created.');
     }
 
-    public function show(User $user)
-    {
-        return view('admin.user-show', ['user' => $user]);
-    }
-
-    public function edit(User $user)
-    {
-        return view('admin.user-edit', ['user' => $user]);
-    }
-
+    //Update User
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -59,9 +51,10 @@ class UserController extends Controller
             'status' => $request->input('status'),
         ]);
 
-        return redirect()->route('admin.user.index')->with('success', 'User successfully updated.');
+        return redirect()->back()->with('success', 'User successfully updated.');
     }
 
+    //Delete User
     public function destroy(User $user)
     {
         $user->delete();

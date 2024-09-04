@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Message;
+use App\Models\User;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index'); // Sesuaikan dengan nama file Blade yang sesuai
-    }
+        // Hitung jumlah pesan
+        $messageCount = Message::count();
+        $userCount = User::count();
 
-    public function home()
-    {
-        return view('admin.home');
+        return view('admin.index', compact('messageCount', 'userCount'));
     }
 
     public function user()
@@ -24,6 +25,11 @@ class AdminController extends Controller
     public function message()
     {
         return view('admin.message');
+    }
+
+    public function product()
+    {
+        return view('admin.product');
     }
 
     public function help()

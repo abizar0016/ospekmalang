@@ -7,6 +7,6 @@
         </label>
     </div>
     <div class="user-profil">
-        <img src="images/admin.png" alt="">
+        <img src="{{ url('images/admin.png') }}" alt="">
     </div>
 </div>

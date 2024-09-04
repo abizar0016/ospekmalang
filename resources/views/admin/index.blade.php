@@ -11,16 +11,19 @@
     {{-- Pengguna --}}
 
     <div class="cardBox" id="beranda">
-        <div class="card">
-            <div class="">
-                <div class="numbers">1,504</div>
-                <div class="cardName">Pengguna</div>
-            </div>
+        <a href="{{ url('admin/user') }}">
 
-            <div class="iconBox">
-                <ion-icon name="person-outline"></ion-icon>
+            <div class="card">
+                <div class="">
+                    <div class="numbers">{{ $userCount }}</div>
+                    <div class="cardName">Pengguna</div>
+                </div>
+                
+                <div class="iconBox">
+                    <ion-icon name="person-outline"></ion-icon>
+                </div>
             </div>
-        </div>
+        </a>
 
         <div class="card">
             <div class="">
@@ -33,16 +36,18 @@
             </div>
         </div>
 
-        <div class="card">
-            <div class="">
-                <div class="numbers">90</div>
-                <div class="cardName">Pesan</div>
+        <a href="{{ url('admin/message') }}">
+            <div class="card">
+                <div class="">
+                    <div class="numbers">{{ $messageCount }}</div>
+                    <div class="cardName">Pesan</div>
+                </div>
+                
+                <div class="iconBox">
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                </div>
             </div>
-
-            <div class="iconBox">
-                <ion-icon name="chatbubbles-outline"></ion-icon>
-            </div>
-        </div>
+        </a>
     </div>
 
     <div class="detail">
@@ -129,7 +134,7 @@
 </div>
 
 {{-- script --}}
-<script src="{{ url('js/admin.js') }}"></script>
+<script src="{{ url('js/admins.js') }}"></script>
 <!------------------ ionicons ----------------------->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

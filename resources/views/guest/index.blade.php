@@ -111,107 +111,6 @@
         </div>
     </header>
 
-    <!-- Cart -->
-    <div class="wrap-header-cart js-panel-cart">
-        <div class="s-full js-hide-cart"></div>
-
-        <div class="header-cart flex-col-l p-l-65 p-r-25">
-            <div class="header-cart-title flex-w flex-sb-m p-b-8">
-                <span class="mtext-103 cl2">
-                    Keranjang Anda
-                </span>
-
-                <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-                    <i class="zmdi zmdi-close"></i>
-                </div>
-            </div>
-
-            <div class="header-cart-content flex-w js-pscroll">
-                <ul class="header-cart-wrapitem w-full">
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/foto.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt">
-                            <a href="#" class="header-cart-item-name m-b-1 hov-cl1 trans-04">
-                                Baju Putih
-                            </a>
-
-                            <span class="header-cart-item-info">
-                                Size: XL
-                            </span>
-
-                            <span class="header-cart-item-info">
-                                1 x 75.000
-                            </span>
-                        </div>
-                    </li>
-
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/sepatu.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt">
-                            <a href="#" class="header-cart-item-name m-b-1 hov-cl1 trans-04">
-                                Sepatu Hitam Cewek
-                            </a>
-
-                            <span class="header-cart-item-info">
-                                Size: 38
-                            </span>
-
-                            <span class="header-cart-item-info">
-                                1 x 60.000
-                            </span>
-                        </div>
-                    </li>
-
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="images/sabuk.jpg" alt="IMG">
-                        </div>
-
-                        <div class="header-cart-item-txt">
-                            <a href="#" class="header-cart-item-name m-b-1 hov-cl1 trans-04">
-                                Sabuk Hitam
-                            </a>
-
-                            <span class="header-cart-item-info">
-                                Size: -
-                            </span>
-
-                            <span class="header-cart-item-info">
-                                1 x 10.000
-                            </span>
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="w-full">
-                    <div class="header-cart-total w-full p-tb-40">
-                        Total: $75.00
-                    </div>
-
-                    <div class="header-cart-buttons flex-w w-full">
-                        <a href="shoping-cart.html"
-                            class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                            Lainnya
-                        </a>
-
-                        <a href="shoping-cart.html"
-                            class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                            Checkout
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
     <!-- Slider -->
     <section class="section-slide">
         <div class="wrap-slick1">
@@ -232,7 +131,7 @@
                             </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                                <a href="product.html"
+                                <a href="{{ url('login') }}"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
                                     Belanja Sekarang
                                 </a>
@@ -259,7 +158,7 @@
 
                             <div class="layer-slick1 animated visible-false" data-appear="slideInUp"
                                 data-delay="1600">
-                                <a href="product.html"
+                                <a href="{{ url('login') }}"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
                                     Belanja Sekarang
                                 </a>
@@ -289,7 +188,7 @@
 
                             <div class="layer-slick1 animated visible-false" data-appear="rotateIn"
                                 data-delay="1600">
-                                <a href="product.html"
+                                <a href="{{ url('login') }}"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
                                     Belanja Sekarang
                                 </a>
@@ -311,7 +210,7 @@
                     <div class="block1 wrap-pic-w">
                         <img src="images/baju.jpg" alt="IMG-BANNER">
 
-                        <a href="product.html"
+                        <a href="{{ url('log') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -337,7 +236,7 @@
                     <div class="block1 wrap-pic-w">
                         <img src="images/celana.jpg" alt="IMG-BANNER">
 
-                        <a href="product.html"
+                        <a href="{{ url('log') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -363,7 +262,7 @@
                     <div class="block1 wrap-pic-w">
                         <img src="images/sabuk.jpg" alt="IMG-BANNER">
 
-                        <a href="product.html"
+                        <a href="{{ url('log') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">

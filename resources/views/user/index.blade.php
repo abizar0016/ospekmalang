@@ -219,7 +219,7 @@
                             Lainnya
                         </a>
 
-                        <a href="shoping-cart.html"
+                        <a href="{{ url('user/checkout') }}"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Checkout
                         </a>
@@ -249,13 +249,6 @@
                                     Baju Ospek
                                 </h2>
                             </div>
-
-                            <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                                <a href="product.html"
-                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Belanja Sekarang
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -276,13 +269,7 @@
                                 </h2>
                             </div>
 
-                            <div class="layer-slick1 animated visible-false" data-appear="slideInUp"
-                                data-delay="1600">
-                                <a href="product.html"
-                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Belanja Sekarang
-                                </a>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -306,13 +293,7 @@
                                 </h2>
                             </div>
 
-                            <div class="layer-slick1 animated visible-false" data-appear="rotateIn"
-                                data-delay="1600">
-                                <a href="product.html"
-                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                    Belanja Sekarang
-                                </a>
-                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,11 @@
 
     <div class="main">
         <x-topbaradmin></x-topbaradmin>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="detail">
             <div class="user" id="user">
                 <div class="cardHeader">
@@ -21,62 +26,76 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($messages as $message)
+                        @if ($messages->isEmpty())
                             <tr>
-                                <td>{{ $message->name }}</td>
-                                <td>{{ $message->content }}</td>
-                                <td>{{ $message->user->uname }}</td>
-                                <td>
-                                    <button onclick="openReplyModal({{ $message->id }})">Balas</button>
-                                    <button>Perbarui</button>
-                                    <button>Hapus</button>
-                                </td>
+                                <td colspan="4">Tidak ada pesan yang ditemukan.</td>
                             </tr>
-                            @foreach ($message->replies as $reply)
+                        @else
+                            @foreach ($messages as $message)
                                 <tr>
-                                    <td>-- {{ $reply->name }}</td>
-                                    <td>-- {{ $reply->content }}</td>
-                                    <td>-- {{ $reply->user->uname }}</td>
-                                    <td></td>
+                                    <td>{{ $message->name }}</td>
+                                    <td>{{ $message->content }}</td>
+                                    <td>{{ $message->user->uname }}</td>
+                                    <td>
+                                        <button onclick="openReplyModal({{ $message->id }})"><ion-icon name="arrow-redo-circle-outline"></ion-icon></button>
+                                        <form action="{{ route('admin.message.destroy', $message->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"><ion-icon name="trash-outline"></ion-icon></button>
+                                        </form>
+                                    </td>
                                 </tr>
+                                @foreach ($message->replies as $reply)
+                                    <tr>
+                                        <td>-- {{ $reply->name }}</td>
+                                        <td>-- {{ $reply->content }}</td>
+                                        <td>-- {{ $reply->user->uname }}</td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
                             @endforeach
-                        @endforeach
+                        @endif
                     </tbody>
+
                 </table>
             </div>
         </div>
     </div>
 
     <!-- Modal untuk balasan -->
-    <div id="replyModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeReplyModal()">&times;</span>
-            <h2>Balas Pesan</h2>
-            <form action="{{ route('admin.message.save') }}" method="POST">
-                @csrf
+    @if (@isset($message))
+        <div id="replyModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeReplyModal()">&times;</span>
+                <h2>Balas Pesan</h2>
+                <form action="{{ route('admin.message.reply') }}" method="POST">
+                    @csrf
 
-                <input type="hidden" id="replyParentId" name="parent_id">
-                <label for="messageName">Nama:</label>
-                <input type="text" id="messageName" name="messageName" value="{{ $currentUser->uname }}" readonly>
+                    <input type="hidden" id="replyParentId" name="parent_id">
+                    <label for="messageName">Nama:</label>
+                    <input type="text" id="messageName" name="messageName" value="{{ $currentUser->uname }}"
+                        readonly>
 
 
-                <label for="messageContent">Pesan:</label>
-                <textarea id="messageContent" name="messageContent" readonly>{{ $message->content }}</textarea>
+                    <label for="messageContent">Pesan:</label>
+                    <textarea id="messageContent" name="messageContent" readonly>{{ $message->content }}</textarea>
 
-                <label for="reply">Balasan:</label>
-                <textarea name="replyName" id="replyName" required></textarea>
+                    <label for="reply">Balasan:</label>
+                    <textarea name="replyName" id="replyName" required></textarea>
 
-                <button type="submit">Kirim</button>
-            </form>
+                    <button type="submit">Kirim</button>
+                </form>
+            </div>
         </div>
-    </div>
+    @endif
 
     <!-- Modal untuk menambahkan pesan -->
     <div id="addMessageModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeAddMessageModal()">&times;</span>
             <h2>Tambah Pesan</h2>
-            <form action="{{ route('admin.message.save') }}" method="POST">
+            <form action="{{ route('admin.message.create') }}" method="POST">
                 @csrf
                 <input type="hidden" id="replyParentId" name="parent_id">
                 <label for="messageName">Nama:</label>
@@ -98,6 +117,6 @@
     </div>
 
 
-    <script src="{{ url('js/admin.js') }}"></script>
+    <script src="{{ url('js/admins.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

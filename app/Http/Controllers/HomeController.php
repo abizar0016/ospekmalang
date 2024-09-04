@@ -24,6 +24,10 @@ class HomeController extends Controller
         return view('user.produk');
     }
 
+    public function checkout(){
+        return view('user.checkout');
+    }
+
     protected $linkService;
 
     public function __construct(LinkService $linkService)

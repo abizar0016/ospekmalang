@@ -32,7 +32,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{ url('css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('css/mained.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('css/admins.css') }}">
     <script src="{{ url('js/sekerip.js') }}"></script>

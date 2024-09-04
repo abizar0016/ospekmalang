@@ -78,6 +78,50 @@ function closeAddMessageModal() {
     document.getElementById('addMessageModal').style.display = 'none';
 }
 
+// Fungsi untuk membuka modal tambah produk
+function openAddProduct() {
+    document.getElementById('addProductModal').style.display = 'block';
+}
+
+// Fungsi untuk menutup modal tambah produk
+function closeAddProduct() {
+    document.getElementById('addProductModal').style.display = 'none';
+}
+
+// Fungsi untuk membuka modal lihat produk
+function openViewProduct() {
+    document.getElementById('productViewModal').style.display = 'block';
+}
+
+// Fungsi untuk menutup modal lihat produk
+function closeViewProduct() {
+    document.getElementById('productViewModal').style.display = 'none';
+}
+
+// Fungsi untuk membuka modal edit produk
+function openEditProduct() {
+    document.getElementById('editProductModal').style.display = 'block';
+}
+
+// Fungsi untuk menutup modal edit produk
+function closeEditProduct() {
+    document.getElementById('editProductModal').style.display = 'none';
+}
+
+// Menutup modal jika klik di luar area modal
+window.onclick = function (event) {
+    if (event.target === document.getElementById('addProductModal')) {
+        closeAddProduct();
+    }
+    if (event.target === document.getElementById('productViewModal')) {
+        closeViewProduct();
+    }
+    if (event.target === document.getElementById('editProductModal')) {
+        closeEditProduct();
+    }
+};
+
+
 // Menutup modal jika klik di luar area modal
 window.onclick = function (event) {
     if (event.target == document.getElementById('replyModal')) {

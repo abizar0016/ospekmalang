@@ -14,11 +14,11 @@ class MessageController extends Controller
         $messages = Message::with('user', 'replies')->get();
         $users = User::all();
         $currentUser = auth()->user(); // Mendapatkan pengguna yang sedang login
-
-        return view('admin.message', compact('messages', 'users', 'currentUser'));
+        $messageCount = Message::count(); // Hitung jumlah pesan
+        return view('admin.message', compact('messages', 'users', 'currentUser', 'messageCount'));
     }
-
-    public function saveMessage(Request $request)
+    
+    public function createMessage(Request $request)
     {
         $request->validate([
             'messageName' => 'required|string',
@@ -26,7 +26,7 @@ class MessageController extends Controller
             'replyName' => 'nullable|string', // Biarkan nullable jika tidak ada balasan
             'parent_id' => 'nullable|exists:messages,id', // Validasi parent_id jika ada
         ]);
-    
+
         Message::create([
             'name' => $request->input('messageName'),
             'content' => $request->input('messageContent'),
@@ -34,25 +34,26 @@ class MessageController extends Controller
             'userid' => auth()->user()->userid,
             'parent_id' => $request->input('parent_id'),
         ]);
-    
-        return redirect()->route('admin.message');
-    }
-    
-    public function showMessages()
-    {
-        $users = User::all(); // Mengambil data pengguna    
-        $currentUser = auth()->user();
-        $messages = Message::where('userid', $currentUser->userid)->get();
-        return view('admin.message', compact('currentUser', 'messages', 'users'));
+
+        return redirect()->back();
     }
 
-    public function showMessageForm($id)
+
+        public function replyMessage($id)
+        {
+            $users = User::all(); // Mengambil data pengguna    
+            $message = Message::findOrFail($id); // Mengambil pesan berdasarkan ID
+            return view('admin.message.reply', [
+                'users' => $users,
+                'message' => $message
+            ]);
+        }
+
+    public function destroy($id)
     {
-        $users = User::all(); // Mengambil data pengguna    
-        $message = Message::findOrFail($id); // Mengambil pesan berdasarkan ID
-        return view('admin.message.create', [
-            'users' => $users,
-            'message' => $message
-        ]);
+        $message = Message::findOrFail($id);
+        $message->delete();
+
+        return redirect()->back()->with('success', 'Pesan berhasil dihapus');
     }
 }

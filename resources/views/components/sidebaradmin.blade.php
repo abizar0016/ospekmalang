@@ -23,7 +23,7 @@
             </li>
 
             <li>
-                <a href="{{ url('admin/produk') }}">
+                <a href="{{ url('admin/product') }}">
                     <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
                     <span class="tittle">Produk</span>
                 </a>
