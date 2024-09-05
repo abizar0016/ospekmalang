@@ -11,21 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id('id_product',11)->primary();
-            $table->string('image',225);
-            $table->string('name',100);
+        Schema::create('product', function (Blueprint $table) {
+            $table->id('idproduct');
+            $table->string('image', 225);
+            $table->string('name', 100);
             $table->text('deskripsi');
-            $table->string('price',100);
-            $table->string('rating',100);
+            $table->string('price', 100);
+            $table->string('stock', 100);
+            $table->enum('category', ['baju', 'celana', 'sepatu', 'aksesoris'])->default('baju');
         });
+        
+        
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product');
     }
-};
+};    

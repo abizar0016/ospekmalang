@@ -20,7 +20,7 @@ class AuthController extends Controller
         // Validasi input
         $request->validate([
             'uname' => 'required|string|max:255',
-            'email' => 'required|email:dns|unique:users,email',
+            'email' => 'required|unique:users,email',
             'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/', // Hanya huruf dan angka
         ]);
 

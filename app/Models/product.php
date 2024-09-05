@@ -5,7 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class Product extends Model
 {
     use HasFactory;
+
+    // Menentukan nama tabel
+    protected $table = 'product';
+
+    // Menentukan primary key
+    protected $primaryKey = 'idproduct';
+
+    // Menentukan bahwa primary key bukan auto-incrementing
+    public $incrementing = false;
+
+    // Menentukan tipe data dari primary key
+    protected $keyType = 'int';
+
+    // Kolom-kolom yang bisa diisi secara massal
+    protected $fillable = [
+        'name',
+        'deskripsi',
+        'image',
+        'price',
+        'stock',
+        'category',
+    ];
+
+    // Kolom yang secara otomatis akan dikelola oleh Eloquent
+    public $timestamps = false;
 }

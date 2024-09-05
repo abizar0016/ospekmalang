@@ -27,7 +27,7 @@
 
         <div class="card">
             <div class="">
-                <div class="numbers">16</div>
+                <div class="numbers">{{ $productCount }}</div>
                 <div class="cardName">Produk</div>
             </div>
 
@@ -134,7 +134,7 @@
 </div>
 
 {{-- script --}}
-<script src="{{ url('js/admins.js') }}"></script>
+<script src="{{ url('js/admin.js') }}"></script>
 <!------------------ ionicons ----------------------->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

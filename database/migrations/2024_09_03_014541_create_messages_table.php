@@ -8,7 +8,7 @@ class CreateMessagesTable extends Migration
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('idmessage', 11)->primary();
             $table->string('name');
             $table->text('content');
             $table->text('reply')->nullable(); // Tambahkan nullable di sini
@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->timestamps();
 
             $table->foreign('userid')->references('userid')->on('users')->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')->on('messages')->onDelete('cascade');
+            $table->foreign('parent_id')->references('idmessage')->on('messages')->onDelete('cascade');
         });
     }
 

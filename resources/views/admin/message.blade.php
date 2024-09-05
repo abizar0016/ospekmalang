@@ -28,7 +28,7 @@
                     <tbody>
                         @if ($messages->isEmpty())
                             <tr>
-                                <td colspan="4">Tidak ada pesan yang ditemukan.</td>
+                                <td colspan="4" style="padding-top: 30px; text-align:center;">Tidak ada pesan yang ditemukan.</td>
                             </tr>
                         @else
                             @foreach ($messages as $message)
@@ -98,6 +98,7 @@
             <form action="{{ route('admin.message.create') }}" method="POST">
                 @csrf
                 <input type="hidden" id="replyParentId" name="parent_id">
+
                 <label for="messageName">Nama:</label>
                 <input type="text" id="messageName" name="messageName" value="{{ $currentUser->uname }}" readonly>
 
@@ -117,6 +118,6 @@
     </div>
 
 
-    <script src="{{ url('js/admins.js') }}"></script>
+    <script src="{{ url('js/admin.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

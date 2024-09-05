@@ -1,12 +1,11 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
-use App\Models\Message;
+use App\Http\Controllers\ProductController;
 
 // Halaman Utama
 Route::prefix('/')->group(function () {
@@ -35,48 +34,28 @@ Route::prefix('user')->group(function () {
 
     Route::get('/checkout', function () {
         return view('user.checkout');
-    })->name('user.kategori');
+    })->name('user.checkout');
 });
 
-
-// Route untuk menampilkan halaman admin dan menghitung jumlah pesan
+// Route untuk Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    
-    // Rute lain tetap sama
-    Route::get('/user', [AdminController::class, 'user'])->name('admin.user');
-    Route::get('/message', [AdminController::class, 'message'])->name('admin.message');
-    Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
-    Route::get('/product', function () {
-        return view('admin.product');
+
+    Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
+    Route::post('/user/create', [UserController::class, 'create'])->name('admin.user.create');
+    Route::put('/user/update', [UserController::class, 'update'])->name('admin.user.update');
+    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+
+    Route::get('/message', [MessageController::class, 'index'])->name('admin.message.index');
+    Route::post('/message/create', [MessageController::class, 'createMessage'])->name('admin.message.create');
+    Route::put('/message/update', [MessageController::class, 'replyMessage'])->name('admin.message.reply');
+    Route::delete('/message/{id}', [MessageController::class, 'destroy'])->name('admin.message.destroy');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+    Route::post('/product', [ProductController::class, 'createProduct'])->name('admin.product.create');
+    Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+    Route::delete('/product{idproduct}}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
     });
-
-        // Menampilkan pengguna
-        Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
-
-        // Menyimpan pengguna baru
-        Route::post('/user/create', [UserController::class, 'create'])->name('admin.user.create');
-    
-        //update pengguna
-        Route::put('/user/update', [UserController::class, 'update'])->name('admin.user.update');
-    
-        // Menghapus pengguna
-        Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
-    
-        // Menampilkan pesan
-        Route::get('/message', [MessageController::class, 'index'])->name('admin.index');
-    
-        // Menampilkan formulir untuk membuat pesan baru
-        Route::post('message/create', [MessageController::class, 'createMessage'])->name('admin.message.create');
-    
-        // Menyimpan balasan pesan
-        Route::put('message/update', [MessageController::class, 'replyMessage'])->name('admin.message.reply');
-    
-        //menghapus pesan
-        Route::delete('/message/{id}', [MessageController::class, 'destroy'])->name('admin.message.destroy');
-});
-
-
 // Halaman Khusus
 Route::get('/your-page', [HomeController::class, 'link'])->name('your-page');
 
@@ -90,7 +69,6 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 // Product Routes
 Route::post('/product', [AuthController::class, 'addProduct'])->name('product.add');
 Route::get('/product', [AuthController::class, 'product'])->name('product.list');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
