@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Message;
 use App\Models\User;
+use App\Models\Message;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
         // Hitung jumlah pesan
+        $sessions = $request->session()->get('uname');
         $messageCount = Message::count();
         $userCount = User::count();
         $productCount = Product::count();
 
-        return view('admin.index', compact('messageCount', 'userCount', 'productCount'));
+        return view('admin.index', compact('messageCount', 'userCount', 'productCount', 'sessions'));
     }
 
     public function user()

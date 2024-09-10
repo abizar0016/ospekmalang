@@ -2,11 +2,6 @@
 
 <body>
     <div class="container">
-        @if (Session::has('error'))
-            <div class="alert alert-danger" role="alert">
-                {{ Session::get('error') }}
-            </div>
-        @endif
         @if (Session::has('success'))
             <div class="alert alert-success" role="alert">
                 {{ Session::get('success') }}
@@ -33,11 +28,11 @@
                 <h1 class="masuk">Masuk</h1>
 
                 <label for="email">
-                    <input type="email" name="email" id="email" class="input" required>
+                    <input type="email" name="email" id="email" class="input" required value="{{ old('email') }}">
                     <span class="placeholder">Email</span>
                 </label>
                 @error('email')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error" style="color: red">{{ $message }}</div>
                 @enderror
 
                 <label for="password">
@@ -45,7 +40,7 @@
                     <span class="placeholder">Password</span>
                 </label>
                 @error('password')
-                    <div class="error">{{ $message }}</div>
+                    <div class="error" style="color: red">{{ $message }}</div>
                 @enderror
 
                 <a href="" class="link">Lupa Kata Sandi?</a>

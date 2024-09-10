@@ -10,10 +10,10 @@ class Product extends Model
     use HasFactory;
 
     // Menentukan nama tabel
-    protected $table = 'product';
+    protected $table = 'products';
 
     // Menentukan primary key
-    protected $primaryKey = 'idproduct';
+    protected $primaryKey = 'id';
 
     // Menentukan bahwa primary key bukan auto-incrementing
     public $incrementing = false;

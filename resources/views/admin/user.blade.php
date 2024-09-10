@@ -1,6 +1,9 @@
 <x-head></x-head>
 <x-sidebaradmin></x-sidebaradmin>
 
+@if (@session('success'))
+
+@endif
 <div class="main">
     <x-topbaradmin></x-topbaradmin>
     @if (session('success'))
@@ -29,14 +32,14 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td><img src="" alt="foto"></td>
+                            <td><img src="" alt="foto">{{$user->iam}}</td>
                             <td class="name-tbl">{{ $user->uname }}</td>
                             <td class="email-tbl">{{ $user->email }}</td>
                             <td>{{ $user->status }}</td>
                             <td>
                                 <button onclick="viewUserModal()"><ion-icon name="eye-outline"></ion-icon></button>
                                 <button onclick="editUserModal()"><ion-icon name="pencil-outline"></ion-icon></button>
-                                <form action="{{ route('admin.user.destroy', $user->userid) }}" method="POST"
+                                <form action="" method="POST"
                                     style="display:inline;">
                                     @csrf
                                     @method('DELETE')
@@ -57,7 +60,7 @@
     <div class="modal-content">
         <span class="close" onclick="closeAddUserModal()">&times;</span>
         <h2>Tambah Pengguna</h2>
-        <form action="{{ route('admin.user.create') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <label for="uname">Nama:</label>
             <input type="text" id="uname" name="uname" required>
@@ -109,7 +112,7 @@
     <div class="modal-content">
         <span class="close" onclick="closeEditUserModal()">&times;</span>
         <h2>Perbarui Pengguna</h2>
-        <form action="{{ route('admin.user.update') }}" method="POST">
+        <form action="" method="POST">
             @csrf
             <label for="uname">Nama:</label>
             <input type="text" id="uname" name="uname" value="{{ $user->uname }}" required>

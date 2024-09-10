@@ -84,7 +84,7 @@
         <div class="modal-content">
             <span class="close" onclick="closeAddProduct()">&times;</span>
             <h2>Tambah Produk</h2>
-            <form action="{{ route('admin.product.create') }}" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <label for="name">Nama:</label>
@@ -117,6 +117,8 @@
 
 
     <!-- Modal untuk melihat produk -->
+    @if (@isset($product))
+    
     <div id="productViewModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="closeViewProduct()">&times;</span>
@@ -146,13 +148,13 @@
             </form>
         </div>
     </div>
-
+    
     <!-- Modal untuk memperbarui produk -->
-    <div id="editProductModal" class="modal" style="display: none;">
+    <di v id="editProductModal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="closeEditProduct()">&times;</span>
             <h2>Perbarui Pengguna</h2>
-            <form action="{{ route('product.update') }}" method="POST">
+            <form action="" method="POST">
                 @csrf
 
                 <label for="uname">Nama:</label>
@@ -184,7 +186,8 @@
                 <button type="submit">Kirim</button>
             </form>
         </div>
-    </div>
+    </di>
+    @endif
 
 </div>
 

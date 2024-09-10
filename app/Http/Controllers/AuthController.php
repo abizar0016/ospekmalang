@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password; // Pastikan ini diimpor
 use App\Models\User;
 
 class AuthController extends Controller
@@ -19,9 +18,9 @@ class AuthController extends Controller
     {
         // Validasi input
         $request->validate([
-            'uname' => 'required|string|max:255',
+            'uname' => 'required|string|max:255|min:8',
             'email' => 'required|unique:users,email',
-            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/', // Hanya huruf dan angka
+            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/', 
         ]);
 
         // Membuat pengguna baru
@@ -46,13 +45,7 @@ class AuthController extends Controller
         // Validasi input dengan pesan kustom
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/',
-        ], [
-            'email.required' => 'Email harus diisi.', // Jika email tidak diisi
-            'email.email' => 'Format email tidak valid.', // Jika format email salah
-            'password.required' => 'Password harus diisi.', // Jika password tidak diisi
-            'password.min' => 'Password harus memiliki setidaknya 8 karakter.', // Jika panjang password kurang dari 8 karakter
-            'password.regex' => 'Password hanya boleh terdiri dari huruf dan angka.' // Jika password mengandung karakter selain huruf dan angka
+            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/|',
         ]);
     
         // Persiapan kredensial untuk login
@@ -67,17 +60,18 @@ class AuthController extends Controller
     
             // Periksa status pengguna
             $user = Auth::user();
+
+            $request->session()->put('uname');
+
             if ($user->status === 'admin') {
                 return redirect()->intended('admin')->with('success', 'Login berhasil!');
             } else {
                 return redirect()->intended('user')->with('success', 'Login berhasil!');
             }
+        }else{
+            return redirect()->back();
         }
     
-        // Jika login gagal
-        return back()->withErrors([
-            'email' => 'Kredensial yang diberikan tidak cocok dengan catatan kami.',
-        ])->onlyInput('email');
     }
     
     
@@ -88,6 +82,6 @@ class AuthController extends Controller
         $request->session()->invalidate(); // Menghapus session
         $request->session()->regenerateToken(); // Mengenerate ulang token CSRF
 
-        return redirect()->route('login');
+        return redirect('/');
     }
 }

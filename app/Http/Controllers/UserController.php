@@ -4,18 +4,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $users = User::all(); // Ambil semua pengguna dari database
-        return view('admin.user', ['users' => $users]); // Kirim data pengguna ke view
+        $sessions = $request->session()->get('uname'); // Ambil username dari session
+        return view('admin.user', compact('users', 'sessions')); // Kirim data pengguna ke view
     }
 
     //Create User
-    public function create(Request $request)
+    public function createUser(Request $request)
     {
         $request->validate([
             'uname' => 'required|string|max:255',
@@ -24,26 +26,36 @@ class UserController extends Controller
             'status' => 'required|in:admin,user',
         ]);
 
-        User::create([
-            'uname' => $request->input('uname'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-            'status' => $request->input('status'),
-        ]);
+        $user = new User();
+        $user->uname = $request->uname;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->status = $request->status; // Status berasal dari input
+        $user->save();
 
         return redirect()->back()->with('success', 'User successfully created.');
     }
 
     //Update User
-    public function update(Request $request, User $user)
+    public function userUpdate(Request $request, User $user)
     {
         $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'uname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8',
             'status' => 'required|in:admin,user',
         ]);
 
+        // Proses gambar jika ada
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $user->image = 'images/' . $imageName;
+        }
+
+        // Update user
         $user->update([
             'uname' => $request->input('uname'),
             'email' => $request->input('email'),
@@ -55,9 +67,9 @@ class UserController extends Controller
     }
 
     //Delete User
-    public function destroy(User $user)
+    public function deleteUser(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.user.index')->with('success', 'User successfully deleted.');
+        return redirect()->back()->with('success', 'User successfully deleted.');
     }
 }

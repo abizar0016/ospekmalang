@@ -1,11 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 
 // Halaman Utama
 Route::prefix('/')->group(function () {
@@ -38,26 +38,24 @@ Route::prefix('user')->group(function () {
 });
 
 // Route untuk Admin
-Route::prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
-    Route::get('/user', [UserController::class, 'index'])->name('admin.user.index');
-    Route::post('/user/create', [UserController::class, 'create'])->name('admin.user.create');
-    Route::put('/user/update', [UserController::class, 'update'])->name('admin.user.update');
-    Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
-
-    Route::get('/message', [MessageController::class, 'index'])->name('admin.message.index');
-    Route::post('/message/create', [MessageController::class, 'createMessage'])->name('admin.message.create');
-    Route::put('/message/update', [MessageController::class, 'replyMessage'])->name('admin.message.reply');
-    Route::delete('/message/{id}', [MessageController::class, 'destroy'])->name('admin.message.destroy');
-
-    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
-    Route::post('/product', [ProductController::class, 'createProduct'])->name('admin.product.create');
-    Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
-    Route::delete('/product{idproduct}}', [ProductController::class, 'destroy'])->name('admin.product.destroy');
+    Route::prefix('admin')->group(function (){
+        //routing buat index
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        
+        //routing buat user
+        Route::get('/user', [UserController::class, 'index'])->name('admin.user');
+        Route::post('/user', [UserController::class, 'createUser'])->name('admin.user.create');
+        Route::put('/user', [UserController::class, 'updateUser'])->name('admin.user.update');
+        Route::delete('/user', [UserController::class, 'deleteUser'])->name('admin.user.delete');
+            
+        
+        Route::get('/message', [MessageController::class, 'index'])->name('admin.message');
+        
+        Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+        
+        Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
     });
-// Halaman Khusus
-Route::get('/your-page', [HomeController::class, 'link'])->name('your-page');
 
 // Auth Routes
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -69,7 +67,3 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 // Product Routes
 Route::post('/product', [AuthController::class, 'addProduct'])->name('product.add');
 Route::get('/product', [AuthController::class, 'product'])->name('product.list');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
-});

@@ -6,28 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
-            $table->id('idproduct');
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('product_id')->unique();
             $table->string('image', 225);
             $table->string('name', 100);
             $table->text('deskripsi');
             $table->string('price', 100);
             $table->string('stock', 100);
             $table->enum('category', ['baju', 'celana', 'sepatu', 'aksesoris'])->default('baju');
+            $table->timestamps();
         });
-        
-        
     }
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+
+    public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
-};    
+};

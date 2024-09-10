@@ -150,16 +150,16 @@ body {
 
 .main{
     position: absolute;
-    width: calc(100% - 300px);
-    left: 300px;
+    width: calc(100% - 350px);
+    left: 350px;
     height: 100vh;
     background: var(--white);
     transition: .5s;
 }
 
 .main.active{
-    width: calc(100% - 70px);
-    left: 70px;
+    width: calc(100% - 100px);
+    left: 100px;
 }
 
 .topbar{
@@ -612,4 +612,71 @@ body {
 /* Submit Button Active State */
 .modal-content button[type="submit"]:active {
     transform: translateY(1px); /* Press effect */
+}
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 80%;
+    box-shadow: 0 7px 25px #0008;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    flex: 0 0 200px; /* Adjust width as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 25%;
+}
+
+.profile-img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 4px solid #3498db;
+}
+
+.profile-name {
+    font-size: 2rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+.profile-email {
+    color: #777;
+}
+
+.profile-details {
+    flex: 1; /* Takes up remaining space */
+}
+
+.profile-details .form-group {
+    margin-bottom: 20px;
+}
+
+.profile-details .form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.btn-primary {
+    background-color: var(--black2);
+    border: none;
+    padding: 1.1em;
+    border-radius: 10px;
+    transition: all .3s ease-in-out;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: var(--blue);
+    scale: 1.1;
+    transition: all .3s ease-in-out;
 }

@@ -37,9 +37,9 @@
             </li>
             
             <li>
-                <a href="{{ url('admin/settings') }}">
-                    <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                    <span class="tittle">Pengaturan</span>
+                <a href="{{ url('admin/profile') }}">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></span>
+                    <span class="tittle">Profil</span>
                 </a>
             </li>
             
