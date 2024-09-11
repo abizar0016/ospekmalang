@@ -10,20 +10,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id(); // Primary key default
-            $table->string('image', 225);
+            $table->string('image', 225)->nullable(); // Tidak perlu ->change() saat membuat kolom baru
             $table->string('uname');
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('status', ['admin', 'user'])->default('user');
-            $table->timestamps();
 
-            // Kolom nullable
+            // Kolom nullable foreign keys
             $table->foreignId('product_id')->nullable()
                 ->constrained('products', 'product_id')
                 ->onDelete('set null');
             $table->foreignId('message_id')->nullable()
                 ->constrained('messages', 'message_id')
                 ->onDelete('set null');
+
+            $table->timestamps(); // Taruh timestamps di bagian akhir
         });
     }
 

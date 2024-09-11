@@ -24,33 +24,52 @@ class MessageController extends Controller
 
     public function createMessage(Request $request)
     {
+        // Validasi input
         $request->validate([
             'messageName' => 'required|string',
             'messageContent' => 'required|string',
-            'replyName' => 'nullable|string', // Biarkan nullable jika tidak ada balasan
-            'parent_id' => 'nullable|exists:messages,id', // Validasi parent_id jika ada
+            'messageTarget' => 'required|exists:users,userid', // Validasi tujuan
         ]);
-
+    
+        // Buat pesan baru
         $message = new Message();
-        $message->name = $request->name;
-
+        $message->name = $request->messageName;
+        $message->content = $request->messageContent;
+        $message->user_id = $request->messageTarget; // Menyimpan tujuan ke user_id
+        $message->save();
+    
+        // Logging untuk debugging
         Log::info('Message created successfully:', ['message' => $message->toArray()]);
-
-        return redirect()->back();
+    
+        return redirect()->back()->with('success', 'Pesan berhasil ditambahkan.');
     }
+    
 
-    public function replyMessage($id)
+    public function replyMessage(Request $request, $id)
     {
-        $users = User::all(); // Mengambil data pengguna    
-        $message = Message::findOrFail($id); // Mengambil pesan berdasarkan ID
-        
-        Log::info('Replying to message:', ['message_id' => $id, 'message' => $message->toArray()]);
-
-        return view('admin.message.reply', [
-            'users' => $users,
-            'message' => $message
+        // Validasi input balasan
+        $request->validate([
+            'replyName' => 'required|string',
+            'messageContent' => 'required|string',
         ]);
+    
+        // Ambil pesan yang akan dibalas
+        $message = Message::findOrFail($id);
+    
+        // Buat balasan baru
+        $reply = new Message();
+        $reply->name = Auth::user()->uname; // Nama pengirim balasan
+        $reply->content = $request->replyName;
+        $reply->parent_id = $message->id; // Set parent_id ke id pesan yang dibalas
+        $reply->user_id = Auth::id(); // User yang membalas
+        $reply->save();
+    
+        // Logging untuk debugging
+        Log::info('Message replied successfully:', ['message' => $reply->toArray()]);
+    
+        return redirect()->back()->with('success', 'Balasan berhasil dikirim.');
     }
+    
 
     public function destroy($id)
     {

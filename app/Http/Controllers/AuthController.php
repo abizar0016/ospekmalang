@@ -20,20 +20,33 @@ class AuthController extends Controller
         $request->validate([
             'uname' => 'required|string|max:255|min:8',
             'email' => 'required|unique:users,email',
-            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/', 
+            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi file gambar opsional
         ]);
-
+    
         // Membuat pengguna baru
         $user = new User();
+        
+        // Jika ada file gambar yang di-upload, simpan file tersebut
+        if ($request->hasFile('image')) {
+            $fileName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $fileName);
+            $user->image = $fileName;
+        } else {
+            // Jika tidak ada file yang diupload, set image sebagai null
+            $user->image = null;
+        }
+    
         $user->uname = $request->uname;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 'user';
         $user->save();
-
+    
         // Redirect ke halaman login dengan pesan sukses
         return redirect('login')->with('success', 'Registration successful!');
     }
+    
 
     public function login()
     {
@@ -42,10 +55,10 @@ class AuthController extends Controller
     
     public function postLogin(Request $request)
     {
-        // Validasi input dengan pesan kustom
+        // Validasi input
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/|',
+            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/',
         ]);
     
         // Persiapan kredensial untuk login
@@ -58,21 +71,22 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // Regenerasi session untuk keamanan
     
-            // Periksa status pengguna
+            // Ambil pengguna
             $user = Auth::user();
-
-            $request->session()->put('uname');
-
+    
+            // Simpan data ke dalam sesi
+            $request->session()->put('user_image', $user->image);
+    
             if ($user->status === 'admin') {
                 return redirect()->intended('admin')->with('success', 'Login berhasil!');
             } else {
                 return redirect()->intended('user')->with('success', 'Login berhasil!');
             }
-        }else{
+        } else {
             return redirect()->back();
         }
-    
     }
+    
     
     
 

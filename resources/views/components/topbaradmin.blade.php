@@ -7,6 +7,10 @@
         </label>
     </div>
     <div class="user-profil">
-        <img src="{{ url('images/admin.png') }}" alt="">
+        @if (session('user_image'))
+            <img src="{{ asset(session($user->image)) }}" alt="" style="max-width:50px; max-height:50px; border-radius:50%;">
+        @else
+            <img src="{{ url('images/admin.png') }}" alt="" style="max-width:50px; max-height:50px; border-radius:50%;">
+        @endif
     </div>
 </div>

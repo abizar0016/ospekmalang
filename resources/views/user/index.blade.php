@@ -13,23 +13,24 @@
 
                     <!-- Logo desktop -->
                     <a href="#" class="logo">
-                        <img src="images/logo.png" alt="IMG-LOGO">
+                        <img src="{{ url('images/logo.png') }}" alt="IMG-LOGO">
                     </a>
 
                     <!-- Menu desktop -->
                     <div class="menu-desktop">
                         <ul class="main-menu">
                             <li class="active-menu">
-                                <a href="{{ url('/') }}">Beranda</a>
+                                <a href="{{ url('/user') }}">Beranda</a>
                             </li>
 
                             <li>
-                                <a href="{{ url('produk') }}">Produk</a>
+                                <a href="{{ url('/user#about') }}">Tentang</a>
                             </li>
 
                             <li>
-                                <a href="about.html">Tentang</a>
+                                <a href="{{ url('user/produk') }}">Produk</a>
                             </li>
+
                         </ul>
                     </div>
 
@@ -65,7 +66,7 @@
         <div class="wrap-header-mobile">
             <!-- Logo moblie -->
             <div class="logo-mobile">
-                <a href="{{ url('/') }}"><img src="images/logo.png" alt="IMG-LOGO"></a>
+                <a href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}" alt="IMG-LOGO"></a>
             </div>
 
             <!-- Icon header -->
@@ -107,7 +108,7 @@
                 </li>
 
                 <li>
-                    <a href="about.html">Tentang</a>
+                    <a href="{{ url('user#about') }}">Tentang</a>
                 </li>
 
             </ul>
@@ -117,7 +118,7 @@
         <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
             <div class="container-search-header">
                 <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                    <img src="images/icons/icon-close2.png" alt="CLOSE">
+                    <img src="{{ url('images/icons/icon-close2.png') }}" alt="CLOSE">
                 </button>
 
                 <form class="wrap-search-header flex-w p-l-15">
@@ -149,7 +150,7 @@
                 <ul class="header-cart-wrapitem w-full">
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="images/foto.jpg" alt="IMG">
+                            <img src="{{ url('images/foto.jpg') }}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt">
@@ -169,7 +170,7 @@
 
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="images/sepatu.jpg" alt="IMG">
+                            <img src="{{ url('images/sepatu.jpg') }}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt">
@@ -189,7 +190,7 @@
 
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="images/sabuk.jpg" alt="IMG">
+                            <img src="{{ url('images/sabuk.jpg') }}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt">
@@ -235,7 +236,7 @@
     <section class="section-slide">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url(images/bg-slide2.png);">
+                <div class="item-slick1" style="background-image: url({{ url('images/bg-slide2.png') }});">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -253,7 +254,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url(images/bg-slide3.png);">
+                <div class="item-slick1" style="background-image: url({{ url('images/bg-slide3.png') }});">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -274,7 +275,7 @@
                     </div>
                 </div>
 
-                <div class="item-slick1" style="background-image: url(images/bg-slide.png);">
+                <div class="item-slick1" style="background-image: url({{ url('images/bg-slide.png') }});">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft"
@@ -287,9 +288,7 @@
                             <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight"
                                 data-delay="800">
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                    Ospek
-                                    <br>
-                                    Lainnnya
+                                    Ospek Lainnnya
                                 </h2>
                             </div>
 
@@ -302,6 +301,73 @@
     </section>
 
 
+    <section class="bg0 p-t-75 p-b-120" id="about">
+        <div class="container">
+            <div class="row p-b-148">
+                <div class="col-md-7 col-lg-8">
+                    <div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+                        <h3 class="mtext-111 cl2 p-b-16">
+                            Cerita Kami
+                        </h3>
+
+                        Di Ospek Malang, kami memahami betapa pentingnya memulai perjalanan kampus Anda
+                        dengan penuh semangat dan persiapan yang matang. Itulah sebabnya kami hadir untuk
+                        menyediakan berbagai produk eksklusif yang dirancang khusus untuk membantu Anda
+                        memulai pengalaman ospek dengan gaya dan percaya diri.
+
+                        Ospek Malang adalah destinasi utama bagi mahasiswa baru yang mencari berbagai baju
+                        dan perlengkapan ospek berkualitas tinggi. Kami menawarkan koleksi lengkap yang
+                        mencakup baju ospek, aksesori, dan perlengkapan lainnya yang diperlukan untuk
+                        membuat pengalaman ospek Anda lebih berkesan.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
+                    <div class="how-bor1 ">
+                        <div class="hov-img0">
+                            <img src="{{ url('images/about-01.jpg') }}" alt="IMG">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="order-md-2 col-md-7 col-lg-8 p-b-30">
+                    <div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
+                        <h3 class="mtext-111 cl2 p-b-16">
+                            Misi Kami
+                        </h3>
+
+                        <p class="stext-113 cl6 p-b-26">
+                            Menyediakan Produk Berkualitas: Kami berusaha keras untuk memastikan setiap
+                            produk yang kami tawarkan memenuhi standar kualitas tertinggi, memberikan nilai
+                            tambah kepada setiap pelanggan kami.
+                            <br>
+                            <br>
+                            Memberikan Pengalaman Belanja yang Mudah: Kami berkomitmen untuk memberikan
+                            pengalaman belanja yang mudah dan menyenangkan melalui platform online yang
+                            user-friendly, dengan pelayanan pelanggan yang siap membantu setiap saat.
+                            <br>
+                            <br>
+                            Mendukung Komunitas Mahasiswa: Kami ingin membantu mahasiswa baru merasa
+                            diterima dan siap untuk menghadapi tantangan pertama mereka dengan perlengkapan
+                            yang tepat dan penuh gaya.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
+                    <div class="how-bor2">
+                        <div class="hov-img0">
+                            <img src="{{ url('images/about-02.jpg') }}" alt="IMG">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Banner -->
     <div class="sec-banner bg0 p-t-80 p-b-50">
         <div class="container">
@@ -309,7 +375,7 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="images/baju.jpg" alt="IMG-BANNER">
+                        <img src="{{ url('images/baju.jpg') }}" alt="IMG-BANNER">
 
                         <a href="product.html"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -332,10 +398,11 @@
                     </div>
                 </div>
 
+
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="images/celana.jpg" alt="IMG-BANNER">
+                        <img src="{{ url('images/celana.jpg') }}" alt="IMG-BANNER">
 
                         <a href="product.html"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -361,7 +428,7 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="images/sabuk.jpg" alt="IMG-BANNER">
+                        <img src="{{ url('images/sabuk.jpg') }}" alt="IMG-BANNER">
 
                         <a href="product.html"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -386,6 +453,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!-- Product -->
@@ -437,7 +505,8 @@
                         </button>
 
                         <form action="">
-                            <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                            <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
+                                placeholder="Search">
                         </form>
                     </div>
                 </div>
@@ -449,7 +518,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/baju.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/baju.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -476,7 +545,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/baju2.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/baju2.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -503,7 +572,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/celana.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/celana.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -530,7 +599,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/baju3.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/baju3.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -557,7 +626,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/sepatu.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/sepatu.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -584,7 +653,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/sepatu2.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/sepatu2.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -610,7 +679,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/product-09.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/product-09.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -637,7 +706,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/dasi.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/dasi.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -664,7 +733,7 @@
                     <!-- Block2 -->
                     <div class="block2">
                         <div class="block2-pic hov-img0">
-                            <img src="images/sabuk.jpg" alt="IMG-PRODUCT">
+                            <img src="{{ url('images/sabuk.jpg') }}" alt="IMG-PRODUCT">
 
                             <a href="#"
                                 class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -689,9 +758,10 @@
 
             </div>
 
+            <a href="{{ url('user/produk') }}"></a>
             <div class="flex-c-m flex-w w-full p-t-45">
                 <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-                    Load More
+                    Lainnya 
                 </a>
             </div>
         </div>
@@ -792,7 +862,7 @@
         <div class="container">
             <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
                 <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                    <img src="images/icons/icon-close.png" alt="CLOSE">
+                    <img src="{{ url('images/icons/icon-close.png') }}" alt="CLOSE">
                 </button>
 
                 <div class="row">
@@ -803,34 +873,34 @@
                                 <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                                 <div class="slick3 gallery-lb">
-                                    <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+                                    <div class="item-slick3" data-thumb="{{ url('images/product-detail-01.jpg') }}">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                                            <img src="{{ url('images/product-detail-01.jpg') }}" alt="IMG-PRODUCT">
 
                                             <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                href="images/product-detail-01.jpg">
+                                                href="{{ url('images/product-detail-01.jpg') }}">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
                                     </div>
 
-                                    <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+                                    <div class="item-slick3" data-thumb="{{ url('images/product-detail-02.jpg') }}">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                                            <img src="{{ url('images/product-detail-02.jpg') }}" alt="IMG-PRODUCT">
 
                                             <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                href="images/product-detail-02.jpg">
+                                                href="{{ url('images/product-detail-02.jpg') }}">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
                                     </div>
 
-                                    <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+                                    <div class="item-slick3" data-thumb="{{ url('images/product-detail-03.jpg') }}">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+                                            <img src="{{ url('images/product-detail-03.jpg') }}" alt="IMG-PRODUCT">
 
                                             <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                href="images/product-detail-03.jpg">
+                                                href="{{ url('images/product-detail-03.jpg') }}">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
@@ -953,4 +1023,4 @@
         </div>
     </div>
 
-<x-script></x-script>
+    <x-script></x-script>

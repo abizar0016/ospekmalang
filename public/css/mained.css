@@ -192,11 +192,17 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 
+
+
 /*//////////////////////////////////////////////////////////////////
 [ Header ]*/
 
 /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 [ Header Desktop ]*/
+
+a{
+  text-decoration: none;
+}
 
 .container-menu-desktop {
   height: auto;
@@ -2353,7 +2359,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .ltext-103 {
   font-family: Poppins-Bold;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 1.1;
   text-transform: uppercase;
 }
@@ -2399,7 +2405,7 @@ input.num-product::-webkit-inner-spin-button {
 /*---------------------------------------------*/
 .ltext-201 {
   font-family: PlayfairDisplay-Bold;
-  font-size: 60px;
+  font-size: 40px;
   line-height: 1.1;
   text-transform: uppercase;
 }

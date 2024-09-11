@@ -21,12 +21,23 @@ class UserController extends Controller
     {
         $request->validate([
             'uname' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'status' => 'required|in:admin,user',
         ]);
 
+        // Ambil file gambar dari request
+        $image = $request->file('image');
+
+        // Buat nama file unik
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+        // Pindahkan gambar ke folder public/images
+        $image->move(public_path('images'), $imageName);
+
         $user = new User();
+        $user->image = 'images/' . $imageName; // Simpan path gambar relatif
         $user->uname = $request->uname;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -37,39 +48,42 @@ class UserController extends Controller
     }
 
     //Update User
-    public function userUpdate(Request $request, User $user)
-    {
-        $request->validate([
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'uname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8',
-            'status' => 'required|in:admin,user',
-        ]);
+// Update User
+public function updateUser(Request $request, $id)
+{
+    $user = User::findOrFail($id); // Cari pengguna berdasarkan id
 
-        // Proses gambar jika ada
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $user->image = 'images/' . $imageName;
-        }
+    $request->validate([
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'uname' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+        'password' => 'nullable|string|min:8',
+        'status' => 'required|in:admin,user',
+    ]);
 
-        // Update user
-        $user->update([
-            'uname' => $request->input('uname'),
-            'email' => $request->input('email'),
-            'password' => $request->input('password') ? bcrypt($request->input('password')) : $user->password,
-            'status' => $request->input('status'),
-        ]);
-
-        return redirect()->back()->with('success', 'User successfully updated.');
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        $user->image = 'images/' . $imageName;
     }
 
+    $user->update([
+        'uname' => $request->input('uname'),
+        'email' => $request->input('email'),
+        'password' => $request->input('password') ? Hash::make($request->input('password')) : $user->password,
+        'status' => $request->input('status'),
+    ]);
+
+    return redirect()->back()->with('success', 'User successfully updated.');
+}
+
+    
     //Delete User
     public function deleteUser(User $user)
     {
         $user->delete();
         return redirect()->back()->with('success', 'User successfully deleted.');
     }
-}
+    
+}    

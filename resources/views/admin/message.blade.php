@@ -74,7 +74,7 @@
             <div class="modal-content">
                 <span class="close" onclick="closeReplyModal()">&times;</span>
                 <h2>Balas Pesan</h2>
-                <form action="" method="POST">
+                <form action="{{ route('message.reply') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <input type="hidden" id="replyParentId" name="parent_id">
@@ -98,7 +98,7 @@
             <div class="modal-content">
                 <span class="close" onclick="closeAddMessageModal()">&times;</span>
                 <h2>Tambah Pesan</h2>
-                <form action="" method="POST">
+                <form action="{{ route('message.create') }}" method="POST"  enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" id="replyParentId" name="parent_id">
 
@@ -123,6 +123,6 @@
     @endif
 
 
-    <script src="{{ url('js/admin.js') }}"></script>
+    <script src="{{ url('js/admins.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

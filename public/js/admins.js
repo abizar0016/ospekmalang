@@ -61,30 +61,41 @@ function closeAddMessageModal() {
     document.getElementById('addMessageModal').style.display = 'none';
 }
 
-// Fungsi untuk modal user
+// Untuk membuka modal
 function openAddUserModal() {
     document.getElementById('addUserModal').style.display = 'block';
 }
 
+function openViewUserModal(userId) {
+    document.getElementById('viewUserModal').style.display = 'block';
+    // Load user data by userId if needed
+}
+
+function openEditUserModal(userId) {
+    document.getElementById('editUserModal').style.display = 'block';
+    // Load user data by userId if needed
+}
+
+// Menutup modal
 function closeAddUserModal() {
     document.getElementById('addUserModal').style.display = 'none';
 }
 
-function openEditUserModal() {
-    document.getElementById('editUserModal').style.display = 'block';
+function closeViewUserModal() {
+    document.getElementById('viewUserModal').style.display = 'none';
 }
 
 function closeEditUserModal() {
     document.getElementById('editUserModal').style.display = 'none';
 }
 
-function openViewUserModal() {
-    document.getElementById('viewUserModal').style.display = 'block';
+// Menutup modal jika klik di luar area modal
+window.onclick = function (event) {
+    if (event.target.matches('.modal')) {
+        event.target.style.display = 'none';
+    }
 }
 
-function closeViewUserModal() {
-    document.getElementById('viewUserModal').style.display = 'none';
-}
 
 // Menutup modal jika klik di luar area modal
 window.onclick = function (event) {
@@ -134,4 +145,40 @@ function formatRupiah(angka, prefix) {
 
     rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
     return prefix + rupiah;
+}
+
+function previewImage() {
+    const image = document.querySelector('#image').files[0];
+    const imgPreview = document.querySelector('.img-preview');
+
+    if (image) {
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            imgPreview.src = reader.result; // Perbaiki nama variabel dari preview ke imgPreview
+        };
+
+        reader.readAsDataURL(image); // Perbaiki nama variabel dari file ke image
+        imgPreview.style.display = 'block';
+    } else {
+        imgPreview.src = "{{ asset($user->image) }}"; // Kembalikan ke gambar lama jika tidak ada file
+    }
+}
+
+
+function openAddMessageModal() {
+    document.getElementById('addMessageModal').style.display = 'block';
+}
+
+function closeAddMessageModal() {
+    document.getElementById('addMessageModal').style.display = 'none';
+}
+
+function openReplyModal(id) {
+    document.getElementById('replyParentId').value = id;
+    document.getElementById('replyModal').style.display = 'block';
+}
+
+function closeReplyModal() {
+    document.getElementById('replyModal').style.display = 'none';
 }

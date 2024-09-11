@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,14 +9,18 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $primaryKey = 'userid'; // Menyatakan primary key jika bukan 'id'
+    protected $primaryKey = 'id'; // Ubah sesuai dengan kolom primary key di tabel
 
-    public $incrementing = false; // Menyatakan bahwa primary key tidak auto-increment
+    public $incrementing = true; // Primary key adalah auto-incrementing
     
     protected $fillable = [
         'uname',
         'email',
         'password',
+        'image', // Pastikan kolom ini juga termasuk jika digunakan
+        'status',
+        'product_id',
+        'message_id',
     ];  
 
     protected $hidden = [

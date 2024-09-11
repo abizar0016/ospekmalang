@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 
 // Halaman Utama
 Route::prefix('/')->group(function () {
@@ -44,17 +45,20 @@ Route::prefix('user')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
         
         //routing buat user
-        Route::get('/user', [UserController::class, 'index'])->name('admin.user');
-        Route::post('/user', [UserController::class, 'createUser'])->name('admin.user.create');
-        Route::put('/user', [UserController::class, 'updateUser'])->name('admin.user.update');
-        Route::delete('/user', [UserController::class, 'deleteUser'])->name('admin.user.delete');
-            
+        Route::get('/user', [UserController::class, 'index'])->name('user');
+        Route::post('/user', [UserController::class, 'createUser'])->name('user.create');
+        Route::put('/user/{id}', [UserController::class, 'updateUser'])->name('user.update');
+        Route::delete('/user/{user}', [UserController::class, 'deleteUser'])->name('user.delete');
         
-        Route::get('/message', [MessageController::class, 'index'])->name('admin.message');
+        Route::get('/message', [MessageController::class, 'index'])->name('message');
+        Route::post('/message', [MessageController::class, 'createMessage'])->name('message.create');
+        Route::post('/message/{id}/reply', [MessageController::class, 'replyMessage'])->name('message.reply');
         
         Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+        Route::resource('/product/action', ProductController::class);
         
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+        Route::resource('/profile/action', ProfileController::class);
     });
 
 // Auth Routes
