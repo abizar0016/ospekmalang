@@ -22,12 +22,13 @@
                             </li>
 
                             <li>
-                                <a href="{{ url('produk') }}">Produk</a>
+                                <a href="{{ url('/#about') }}">Tentang</a>
                             </li>
 
                             <li>
-                                <a href="{{ url('about') }}">Tentang</a>
+                                <a href="{{ url('produk') }}">Produk</a>
                             </li>
+
                         </ul>
                     </div>
 
@@ -47,17 +48,6 @@
                 <a href="{{ url('/') }}"><img src="images/logo.png" alt="IMG-LOGO"></a>
             </div>
 
-            <!-- Icon header -->
-            <div class="wrap-icon-header flex-w flex-r-m m-r-15" onclick="toggleSearch()">
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-                    <i class="zmdi zmdi-search"></i>
-                </div>
-
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                    data-notify="2">
-                    <i class="zmdi zmdi-shopping-cart"></i>
-                </div>
-            </div>
 
             <!-- Button show menu -->
             <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -78,16 +68,13 @@
                 </li>
 
                 <li>
-                    <a href="produk">Toko</a>
+                    <a href="{{ url('/#about') }}">Tentang</a>
+                </li>
+                
+                <li>
+                    <a href="{{ url('produk') }}">Produk</a>
                 </li>
 
-                <li>
-                    <a href="{{ url('produk') }}">Kategori</a>
-                </li>
-
-                <li>
-                    <a href="{{ url('about') }}">Tentang</a>
-                </li>
 
             </ul>
         </div>

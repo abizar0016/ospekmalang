@@ -27,4 +27,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function isAdmin()
+    {
+        // Mengembalikan true jika status pengguna adalah 'admin'
+        return $this->status === 'admin';
+    }
 }

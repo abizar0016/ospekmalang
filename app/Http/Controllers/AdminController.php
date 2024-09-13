@@ -6,14 +6,24 @@ use App\Models\User;
 use App\Models\Message;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // Pastikan import ini ada
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-
     public function index(Request $request)
     {
-        // Hitung jumlah pesan
+        // Cek apakah pengguna tidak autentikasi (guest)
+        if (Auth::guest()) {
+            abort(403, 'Access denied. You are not authenticated.');
+        }
+
+        // Cek apakah pengguna bukan admin
+        if (Auth::user()->status !== 'admin') {
+            abort(403, 'Access denied. You are not an admin.');
+        }
+
+        // Jika pengguna adalah admin, tampilkan data
         $sessions = $request->session()->get('uname');
         $messageCount = Message::count();
         $userCount = User::count();
@@ -49,7 +59,7 @@ class AdminController extends Controller
 
     public function logout()
     {
-        // Logika logout, jika diperlukan
+        Auth::logout(); // Pastikan logout dilakukan
         return redirect('/');
     }
 }

@@ -92,7 +92,7 @@
 
 <!-- Modal untuk melihat pengguna -->
 @if (isset($user))
-    <div id="viewUserModal" class="modal" style="display: none;">
+    <div id="viewUserModal({{ $user->id }})" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="closeViewUserModal()">&times;</span>
             <h2>Detail Pengguna</h2>
@@ -119,7 +119,7 @@
 
 <!-- Modal untuk memperbarui pengguna -->
 @if (isset($user))
-    <div id="editUserModal" class="modal" style="display: none;">
+    <div id="editUserModal({{ $user->id }})" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="closeEditUserModal()">&times;</span>
             <h2>Perbarui Pengguna</h2>

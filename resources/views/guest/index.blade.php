@@ -24,12 +24,13 @@
                             </li>
 
                             <li>
-                                <a href="{{ url('produk') }}">Produk</a>
+                                <a href="{{ url('/#about') }}">Tentang</a>
                             </li>
 
                             <li>
-                                <a href="{{ url('/#about') }}">Tentang</a>
+                                <a href="{{ url('produk') }}">Produk</a>
                             </li>
+
                         </ul>
                     </div>
 
@@ -47,18 +48,6 @@
             <!-- Logo moblie -->
             <div class="logo-mobile">
                 <a href="{{ url('/') }}"><img src="images/logo.png" alt="IMG-LOGO"></a>
-            </div>
-
-            <!-- Icon header -->
-            <div class="wrap-icon-header flex-w flex-r-m m-r-15" onclick="toggleSearch()">
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-                    <i class="zmdi zmdi-search"></i>
-                </div>
-
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                    data-notify="2">
-                    <i class="zmdi zmdi-shopping-cart"></i>
-                </div>
             </div>
 
             <!-- Button show menu -->
@@ -80,15 +69,11 @@
                 </li>
 
                 <li>
-                    <a href="produk">Toko</a>
+                    <a href="{{ url('produk') }}">Produk</a>
                 </li>
 
                 <li>
-                    <a href="{{ url('produk') }}">Kategori</a>
-                </li>
-
-                <li>
-                    <a href="{{ url('about') }}">Tentang</a>
+                    <a href="{{ url('#about') }}">Tentang</a>
                 </li>
 
             </ul>
@@ -200,6 +185,70 @@
         </div>
     </section>
 
+    <section class="bg0 p-t-75 p-b-120" id="about">
+        <div class="container">
+            <div class="row p-b-148">
+                <div class="col-md-7 col-lg-8">
+                    <div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+                        <h3 class="mtext-111 cl2 p-b-16">
+                            Cerita Kami
+                        </h3>
+
+                        Di Ospek Malang, kami memahami betapa pentingnya memulai perjalanan kampus Anda
+                        dengan penuh semangat dan persiapan yang matang. Itulah sebabnya kami hadir untuk
+                        menyediakan berbagai produk eksklusif yang dirancang khusus untuk membantu Anda
+                        memulai pengalaman ospek dengan gaya dan percaya diri.
+
+                        Ospek Malang adalah destinasi utama bagi mahasiswa baru yang mencari berbagai baju
+                        dan perlengkapan ospek berkualitas tinggi. Kami menawarkan koleksi lengkap yang
+                        mencakup baju ospek, aksesori, dan perlengkapan lainnya yang diperlukan untuk
+                        membuat pengalaman ospek Anda lebih berkesan.
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
+                        <div class="hov-img0">
+                            <img src="{{ url('images/foto-about-1.png') }}" style="border:none;" alt="IMG">
+                        </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="order-md-2 col-md-7 col-lg-8 p-b-30">
+                    <div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
+                        <h3 class="mtext-111 cl2 p-b-16">
+                            Misi Kami
+                        </h3>
+
+                        <p class="stext-113 cl6 p-b-26">
+                            Menyediakan Produk Berkualitas: Kami berusaha keras untuk memastikan setiap
+                            produk yang kami tawarkan memenuhi standar kualitas tertinggi, memberikan nilai
+                            tambah kepada setiap pelanggan kami.
+                            <br>
+                            <br>
+                            Memberikan Pengalaman Belanja yang Mudah: Kami berkomitmen untuk memberikan
+                            pengalaman belanja yang mudah dan menyenangkan melalui platform online yang
+                            user-friendly, dengan pelayanan pelanggan yang siap membantu setiap saat.
+                            <br>
+                            <br>
+                            Mendukung Komunitas Mahasiswa: Kami ingin membantu mahasiswa baru merasa
+                            diterima dan siap untuk menghadapi tantangan pertama mereka dengan perlengkapan
+                            yang tepat dan penuh gaya.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
+                        <div class="hov-img0">
+                            <img src="{{ url('images/foto-about-2.png') }}" alt="IMG">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Banner -->
     <div class="sec-banner bg0 p-t-80 p-b-50">
@@ -210,7 +259,7 @@
                     <div class="block1 wrap-pic-w">
                         <img src="images/baju.jpg" alt="IMG-BANNER">
 
-                        <a href="{{ url('log') }}"
+                        <a href="{{ url('login') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -236,7 +285,7 @@
                     <div class="block1 wrap-pic-w">
                         <img src="images/celana.jpg" alt="IMG-BANNER">
 
-                        <a href="{{ url('log') }}"
+                        <a href="{{ url('login') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -262,7 +311,7 @@
                     <div class="block1 wrap-pic-w">
                         <img src="images/sabuk.jpg" alt="IMG-BANNER">
 
-                        <a href="{{ url('log') }}"
+                        <a href="{{ url('login') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -350,8 +399,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/baju.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -377,8 +426,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/baju2.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -404,8 +453,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/celana.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -431,8 +480,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/baju3.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -458,8 +507,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/sepatu.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -485,8 +534,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/sepatu2.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -511,8 +560,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/product-09.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -538,8 +587,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/dasi.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -565,8 +614,8 @@
                         <div class="block2-pic hov-img0">
                             <img src="images/sabuk.jpg" alt="IMG-PRODUCT">
 
-                            <a href="#"
-                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                            <a href="{{ url('login') }}"
+                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
                                 Lihat Cepat
                             </a>
                         </div>
@@ -589,7 +638,7 @@
             </div>
 
             <div class="flex-c-m flex-w w-full p-t-45">
-                <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                <a href="{{ url('login') }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                     Lainnya
                 </a>
             </div>

@@ -95,20 +95,16 @@
 
 
             <ul class="main-menu-m">
-                <li>
-                    <a href="{{ url('/') }}">Beranda</a>
+                <li class="active-menu">
+                    <a href="{{ url('/user') }}">Beranda</a>
                 </li>
 
                 <li>
-                    <a href="produk">Toko</a>
+                    <a href="{{ url('/user#about') }}">Tentang</a>
                 </li>
 
                 <li>
-                    <a href="{{ url('produk') }}">Kategori</a>
-                </li>
-
-                <li>
-                    <a href="{{ url('user#about') }}">Tentang</a>
+                    <a href="{{ url('user/produk') }}">Produk</a>
                 </li>
 
             </ul>
@@ -325,11 +321,9 @@
                 </div>
 
                 <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
-                    <div class="how-bor1 ">
                         <div class="hov-img0">
-                            <img src="{{ url('images/about-01.jpg') }}" alt="IMG">
+                            <img src="{{ url('images/foto-about-1.png') }}" alt="IMG">
                         </div>
-                    </div>
                 </div>
             </div>
 
@@ -359,11 +353,9 @@
                 </div>
 
                 <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
-                    <div class="how-bor2">
                         <div class="hov-img0">
-                            <img src="{{ url('images/about-02.jpg') }}" alt="IMG">
+                            <img src="{{ url('images/foto-about-2.png') }}" alt="IMG">
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

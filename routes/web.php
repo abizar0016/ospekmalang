@@ -1,11 +1,15 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserPageController;
+use App\Http\Kernel;
+
 use App\Models\User;
 
 // Halaman Utama
@@ -25,9 +29,7 @@ Route::prefix('/')->group(function () {
 
 // Routes untuk User
 Route::prefix('user')->group(function () {
-    Route::get('/', function () {
-        return view('user.index');
-    })->name('user.index');
+    Route::get('/', [UserPageController::class, 'index'])->name('user.index')->middleware('auth');
 
     Route::get('/produk', function () {
         return view('user.produk');
@@ -40,26 +42,28 @@ Route::prefix('user')->group(function () {
 
 // Route untuk Admin
 
-    Route::prefix('admin')->group(function (){
-        //routing buat index
-        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-        
-        //routing buat user
-        Route::get('/user', [UserController::class, 'index'])->name('user');
-        Route::post('/user', [UserController::class, 'createUser'])->name('user.create');
-        Route::put('/user/{id}', [UserController::class, 'updateUser'])->name('user.update');
-        Route::delete('/user/{user}', [UserController::class, 'deleteUser'])->name('user.delete');
-        
-        Route::get('/message', [MessageController::class, 'index'])->name('message');
-        Route::post('/message', [MessageController::class, 'createMessage'])->name('message.create');
-        Route::post('/message/{id}/reply', [MessageController::class, 'replyMessage'])->name('message.reply');
-        
-        Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
-        Route::resource('/product/action', ProductController::class);
-        
-        Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
-        Route::resource('/profile/action', ProfileController::class);
-    });
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+    // Rute lainnya yang hanya boleh diakses oleh admin
+    Route::get('admin/user', [UserAdminController::class, 'index'])->name('user');
+    Route::post('admin/user', [UserAdminController::class, 'createUser'])->name('user.create');
+    Route::put('admin/user/{id}', [UserAdminController::class, 'updateUser'])->name('user.update');
+    Route::delete('admin/user/{user}', [UserAdminController::class, 'deleteUser'])->name('user.delete');
+
+    Route::get('/message', [MessageController::class, 'index'])->name('message');
+    Route::post('/message', [MessageController::class, 'createMessage'])->name('message.create');
+    Route::post('/message/{id}/reply', [MessageController::class, 'replyMessage'])->name('message.reply');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+    Route::resource('/product/action', ProductController::class);
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+    Route::resource('/profile/action', ProfileController::class);
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
 
 // Auth Routes
 Route::get('/register', [AuthController::class, 'register'])->name('register');
