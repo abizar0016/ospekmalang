@@ -51,7 +51,6 @@
         </a>
     </div>
 
-    <div class="detail">
         <div class="recentOrders">
             <div class="cardHeader">
                 <h2>
@@ -129,7 +128,6 @@
             </table>
         </div>
 
-    </div>
 
 
 </div>

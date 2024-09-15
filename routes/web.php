@@ -1,16 +1,17 @@
 <?php
 
+use App\Http\Kernel;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserPageController;
-use App\Http\Kernel;
 
-use App\Models\User;
+use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\UserAdminController;
 
 // Halaman Utama
 Route::prefix('/')->group(function () {
@@ -50,26 +51,49 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('admin/user', [UserAdminController::class, 'createUser'])->name('user.create');
     Route::put('admin/user/{id}', [UserAdminController::class, 'updateUser'])->name('user.update');
     Route::delete('admin/user/{user}', [UserAdminController::class, 'deleteUser'])->name('user.delete');
+    Route::get('admin/user/view/{id}', [UserAdminController::class, 'show'])->name('user.view');
 
-    Route::get('/message', [MessageController::class, 'index'])->name('message');
-    Route::post('/message', [MessageController::class, 'createMessage'])->name('message.create');
-    Route::post('/message/{id}/reply', [MessageController::class, 'replyMessage'])->name('message.reply');
+    Route::get('admin/message', [MessageController::class, 'index'])->name('message');
+    Route::post('admin/message', [MessageController::class, 'createMessage'])->name('message.create');
+    Route::post('admin/message/{id}/reply', [MessageController::class, 'replyMessage'])->name('message.reply');
 
-    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
-    Route::resource('/product/action', ProductController::class);
+    Route::get('admin/product', [ProductController::class, 'index'])->name('admin.product.index');
+    Route::resource('admin/product/action', ProductController::class);
 
-    Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
-    Route::resource('/profile/action', ProfileController::class);
+    Route::get('admin/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+    Route::resource('admin/profile/action', ProfileController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 
 // Auth Routes
-Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/register', function(){
+    if (Auth::check()) {
+        // Cek status pengguna dan arahkan sesuai peran
+        if (Auth::user()->status === 'admin') {
+            return redirect()->route('admin.index');
+        } else {
+            return redirect()->route('user.index');
+        }
+    }
+
+    return view('register');
+})->name('register');
 Route::post('/register', [AuthController::class, 'postRegister'])->name('register.post');
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', function () {
+    if (Auth::check()) {
+        // Cek status pengguna dan arahkan sesuai peran
+        if (Auth::user()->status === 'admin') {
+            return redirect()->route('admin.index');
+        } else {
+            return redirect()->route('user.index');
+        }
+    }
+
+    return view('login');
+})->name('login');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 
 // Product Routes

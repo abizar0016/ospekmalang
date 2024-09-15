@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
-html::-webkit-scrollbar{
+html::-webkit-scrollbar {
     display: none;
 }
 
-html{
-    scroll-behavior:smooth ;
+html {
+    scroll-behavior: smooth;
 }
 
 * {
@@ -135,20 +135,20 @@ body {
     pointer-events: none;
 }
 
-.navigation.active{
-    width: 70px;
+.navigation.active {
+    width: 100px;
 }
 
-.navigation ul li a span img{
+.navigation ul li a span img {
     width: 30px;
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
-.navigation ul li:hover a span img{
+.navigation ul li:hover a span img {
     filter: none;
 }
 
-.main{
+.main {
     position: absolute;
     width: calc(100% - 350px);
     left: 350px;
@@ -157,12 +157,12 @@ body {
     transition: .5s;
 }
 
-.main.active{
-    width: calc(100% - 100px);
-    left: 100px;
+.main.active {
+    width: calc(100% - 350px);
+    left: 250px;
 }
 
-.topbar{
+.topbar {
     width: 100%;
     height: 60px;
     display: flex;
@@ -171,7 +171,7 @@ body {
     padding: 0 10px;
 }
 
-.toggle{
+.toggle {
     position: relative;
     width: 60px;
     height: 60px;
@@ -182,18 +182,18 @@ body {
     cursor: pointer;
 }
 
-.search-admin{
+.search-admin {
     position: relative;
     width: 400px;
     margin: 0 10px;
 }
 
-.search-admin label{
+.search-admin label {
     position: relative;
     width: 100%;
 }
 
-.search-admin label input{
+.search-admin label input {
     width: 100%;
     height: 40px;
     border-radius: 40px;
@@ -203,14 +203,14 @@ body {
     border: 1px solid var(--black2);
 }
 
-.search-admin label ion-icon{
+.search-admin label ion-icon {
     position: absolute;
     top: 10px;
     left: 10px;
     font-size: 1.2rem;
 }
 
-.user-profil{
+.user-profil {
     position: relative;
     width: 40px;
     height: 40px;
@@ -219,7 +219,7 @@ body {
     cursor: pointer;
 }
 
-.user-profil img{
+.user-profil img {
     position: absolute;
     top: 0;
     left: 0;
@@ -228,7 +228,7 @@ body {
     object-fit: cover;
 }
 
-.cardBox{
+.cardBox {
     position: relative;
     display: flex;
     width: 100%;
@@ -238,7 +238,7 @@ body {
     grid-gap: 30px;
 }
 
-.cardBox .card{
+.cardBox .card {
     position: relative;
     background: var(--white);
     padding: 30px;
@@ -250,43 +250,36 @@ body {
     box-shadow: 0 7px 25px #0008;
 }
 
-.cardBox .card .numbers{
+.cardBox .card .numbers {
     position: relative;
     font-weight: 500;
     font-size: 2.5rem;
     color: var(--blue);
 }
 
-.cardBox .card .cardName{
+.cardBox .card .cardName {
     color: var(--black2);
     font-size: 1.1rem;
     margin-top: 5px;
 }
 
-.cardBox .card .iconBox{
+.cardBox .card .iconBox {
     font-size: 3.5rem;
     color: var(--black2);
 }
 
-.cardBox .card:hover{
+.cardBox .card:hover {
     background: var(--blue);
 }
 
 .cardBox .card:hover .numbers,
 .cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBox{
+.cardBox .card:hover .iconBox {
     color: var(--white);
 }
 
-.detail{
-    position: relative;
-    width: 100%;
-    padding: 20px;
-    display: grid;
-    gap: 50px;
-}
 
-.detail .recentOrders{
+.recentOrders {
     position: relative;
     max-height: 800px;
     overflow-y: auto;
@@ -296,18 +289,18 @@ body {
     border-radius: 20px;
 }
 
-.detail .cardHeader{
+.cardHeader {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.cardHeader h2{
+.cardHeader h2 {
     font-weight: 600;
     color: var(--blue);
 }
 
-.cardHeader .view-btn{
+.cardHeader .view-btn {
     position: relative;
     padding: 5px 10px;
     background: var(--blue);
@@ -316,48 +309,48 @@ body {
     border-radius: 6px;
 }
 
-.detail table{
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.detail table thead td{
+table thead td {
     font-weight: 600;
 }
 
-.detail .recentOrders table tr{
+.recentOrders table tr {
     color: var(--black1);
     border-bottom: 1px solid #0001;
 }
 
-.detail .recentOrders table tr:last-child{
+.recentOrders table tr:last-child {
     border-bottom: none;
 }
 
 
-.detail .recentOrders table tr .aksi{
+.recentOrders table tr .aksi {
     padding: 10px;
     text-align: center;
 }
 
-.detail .recentOrders table tr td{
+.recentOrders table tr td {
     padding: 10px;
 }
 
-.detail .recentOrders table tr td:last-child{
+.recentOrders table tr td:last-child {
     text-align: end;
 }
 
-.detail .recentOrders table tr td:last-child(2){
+.recentOrders table tr td:last-child(2) {
     text-align: end;
 }
 
-.detail .recentOrders table tr td:last-child(3){
+.recentOrders table tr td:last-child(3) {
     text-align: center;
 }
 
-.status.delivered{
+.status.delivered {
     padding: 2px 4px;
     background: #8de02c;
     color: var(--white);
@@ -365,7 +358,8 @@ body {
     font-size: 14px;
     font-weight: 500;
 }
-.status.pending{
+
+.status.pending {
     padding: 2px 4px;
     background: #f9ca3f;
     color: var(--white);
@@ -373,7 +367,8 @@ body {
     font-size: 14px;
     font-weight: 500;
 }
-.status.return{
+
+.status.return {
     padding: 2px 4px;
     background: #f00;
     color: var(--white);
@@ -381,7 +376,8 @@ body {
     font-size: 14px;
     font-weight: 500;
 }
-.status.inProgress{
+
+.status.inProgress {
     padding: 2px 4px;
     background: #1795ce;
     color: var(--white);
@@ -390,91 +386,97 @@ body {
     font-weight: 500;
 }
 
-.user{
+.user {
     position: relative;
     width: 100%;
     padding: 20px;
-
     box-shadow: 0 7px 25px #0008;
     border-radius: 20px;
     overflow-y: auto;
 }
 
-.user .cardHeader button{
+.user .cardHeader button {
     font-size: 16px;
     font-weight: 600;
-    border-radius: 10px;
-    width: 30px;
-    height: 30px;
+    border-radius: 10px;    
+    padding: 10px;
     background-color: var(--black2);
+    transition: .4s ease-in-out;
 }
 
-.user .cardHeader button:hover{
+.user table tbody tr{
+    height: 60px;
+}
+
+.user .cardHeader button:hover {
     background-color: var(--blue);
     color: var(--white);
+    scale: 1.1;
+    transition: .4s ease-in-out;
 }
 
-.user table tr td:last-child{
+.user table tr td:last-child {
     text-align: end;
 }
 
-.user table tr td:last-child(2){
+.user table tr td:last-child(2) {
     text-align: end;
 }
 
-.user  table tr td:last-child(3){
+.user table tr td:last-child(3) {
     text-align: center;
 }
 
-.user table{
+.user table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.user table thead td{
+.user table thead td {
     font-weight: 600;
 }
 
 
-.user table tr:last-child{
+.user table tr:last-child {
     border-bottom: none;
 }
 
 
 .user table tr .name-tbl,
 .user table tr .password-tbl,
-.user table tr .email-tbl{
-    padding: 10px;
+.user table tr .email-tbl {
     max-width: 150px;
     overflow: hidden;
-    white-space: nowrap;      
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.user table tbody tr:hover td{
-    color: var(--blue);
-}
-.detail table tbody tr:hover td{
+.user table tbody tr:hover td {
     color: var(--blue);
 }
 
-.detail table tr td button{
+table tbody tr:hover td {
+    color: var(--blue);
+}
+
+table tr td button {
     padding: 5px 15px;
     background: var(--black2);
     color: var(--white);
     margin: 5px;
 }
 
-.user table tr td button:hover{
+.user table tr td button:hover {
     background: var(--blue);
     color: var(--white);
 }
 
-.detail table tr td button:hover{
+table tr td button:hover {
     background: var(--blue);
     color: var(--white);
 }
+
 
 /* Modal Background */
 .modal {
@@ -486,21 +488,26 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background: rgba(0, 0, 0, 0.85); /* Darker and more opaque background */
-    backdrop-filter: blur(5px); /* Background blur effect */
+    background: rgba(0, 0, 0, 0.85);
+    /* Darker and more opaque background */
+    backdrop-filter: blur(5px);
+    /* Background blur effect */
     padding-top: 60px;
-    font-family: 'Poppins', sans-serif; /* Modern font */
+    font-family: 'Poppins', sans-serif;
+    /* Modern font */
 }
 
 /* Modal Content */
 .modal-content {
-    background: linear-gradient(135deg, #fff, #f3f3f3); /* Subtle gradient background */
+    background: linear-gradient(135deg, #fff, #f3f3f3);
+    /* Subtle gradient background */
     margin: auto;
     padding: 40px;
     border-radius: 20px;
     width: 80%;
     max-width: 600px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); /* Deep shadow for depth */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    /* Deep shadow for depth */
     animation: zoomIn 0.5s ease-in-out;
     position: relative;
 }
@@ -511,6 +518,7 @@ body {
         transform: scale(0.7);
         opacity: 0;
     }
+
     to {
         transform: scale(1);
         opacity: 1;
@@ -530,7 +538,8 @@ body {
 
 .close:hover,
 .close:focus {
-    color: #ff5757; /* Red on hover */
+    color: #ff5757;
+    /* Red on hover */
     cursor: pointer;
 }
 
@@ -579,7 +588,8 @@ body {
 .modal-content input:focus,
 .modal-content textarea:focus {
     border-color: #717fe0;
-    box-shadow: 0 0 10px rgba(113, 127, 224, 0.5); /* Soft glow on focus */
+    box-shadow: 0 0 10px rgba(113, 127, 224, 0.5);
+    /* Soft glow on focus */
     outline: none;
 }
 
@@ -605,14 +615,18 @@ body {
 }
 
 .modal-content button[type="submit"]:hover {
-    background: linear-gradient(135deg, #5a68c7, #404eac); /* Darker on hover */
-    transform: translateY(-3px); /* Slight lift on hover */
+    background: linear-gradient(135deg, #5a68c7, #404eac);
+    /* Darker on hover */
+    transform: translateY(-3px);
+    /* Slight lift on hover */
 }
 
 /* Submit Button Active State */
 .modal-content button[type="submit"]:active {
-    transform: translateY(1px); /* Press effect */
+    transform: translateY(1px);
+    /* Press effect */
 }
+
 .profile-container {
     display: flex;
     flex-direction: row;
@@ -626,7 +640,8 @@ body {
 }
 
 .profile-header {
-    flex: 0 0 200px; /* Adjust width as needed */
+    flex: 0 0 200px;
+    /* Adjust width as needed */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -652,7 +667,8 @@ body {
 }
 
 .profile-details {
-    flex: 1; /* Takes up remaining space */
+    flex: 1;
+    /* Takes up remaining space */
 }
 
 .profile-details .form-group {
@@ -679,4 +695,10 @@ body {
     background-color: var(--blue);
     scale: 1.1;
     transition: all .3s ease-in-out;
+}
+
+.user-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
 }

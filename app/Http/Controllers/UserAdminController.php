@@ -13,7 +13,7 @@ class UserAdminController extends Controller
     {
         $users = User::all(); // Ambil semua pengguna dari database
         $sessions = $request->session()->get('uname'); // Ambil username dari session
-        return view('admin.user', compact('users', 'sessions')); // Kirim data pengguna ke view
+        return view('admin.userManage.index', compact('users', 'sessions')); // Kirim data pengguna ke view
     }
 
     //Create User
@@ -47,43 +47,52 @@ class UserAdminController extends Controller
         return redirect()->back()->with('success', 'User successfully created.');
     }
 
-    //Update User
-// Update User
-public function updateUser(Request $request, $id)
-{
-    $user = User::findOrFail($id); // Cari pengguna berdasarkan id
 
-    $request->validate([
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'uname' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-        'password' => 'nullable|string|min:8',
-        'status' => 'required|in:admin,user',
-    ]);
-
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images'), $imageName);
-        $user->image = 'images/' . $imageName;
+    public function show($id)
+    {
+        if (!is_numeric($id)) {
+            abort(404, 'Invalid user ID.');
+        }
+    
+        $user = User::findOrFail($id); 
+        return view('admin.userManage.view', compact('user'));
     }
 
-    $user->update([
-        'uname' => $request->input('uname'),
-        'email' => $request->input('email'),
-        'password' => $request->input('password') ? Hash::make($request->input('password')) : $user->password,
-        'status' => $request->input('status'),
-    ]);
+    // Update User
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id); // Cari pengguna berdasarkan id
 
-    return redirect()->back()->with('success', 'User successfully updated.');
-}
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'uname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8',
+            'status' => 'required|in:admin,user',
+        ]);
 
-    
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $user->image = 'images/' . $imageName;
+        }
+
+        $user->update([
+            'uname' => $request->input('uname'),
+            'email' => $request->input('email'),
+            'password' => $request->input('password') ? Hash::make($request->input('password')) : $user->password,
+            'status' => $request->input('status'),
+        ]);
+
+        return redirect()->back()->with('success', 'User successfully updated.');
+    }
+
+
     //Delete User
     public function deleteUser(User $user)
     {
         $user->delete();
         return redirect()->back()->with('success', 'User successfully deleted.');
     }
-    
-}    
+}
