@@ -91,9 +91,9 @@ class UserAdminController extends Controller
 
 
     //Delete User
-    public function deleteUser(User $user)
+    public function deleteUser(User $id)
     {
-        $user->delete();
+        $id->delete();
         return redirect()->back()->with('success', 'User successfully deleted.');
     }
 }
