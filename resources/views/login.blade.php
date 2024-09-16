@@ -22,7 +22,7 @@
 
 
 
-            <form action="{{ route('login') }}" method="POST" class="tbl-form">
+            <form action="{{ route('login.post') }}" method="POST" class="tbl-form">
                 @csrf
 
                 <h1 class="masuk">Masuk</h1>

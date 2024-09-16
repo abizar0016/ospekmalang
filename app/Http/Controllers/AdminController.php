@@ -32,31 +32,6 @@ class AdminController extends Controller
         return view('admin.index', compact('messageCount', 'userCount', 'productCount', 'sessions'));
     }
 
-    public function user()
-    {
-        return view('admin.user');
-    }
-
-    public function message()
-    {
-        return view('admin.message');
-    }
-
-    public function product()
-    {
-        return view('admin.product');
-    }
-
-    public function help()
-    {
-        return view('admin.help');
-    }
-
-    public function settings()
-    {
-        return view('admin.settings');
-    }
-
     public function logout()
     {
         Auth::logout(); // Pastikan logout dilakukan

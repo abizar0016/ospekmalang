@@ -4,37 +4,43 @@
 <div class="main">
     <x-topbaradmin></x-topbaradmin>
 
+    @if (Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
     <h2 class="page-title">Tambah Akun</h2>
-    <form action="{{ route('admin.user.createUser') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.user.create.post') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-view">
             <div class="detail-list">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="uname">Nama:</label>
-                        <input type="text" name="uname" class="text-disabled">
+                        <input required type="text" name="uname" class="text-disabled">
                         <label for="password">Password:</label>
-                        <input type="password" name="password" class="text-disabled">
+                        <input required type="password" name="password" class="text-disabled">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="text-disabled">
+                        <input required type="email" name="email" class="text-disabled">
                     </div>
                     <div class="form-group">
                         <label for="phone">Nomor Ponsel</label>
-                        <input type="number" name="phone"  class="text-disabled">
+                        <input required type="number" name="phone" class="text-disabled">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="dob">Tanggal Lahir</label>
-                        <input type="date" name="dob" class="text-disabled">
+                        <input required type="date" name="dob" class="text-disabled">
                     </div>
                     <div class="form-group">
                         <label for="city">Kota</label>
-                        <input type="text" name="city"  class="text-disabled">
+                        <input required type="text" name="city" class="text-disabled">
                     </div>
                 </div>
                 <div class="form-group">
@@ -43,11 +49,19 @@
                 </div>
                 <div class="form-group">
                     <label for="image">Gambar Profil</label>
-                    <input type="file" name="image" class="text-disabled image-preview">
+                    <input required type="file" name="image" class="text-disabled image-preview">
                 </div>
+                <div class="form-group">
+                    <label for="status">Peran:</label>
+                    <select name="status" required class="text-disabled">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                
                 <div class="button-group">
-                    <input type="submit" value="Tambah" class="btn update-btn"></input>
-                    <a href="{{ route('admin.user') }}" class="btn back-btn">Back</a>
+                    <input type="submit" value="Tambah" class="btn"></input>
+                    <a href="{{ route('admin.user') }}" class="btn">Back</a>
                 </div>
             </div>
         </div>

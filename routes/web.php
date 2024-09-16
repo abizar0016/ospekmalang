@@ -6,13 +6,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AddUserController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\UserAdminController;
+use App\Http\Controllers\AddProductController;
+use App\Http\Controllers\UpdateUserController;
+use App\Http\Controllers\ProductAdminController;
 
+//not fount page
+
+Route::fallback(function () {
+    abort(404, 'Halaman Tidak Ditemukan');
+});
 // Halaman Utama
 Route::prefix('/')->group(function () {
     Route::get('/', function () {
@@ -44,22 +52,40 @@ Route::prefix('user')->group(function () {
 // Route untuk Admin
 
 Route::group(['middleware' => ['auth']], function () {
+
+    // --------------------VIEW ADMIN--------------------------//
+
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    // Rute lainnya yang hanya boleh diakses oleh admin
+    //--------------------------------VIEW MANAGE USER-------------------------------------//
+
     Route::get('admin/user', [UserAdminController::class, 'index'])->name('admin.user');
-    Route::get('admin/user/create', [UserAdminController::class, 'create'])->name('admin.user.create');
-    Route::post('admin/user/created', [UserAdminController::class, 'createUser'])->name('admin.user.createUser');
-    Route::put('admin/user/update/{id}', [UserAdminController::class, 'updateUser'])->name('admin.user.update');
-    Route::delete('admin/user/{id}', [UserAdminController::class, 'deleteUser'])->name('admin.user.delete');
     Route::get('admin/user/view/{id}', [UserAdminController::class, 'show'])->name('admin.user.view');
+
+    //---------------------------CREATE USER-----------------------------------------------------//
+
+    Route::get('admin/user/create', [AddUserController::class, 'index'])->name('admin.user.create');
+    Route::post('admin/user/create', [AddUserController::class, 'create'])->name('admin.user.create.post');
+
+    //---------------------------------UPDATE USER----------------------------------------------------------------------------//
+
+    Route::get('admin/user/update/{id}', [UpdateUserController::class, 'index'])->name('admin.user.update');
+    Route::put('admin/user/update/{id}', [UpdateUserController::class, 'update'])->name('admin.user.update.post');
+
+    //------------------------------------DELETE USER-----------------------------------------------------
+
+    Route::delete('admin/user/{id}', [UserAdminController::class, 'delete'])->name('admin.user.delete');
+
+    //---------------------------------------PRODUCT ADMIN--------------------------------------------------------//
+
+    Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
+    Route::get('admin/product/create', [AddProductController::class, 'index'])->name('admin.product.create');
+
+    //----------------------------------VIEW MESSAGE FROM USER------------------------------------------//
 
     Route::get('admin/message', [MessageController::class, 'index'])->name('message');
     Route::post('admin/message', [MessageController::class, 'createMessage'])->name('message.create');
     Route::post('admin/message/{id}/reply', [MessageController::class, 'replyMessage'])->name('message.reply');
-
-    Route::get('admin/product', [ProductController::class, 'index'])->name('admin.product.index');
-    Route::resource('admin/product/action', ProductController::class);
 
     Route::get('admin/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
     Route::resource('admin/profile/action', ProfileController::class);
@@ -69,7 +95,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 // Auth Routes
-Route::get('/register', function(){
+Route::get('/register', function () {
     if (Auth::check()) {
         // Cek status pengguna dan arahkan sesuai peran
         if (Auth::user()->status === 'admin') {

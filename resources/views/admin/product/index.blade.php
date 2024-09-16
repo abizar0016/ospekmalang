@@ -15,7 +15,7 @@
         <div class="user" id="user">
             <div class="cardHeader">
                 <h2>Produk</h2>
-                <button onclick="openAddProduct()">+</button>
+                <a href="{{ route('admin.product.create') }}"><button>Tambah Produk</button></a>
             </div>
 
             <table>

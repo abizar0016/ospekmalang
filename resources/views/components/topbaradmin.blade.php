@@ -10,7 +10,7 @@
         @if (Auth::user()->image)
             <img src="{{ asset(Auth::user()->image) }}" alt="User Image" style="max-width:50px; max-height:50px; border-radius:50%;">
         @else
-            <img src="{{ url('images/admin.png') }}" alt="Default Image" style="max-width:50px; max-height:50px; border-radius:50%;">
+            <img src="{{ url('images/default-profile.jpg') }}" alt="Default Image" style="max-width:50px; max-height:50px; border-radius:50%;">
         @endif
     </div>
 </div>

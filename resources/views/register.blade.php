@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('register') }}" method="POST" class="tbl-form">
+            <form action="{{ route('register.post') }}" method="POST" class="tbl-form">
 
                 @csrf
 

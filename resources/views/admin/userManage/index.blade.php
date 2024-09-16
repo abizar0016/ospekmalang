@@ -1,13 +1,11 @@
 <x-head></x-head>
 <x-sidebaradmin></x-sidebaradmin>
 
-@if (@session('success'))
-@endif
 <div class="main">
     <x-topbaradmin></x-topbaradmin>
-    @if (session('success'))
+    @if (Session::has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
+            {{ Session::get('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
@@ -26,6 +24,8 @@
                         <td>Profil</td>
                         <td>Nama</td>
                         <td>Email</td>
+                        <td>Nomor</td>
+                        <td>Kota</td>
                         <td>Peran</td>
                         <td colspan="3">aksi</td>
                     </tr>
@@ -37,6 +37,8 @@
                                     style="border-radius: 50%; object-fit:cover;"></td>
                             <td class="name-tbl">{{ $user->uname }}</td>
                             <td class="email-tbl">{{ $user->email }}</td>
+                            <td class="phone-tbl">{{ $user->phone }}</td>
+                            <td class="city-tbl">{{ $user->city }}</td>
                             <td>{{ $user->status }}</td>
                             <td>
                                 <a href="{{ route('admin.user.view', $user->id) }}"><button><ion-icon name="eye-outline"></ion-icon></button></a>

@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
-class ProductController extends Controller
+class ProductAdminController extends Controller
 {
     // Menampilkan daftar produk
     public function index()
     {
         $products = Product::all();
         // dd($products); // Debugging untuk melihat data
-        return view('admin.product', compact('products'));
+        return view('admin.product.index', compact('products'));
     }
 
 
