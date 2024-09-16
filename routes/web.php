@@ -47,11 +47,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
     // Rute lainnya yang hanya boleh diakses oleh admin
-    Route::get('admin/user', [UserAdminController::class, 'index'])->name('user');
-    Route::post('admin/user', [UserAdminController::class, 'createUser'])->name('user.create');
-    Route::put('admin/user/{id}', [UserAdminController::class, 'updateUser'])->name('user.update');
-    Route::delete('admin/user/{user}', [UserAdminController::class, 'deleteUser'])->name('user.delete');
-    Route::get('admin/user/view/{id}', [UserAdminController::class, 'show'])->name('user.view');
+    Route::get('admin/user', [UserAdminController::class, 'index'])->name('admin.user');
+    Route::get('admin/user/create', [UserAdminController::class, 'create'])->name('admin.user.create');
+    Route::post('admin/user/created', [UserAdminController::class, 'createUser'])->name('admin.user.createUser');
+    Route::put('admin/user/update/{id}', [UserAdminController::class, 'updateUser'])->name('admin.user.update');
+    Route::delete('admin/user/{user}', [UserAdminController::class, 'deleteUser'])->name('admin.user.delete');
+    Route::get('admin/user/view/{id}', [UserAdminController::class, 'show'])->name('admin.user.view');
 
     Route::get('admin/message', [MessageController::class, 'index'])->name('message');
     Route::post('admin/message', [MessageController::class, 'createMessage'])->name('message.create');

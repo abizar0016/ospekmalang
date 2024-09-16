@@ -19,6 +19,9 @@ class User extends Authenticatable
         'password',
         'image', // Pastikan kolom ini juga termasuk jika digunakan
         'status',
+        'bio',
+        'phone',
+        'city',
         'product_id',
         'message_id',
     ];  

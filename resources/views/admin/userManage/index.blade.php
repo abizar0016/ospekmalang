@@ -17,7 +17,7 @@
         <div class="user" id="user">
             <div class="cardHeader">
                 <h2>Akun Pengguna</h2>
-                <a href=""><button>Tambah Akun</button></a>
+                <a href="{{ route('admin.user.create') }}"><button>Tambah Akun</button></a>
             </div>
 
             <table>
@@ -39,9 +39,9 @@
                             <td class="email-tbl">{{ $user->email }}</td>
                             <td>{{ $user->status }}</td>
                             <td>
-                                <a href="{{ route('user.view', $user->id) }}"><button><ion-icon name="eye-outline"></ion-icon></button></a>
-                                <a href=""><button><ion-icon name="pencil-outline"></ion-icon></button></a>
-                                <form action="{{ route('user.delete', $user->id) }}" method="POST" style="display:inline;" enctype="multipart/form-data">
+                                <a href="{{ route('admin.user.view', $user->id) }}"><button><ion-icon name="eye-outline"></ion-icon></button></a>
+                                <a href="{{ route('admin.user.update', $user->id) }}"><button><ion-icon name="pencil-outline"></ion-icon></button></a>
+                                <form action="{{ route('admin.user.delete', $user->id) }}" method="POST" style="display:inline;" enctype="multipart/form-data">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')">

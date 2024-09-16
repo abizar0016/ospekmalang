@@ -17,6 +17,11 @@ class UserAdminController extends Controller
     }
 
     //Create User
+    public function create()
+    {
+        return view('admin.userManage.create'); // Pastikan view ini ada
+    }
+
     public function createUser(Request $request)
     {
         $request->validate([
@@ -29,22 +34,18 @@ class UserAdminController extends Controller
 
         // Ambil file gambar dari request
         $image = $request->file('image');
-
-        // Buat nama file unik
         $imageName = time() . '.' . $image->getClientOriginalExtension();
-
-        // Pindahkan gambar ke folder public/images
         $image->move(public_path('images'), $imageName);
 
         $user = new User();
-        $user->image = 'images/' . $imageName; // Simpan path gambar relatif
+        $user->image = 'images/' . $imageName;
         $user->uname = $request->uname;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->status = $request->status; // Status berasal dari input
+        $user->status = $request->status;
         $user->save();
 
-        return redirect()->back()->with('success', 'User successfully created.');
+        return redirect()->route('admin.user')->with('success', 'User successfully created.');
     }
 
 
@@ -53,8 +54,8 @@ class UserAdminController extends Controller
         if (!is_numeric($id)) {
             abort(404, 'Invalid user ID.');
         }
-    
-        $user = User::findOrFail($id); 
+
+        $user = User::findOrFail($id);
         return view('admin.userManage.view', compact('user'));
     }
 
