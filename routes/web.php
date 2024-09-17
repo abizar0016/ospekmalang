@@ -15,6 +15,7 @@ use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\AddProductController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ProductAdminController;
+use App\Http\Controllers\UpdateProductController;
 
 //not fount page
 
@@ -79,8 +80,24 @@ Route::group(['middleware' => ['auth']], function () {
     //---------------------------------------PRODUCT ADMIN--------------------------------------------------------//
 
     Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
-    Route::get('admin/product/create', [AddProductController::class, 'index'])->name('admin.product.create');
 
+    //-------------------------------------------CREATE PRODUCT-------------------------------------------------------//
+
+    Route::get('admin/product/create', [AddProductController::class, 'index'])->name('admin.product.create');
+    Route::post('admin/product/create', [AddProductController::class, 'create'])->name('admin.product.create.post');
+
+    //------------------------------------------VIEW PRODUCT---------------------------------------------//
+    
+    Route::get('admin/product/view/{id}', [ProductAdminController::class, 'show'])->name('admin.product.view');
+
+    //-----------------------------------------UPDATE PRODUCT------------------------------------------------------//
+
+    Route::get('admin/product/update/{id}', [UpdateProductController::class, 'index'])->name('admin.product.update');
+    Route::put('admin/product/update/{id}', [UpdateProductController::class, 'update'])->name('admin.product.update.post');
+
+    //---------------------------------------DELETE PRODUCT--------------------------------------------------------//
+    Route::delete('admin/product/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
+    
     //----------------------------------VIEW MESSAGE FROM USER------------------------------------------//
 
     Route::get('admin/message', [MessageController::class, 'index'])->name('message');

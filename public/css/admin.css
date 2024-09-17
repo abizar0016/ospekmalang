@@ -303,6 +303,7 @@ body {
 .cardHeader h2 {
     font-weight: 600;
     color: var(--blue);
+    margin-bottom: 10px;
 }
 
 .cardHeader .view-btn {
@@ -317,7 +318,6 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
 
 table thead td {
@@ -656,6 +656,12 @@ table tr td button:hover {
     margin-right: 25%;
 }
 
+.img-preview {
+    display: none;
+    max-width: 200px;
+    margin-bottom: 10px;
+}
+
 .profile-img {
     border-radius: 50%;
     width: 150px;
@@ -707,24 +713,12 @@ table tr td button:hover {
 
 
 .card-view {
-    display: flex;
-    flex-direction: row;
-    box-shadow: 0 7px 25px #0008;
-    padding: 40px;
-    width: 95%;
-}
-
-.page-title {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Styling card view */
-.card-view {
-    display: flex;
-    align-items: flex-start;
+    position: relative;
+    width: 100%;
     padding: 20px;
+    box-shadow: 0 7px 25px #0008;
     border-radius: 20px;
+    overflow-y: auto;
 }
 
 .user-profile {
@@ -796,7 +790,8 @@ label {
 .button-group {
     display: flex;
     justify-content: flex-start;
-    margin-top: 20px;
+    margin: 20px auto;
+    padding: 20px 0;
 }
 
 .button-group .btn {
@@ -820,4 +815,14 @@ label {
     background-color: var(--blue);
     scale: 1.1;
     transition: .4s ease-in-out;
+}
+
+
+.card-product {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 7px 25px #0008;
+    border-radius: 20px;
+    overflow-y: auto;
 }

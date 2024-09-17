@@ -24,7 +24,7 @@ class Product extends Model
     // Kolom-kolom yang bisa diisi secara massal
     protected $fillable = [
         'name',
-        'deskripsi',
+        'descriptions',
         'image',
         'price',
         'stock',

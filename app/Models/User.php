@@ -21,6 +21,7 @@ class User extends Authenticatable
         'status',
         'bio',
         'phone',
+        'dob',
         'city',
         'product_id',
         'message_id',

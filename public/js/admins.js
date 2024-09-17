@@ -42,20 +42,19 @@ function formatRupiah(angka, prefix) {
 }
 
 function previewImage() {
-    const image = document.querySelector('#image').files[0];
+    const file = document.getElementById('image').files[0];
     const imgPreview = document.querySelector('.img-preview');
 
-    if (image) {
+    if (file) {
         const reader = new FileReader();
 
-        reader.onloadend = function () {
-            imgPreview.src = reader.result; // Perbaiki nama variabel dari preview ke imgPreview
-        };
+        reader.onload = function (e) {
+            imgPreview.src = e.target.result;
+            imgPreview.style.display = 'block'; // Show the image preview
+        }
 
-        reader.readAsDataURL(image); // Perbaiki nama variabel dari file ke image
-        imgPreview.style.display = 'block';
+        reader.readAsDataURL(file);
     } else {
-        imgPreview.src = "{{ asset($user->image) }}"; // Kembalikan ke gambar lama jika tidak ada file
+        imgPreview.style.display = 'none'; // Hide the image preview if no file is selected
     }
 }
-
