@@ -14,7 +14,7 @@ class UserAdminController extends Controller
     {
         $users = User::all(); // Ambil semua pengguna dari database
         $sessions = $request->session()->get('uname'); // Ambil username dari session
-        return view('admin.userManage.index', compact('users', 'sessions')); // Kirim data pengguna ke view
+        return view('admin.user.index', compact('users', 'sessions')); // Kirim data pengguna ke view
     }
     
     public function show($id)
@@ -24,7 +24,7 @@ class UserAdminController extends Controller
         }
 
         $user = User::findOrFail($id);
-        return view('admin.userManage.view', compact('user'));
+        return view('admin.user.view', compact('user'));
     }
 
     //Delete User

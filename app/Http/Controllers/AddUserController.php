@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 class AddUserController extends Controller
 {
     public function index() {
-        return view('admin.userManage.create');
+        return view('admin.user.create');
     }
 
     public function create(Request $request)

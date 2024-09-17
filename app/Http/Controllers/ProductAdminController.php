@@ -17,8 +17,8 @@ class ProductAdminController extends Controller
 
     public function show($id)
     {
+        abort(404, 'Invalid user ID.');
         if (!is_numeric($id)) {
-            abort(404, 'Invalid user ID.');
         }
 
         $product = Product::findOrFail($id);

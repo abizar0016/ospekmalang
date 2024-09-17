@@ -24,22 +24,15 @@
 
             <li>
                 <a href="{{ url('admin/product') }}">
-                    <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
+                    <span class="icon"><ion-icon name="logo-dropbox"></ion-icon></span>
                     <span class="tittle">Produk</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ url('admin/message') }}">
-                    <span class="icon"><ion-icon name="chatbox-outline"></ion-icon></span>
-                    <span class="tittle">Pesan</span>
-                </a>
-            </li>
-            
-            <li>
-                <a href="{{ url('admin/profile') }}">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon></ion-icon></span>
-                    <span class="tittle">Profil</span>
+                <a href="{{ url('admin/order') }}">
+                    <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
+                    <span class="tittle">Pesanan</span>
                 </a>
             </li>
             

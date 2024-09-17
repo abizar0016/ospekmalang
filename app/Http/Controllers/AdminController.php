@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Pastikan import ini ada
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 
 class AdminController extends Controller
 {
@@ -25,11 +26,11 @@ class AdminController extends Controller
 
         // Jika pengguna adalah admin, tampilkan data
         $sessions = $request->session()->get('uname');
-        $messageCount = Message::count();
         $userCount = User::count();
+        $orderCount = Order::count();
         $productCount = Product::count();
 
-        return view('admin.index', compact('messageCount', 'userCount', 'productCount', 'sessions'));
+        return view('admin.index', compact('orderCount', 'userCount', 'productCount', 'sessions'));
     }
 
     public function logout()

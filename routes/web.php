@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AddUserController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
@@ -98,14 +99,7 @@ Route::group(['middleware' => ['auth']], function () {
     //---------------------------------------DELETE PRODUCT--------------------------------------------------------//
     Route::delete('admin/product/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
     
-    //----------------------------------VIEW MESSAGE FROM USER------------------------------------------//
-
-    Route::get('admin/message', [MessageController::class, 'index'])->name('message');
-    Route::post('admin/message', [MessageController::class, 'createMessage'])->name('message.create');
-    Route::post('admin/message/{id}/reply', [MessageController::class, 'replyMessage'])->name('message.reply');
-
-    Route::get('admin/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
-    Route::resource('admin/profile/action', ProfileController::class);
+    Route::get('admin/order', [OrderController::class, 'index']);
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

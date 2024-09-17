@@ -1,55 +1,53 @@
-    
-<x-head></x-head>
+    <x-head></x-head>
 
-<x-sidebaradmin></x-sidebaradmin>
+    <x-sidebaradmin></x-sidebaradmin>
 
-{{-- content --}}
+    {{-- content --}}
 
-<div class="main">
-    <x-topbaradmin></x-topbaradmin>
+    <div class="main">
+        <x-topbaradmin></x-topbaradmin>
 
 
-    {{-- Pengguna --}}
+        {{-- Pengguna --}}
 
-    <div class="cardBox" id="beranda">
-        <a href="{{ url('admin/user') }}">
+        <div class="cardBox" id="beranda">
+            <a href="{{ url('admin/user') }}">
+
+                <div class="card">
+                    <div class="">
+                        <div class="numbers">{{ $userCount }}</div>
+                        <div class="cardName">Pengguna</div>
+                    </div>
+
+                    <div class="iconBox">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </div>
+                </div>
+            </a>
 
             <div class="card">
                 <div class="">
-                    <div class="numbers">{{ $userCount }}</div>
-                    <div class="cardName">Pengguna</div>
+                    <div class="numbers">{{ $productCount }}</div>
+                    <div class="cardName">Produk</div>
                 </div>
-                
+
                 <div class="iconBox">
-                    <ion-icon name="person-outline"></ion-icon>
+                    <ion-icon name="logo-dropbox"></ion-icon>
                 </div>
             </div>
-        </a>
 
-        <div class="card">
-            <div class="">
-                <div class="numbers">{{ $productCount }}</div>
-                <div class="cardName">Produk</div>
-            </div>
+            <a href="{{ url('admin/message') }}">
+                <div class="card">
+                    <div class="">
+                        <div class="numbers">{{ $orderCount }}</div>
+                        <div class="cardName">Pesanan</div>
+                    </div>
 
-            <div class="iconBox">
-                <ion-icon name="cart-outline"></ion-icon>
-            </div>
+                    <div class="iconBox">
+                        <ion-icon name="cart-outline"></ion-icon>                    </div>
+                </div>
+            </a>
         </div>
-
-        <a href="{{ url('admin/message') }}">
-            <div class="card">
-                <div class="">
-                    <div class="numbers">{{ $messageCount }}</div>
-                    <div class="cardName">Pesan</div>
-                </div>
-                
-                <div class="iconBox">
-                    <ion-icon name="chatbubbles-outline"></ion-icon>
-                </div>
-            </div>
-        </a>
-    </div>
 
         <div class="recentOrders">
             <div class="cardHeader">
@@ -130,12 +128,11 @@
 
 
 
-</div>
+    </div>
 
-{{-- script --}}
-<script src="{{ url('js/admins.js') }}"></script>
-<!------------------ ionicons ----------------------->
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-
+    {{-- script --}}
+    <script src="{{ url('js/admins.js') }}"></script>
+    <!------------------ ionicons ----------------------->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    </body>

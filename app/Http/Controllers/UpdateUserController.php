@@ -11,7 +11,7 @@ class UpdateUserController extends Controller
     public function index($id) {
         // Menampilkan halaman update dengan data user yang akan di-update
         $user = User::findOrFail($id);
-        return view('admin.userManage.update', compact('user'));
+        return view('admin.user.update', compact('user'));
     }
     
     public function update(Request $request, $id)
