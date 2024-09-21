@@ -64,7 +64,15 @@ class UserPageController extends Controller
         $sessions = $request->session()->get('uname');
         
         // Kirim data ke view
-        return view('user.produk', compact('products', 'categories', 'users', 'sessions', 'cartItems', 'cartCount'));
+        return view('user.product', compact('products', 'categories', 'users', 'sessions', 'cartItems', 'cartCount'));
+    }
+
+    public function delete($id)
+    {
+        // Contoh logika untuk menghapus item dari keranjang
+        Cart::findOrFail($id)->delete();
+    
+        return redirect()->route('user.index')->with('success', 'Item berhasil dihapus');
     }
 }
 

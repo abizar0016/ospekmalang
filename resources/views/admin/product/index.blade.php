@@ -1,5 +1,7 @@
 <x-head></x-head>
 
+<body class="animation">
+
 <x-sidebaradmin></x-sidebaradmin>
 
 
@@ -79,7 +81,7 @@
     </div>
 </div>
 
-
+</body>
 
 <script src="{{ url('js/admins.js') }}"></script>
 <!------------------ ionicons ----------------------->

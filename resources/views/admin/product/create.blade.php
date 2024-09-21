@@ -1,4 +1,7 @@
 <x-head></x-head>
+
+<body class="animation">
+
 <x-sidebaradmin></x-sidebaradmin>
 
 <div class="main">
@@ -90,6 +93,8 @@
         @endif
     </div>
 </div>
+
+</body>
 
 <script src="{{ url('js/admins.js') }}"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

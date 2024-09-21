@@ -1,4 +1,6 @@
-    <x-head></x-head>
+<x-head></x-head>
+
+<body class="animation">
 
     <x-sidebaradmin></x-sidebaradmin>
 
@@ -130,14 +132,13 @@
                 </table>
             </div>
         </div>
-
-
-
     </div>
 
-    {{-- script --}}
-    <script src="{{ url('js/admins.js') }}"></script>
-    <!------------------ ionicons ----------------------->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    </body>
+</body>
+
+{{-- script --}}
+<script src="{{ url('js/admins.js') }}"></script>
+<!------------------ ionicons ----------------------->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>

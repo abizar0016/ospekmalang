@@ -3290,8 +3290,8 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-btn1:hover {
-  border-color: #222;
-  background-color: #222;
+  border-color: #333;
+  background-color: #333;
   color: #fff;
 }
 
@@ -3822,6 +3822,7 @@ input.num-product::-webkit-inner-spin-button {
   flex-direction: column;
   justify-content: space-between;
   width: 70px;
+  height: 100px;
   margin: 0;
   padding: 10px;
 }
@@ -3885,3 +3886,33 @@ input.num-product::-webkit-inner-spin-button {
   color: #007bff; /* Warna saat di-hover */
 }
 
+.name-product{
+  color: #000;
+  font-size: 30px;
+}
+
+.price-product{
+  font-size: 20px;
+  color: #555;
+}
+
+.product-list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.description-product{
+  height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.add-btn{
+  padding: 10px 10px;
+  margin: 10px 0 0 0;
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-weight: 500;
+}

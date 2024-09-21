@@ -43,6 +43,7 @@ Route::prefix('/')->group(function () {
 Route::group(['middleware' => ['auth']],function(){
     Route::prefix('user')->group(function () {
         Route::get('/', [UserPageController::class, 'index'])->name('user.index');
+        Route::delete('/{id}', [UserPageController::class, 'delete'])->name('user.cart.delete');
     
         Route::get('/product', [UserPageController::class, 'productView'])->name('user.product');
     

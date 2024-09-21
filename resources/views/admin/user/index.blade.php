@@ -1,4 +1,6 @@
 <x-head></x-head>
+<body class="animation">    
+
 <x-sidebaradmin></x-sidebaradmin>
 
 <div class="main">
@@ -59,6 +61,7 @@
         </div>
     </div>
 </div>
+</body>
 
 <script src="{{ url('js/admins.js') }}"></script>
 <!------------------ ionicons ----------------------->

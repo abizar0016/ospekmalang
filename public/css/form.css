@@ -93,18 +93,7 @@ label {
 
 .placeholder {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #f9f9f9;
-  padding: 0 5px;
-  color: #aaa;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.input:focus + .placeholder,
-.input:valid + .placeholder {
-  top: -10px;
+  top: -20px;
   left: 0px;
   font-size: 12px;
   padding: 0 5px;
