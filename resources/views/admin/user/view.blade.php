@@ -15,28 +15,28 @@
                     alt="{{ $user->uname }}">
             </div>
             <div class="detail-list">
-                <div class="form-row">
+                <div class="input-singgle">
                     <div class="form-group">
                         <label for="first_name">Nama:</label>
                         <div class="text-disabled">{{ $user->uname }}</div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-item">
                         <label for="email">Email</label>
                         <div class="text-disabled">{{ $user->email }}</div>
                     </div>
-                    <div class="form-group">
+                    <div class="input-group-item">
                         <label for="phone">Nomor Ponsel</label>
                         <div class="text-disabled">{{ $user->phone }}</div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-item">
                         <label for="dob">Tanggal Lahir</label>
                         <div class="text-disabled">{{ $user->dob }}</div>
                     </div>
-                    <div class="form-group">
+                    <div class="input-group-item">
                         <label for="city">Kota</label>
                         <div class="text-disabled">{{ $user->city }}</div>
                     </div>

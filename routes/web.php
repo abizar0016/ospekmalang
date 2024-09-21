@@ -17,6 +17,7 @@ use App\Http\Controllers\AddProductController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\UpdateProductController;
+use App\Http\Controllers\CartController;
 
 //not fount page
 
@@ -39,16 +40,19 @@ Route::prefix('/')->group(function () {
 });
 
 // Routes untuk User
-Route::prefix('user')->group(function () {
-    Route::get('/', [UserPageController::class, 'index'])->name('user.index')->middleware('auth');
+Route::group(['middleware' => ['auth']],function(){
+    Route::prefix('user')->group(function () {
+        Route::get('/', [UserPageController::class, 'index'])->name('user.index');
+    
+        Route::get('/product', [UserPageController::class, 'productView'])->name('user.product');
+    
+        Route::get('/checkout', function () {
+            return view('user.checkout');
+        })->name('user.checkout');
 
-    Route::get('/produk', function () {
-        return view('user.produk');
-    })->name('user.produk');
+        Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
-    Route::get('/checkout', function () {
-        return view('user.checkout');
-    })->name('user.checkout');
+    });
 });
 
 // Route untuk Admin
@@ -88,7 +92,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('admin/product/create', [AddProductController::class, 'create'])->name('admin.product.create.post');
 
     //------------------------------------------VIEW PRODUCT---------------------------------------------//
-    
+
     Route::get('admin/product/view/{id}', [ProductAdminController::class, 'show'])->name('admin.product.view');
 
     //-----------------------------------------UPDATE PRODUCT------------------------------------------------------//
@@ -98,8 +102,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     //---------------------------------------DELETE PRODUCT--------------------------------------------------------//
     Route::delete('admin/product/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
-    
-    Route::get('admin/order', [OrderController::class, 'index']);
+
+    Route::get('admin/order', [OrderController::class, 'index'])->name('admin.oder.index');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

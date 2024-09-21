@@ -57,8 +57,8 @@ class AuthController extends Controller
     {
         // Validasi input
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/',
+            'email' => 'required|email|',
+            'password' => 'required|min:8|regex:/^[a-zA-Z0-9]*$/|',
         ]);
     
         // Persiapan kredensial untuk login
@@ -66,6 +66,15 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            // Jika email tidak ditemukan, kembalikan dengan pesan error
+            return redirect()->back()->withErrors([
+                'email' => 'Email tidak terdaftar. Silakan coba lagi.',
+            ])->withInput($request->only('email'));
+        }
     
         // Proses login
         if (Auth::attempt($credentials)) {

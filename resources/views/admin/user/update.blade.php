@@ -20,51 +20,53 @@
                 </div>
                 <div class="detail-list">
                     <label for="image">Gambar Profil :</label>
-                    <div class="form-row">
+                    <div class="input-singgle">
                         @if ($user->image)
-                            <img id="current-image" src="{{ asset($user->image) }}" class="img-preview user-image">
+                            <img id="img-preview" src="{{ asset($user->image) }}" class="img-preview user-image"
+                                style="width: 100px; height: 100px;">
+                        @else
+                            <img id="img-preview" src="{{ url('images/default-profile.jpg') }}"
+                                class="img-preview user-image" style="width: 100px; height: 100px;">
                         @endif
                     </div>
-                    <div class="form-row">
-                        <input required type="file" id="image" name="image" class="text-disabled image-preview"
-                            onchange="previewImage()">
+                    <div class="input-singgle">
+                        <input type="file" id="image" name="image" class="text-disabled image-preview"
+                            onchange="previewImageProfile()">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="uname">Nama :</label>
-                            <input required type="text" name="uname" value="{{ $user->uname }}"
-                                class="text-disabled">
-                        </div>
+
+                    <div class="input-singgle">
+                        <label for="uname">Nama :</label>
+                        <input required type="text" name="uname" value="{{ $user->uname }}" class="text-disabled">
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-item">
                             <label for="email">Email :</label>
                             <input required type="email" name="email" value="{{ $user->email }}"
                                 class="text-disabled">
                         </div>
-                        <div class="form-group">
+                        <div class="input-group-item">
                             <label for="phone">Nomor Ponsel :</label>
                             <input required type="number" name="phone" value="{{ $user->phone }}"
                                 class="text-disabled">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-item">
                             <label for="dob">Tanggal Lahir :</label>
                             <input required type="date" name="dob" value="{{ $user->dob }}"
                                 class="text-disabled">
                         </div>
-                        <div class="form-group">
+                        <div class="input-group-item">
                             <label for="city">Kota :</label>
                             <input required type="text" name="city" value="{{ $user->city }}"
                                 class="text-disabled">
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="input-singgle">
                         <label for="bio">Bio :</label>
                         <textarea name="bio" class="text-area-disabled">{{ $user->bio }}</textarea>
                     </div>
-                    <div class="form-row">
+                    <div class="input-singgle">
                         <label for="status">Peran :</label>
                         <select name="status" required class="text-disabled">
                             <option value="user" {{ $user->status == 'user' ? 'selected' : '' }}>User</option>
@@ -75,8 +77,8 @@
                 </div>
             </div>
             <div class="button-group">
-                <input type="submit" value="Perbarui" class="btn update-btn">
                 <a href="{{ route('admin.user') }}" class="btn back-btn">Kembali</a>
+                <input type="submit" value="Kirim" class="btn update-btn">
             </div>
         </form>
     </div>

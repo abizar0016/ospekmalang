@@ -25,12 +25,19 @@ class Product extends Model
     protected $fillable = [
         'name',
         'descriptions',
-        'image',
+        'image1',
+        'image2',
+        'image3',
         'price',
         'stock',
-        'category',
+        'category_id',
     ];
 
     // Kolom yang secara otomatis akan dikelola oleh Eloquent
     public $timestamps = false;
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

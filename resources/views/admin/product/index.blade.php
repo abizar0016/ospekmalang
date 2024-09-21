@@ -12,11 +12,11 @@
         </div>
     @endif
     <div class="detail">
+        <div class="cardHeader">
+            <h2>Produk</h2>
+            <a href="{{ route('admin.product.create') }}"><button>Tambah Produk</button></a>
+        </div>
         <div class="user" id="user">
-            <div class="cardHeader">
-                <h2>Produk</h2>
-                <a href="{{ route('admin.product.create') }}"><button>Tambah Produk</button></a>
-            </div>
 
             <table>
                 <thead>
@@ -48,19 +48,19 @@
                 <tbody>
                     @if ($products->isEmpty())
                         <tr>
-                            <td colspan="6" style="padding-top: 30px; text-align:center;">Tidak Ada Product yang
-                                Ditambahkan</td>
+                            <td colspan="6" style="padding-top: 30px; text-align:center;">Tidak Ada Product yang Ditambahkan</td>
                         </tr>
                     @else
                         @foreach ($products as $product)
                             <tr>
-                                <td><img src="{{ url($product->image) }}" alt="Product Image"
-                                        style="width: 50px; height: 50px;"></td>
+                                <td>
+                                    <img src="{{ asset('images/' . $product->image1) }}" alt="Product Image 1" style="width: 50px; height: 50px;object-fit:contain">
+                                </td>
                                 <td>{{ $product->name }}</td>
-                                <td>{{ $product->deskripsi }}</td>
+                                <td>{{ $product->descriptions }}</td>
                                 <td>Rp. {{ number_format($product->price, 0, ',', '.') }}</td>
                                 <td>{{ $product->stock }}</td>
-                                <td>{{ $product->category }}</td>
+                                <td>{{ $product->category->name }}</td>
                                 <td>
                                     <a href="{{ route('admin.product.view', $product->id) }}"><button><ion-icon name="eye-outline"></ion-icon></button></a>
                                     <a href="{{ route('admin.product.update', $product->id) }}"><button><ion-icon name="pencil-outline"></ion-icon></button></a>
@@ -74,6 +74,7 @@
                         @endforeach
                     @endif
                 </tbody>
+                
         </div>
     </div>
 </div>

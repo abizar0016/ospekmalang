@@ -11,11 +11,11 @@
         <div class="form-container">
             <div class="panel">
                 <div class="panel-item">
-                    <a href="{{ url('login') }}">
-                        <button class="button-link active">Masuk</button>
-                    </a>
                     <a href="{{ url('register') }}">
                         <button class="button-link">Daftar</button>
+                    </a>
+                    <a href="{{ url('login') }}">
+                        <button class="button-link active">Masuk</button>
                     </a>
                 </div>
             </div>
@@ -28,20 +28,20 @@
                 <h1 class="masuk">Masuk</h1>
 
                 <label for="email">
-                    <input type="email" name="email" id="email" class="input" required value="{{ old('email') }}">
+                    <input type="email" name="email" id="email" class="input" value="{{ old('email') }}">
                     <span class="placeholder">Email</span>
+                    @error('email')
+                        <div class="error" style="color: red">{{ $message }}</div>
+                    @enderror
                 </label>
-                @error('email')
-                    <div class="error" style="color: red">{{ $message }}</div>
-                @enderror
 
                 <label for="password">
-                    <input type="password" name="password" id="password" class="input" required>
+                    <input type="password" name="password" id="password" class="input">
                     <span class="placeholder">Password</span>
+                    @error('password')
+                        <div class="error" style="color: red">{{ $message }}</div>
+                    @enderror
                 </label>
-                @error('password')
-                    <div class="error" style="color: red">{{ $message }}</div>
-                @enderror
 
                 <a href="" class="link">Lupa Kata Sandi?</a>
 

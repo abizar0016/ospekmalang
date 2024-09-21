@@ -41,8 +41,9 @@ function formatRupiah(angka, prefix) {
     return prefix + rupiah;
 }
 
-function previewImage() {
-    const file = document.getElementById('image').files[0];
+function previewImageProfile() {
+    const fileInput = document.getElementById('image');
+    const file = fileInput.files[0];
     const imgPreview = document.querySelector('.img-preview');
 
     if (file) {
@@ -50,11 +51,31 @@ function previewImage() {
 
         reader.onload = function (e) {
             imgPreview.src = e.target.result;
-            imgPreview.style.display = 'block'; // Show the image preview
+            imgPreview.style.display = 'block'; // Pastikan gambar ditampilkan
         }
 
         reader.readAsDataURL(file);
     } else {
-        imgPreview.style.display = 'none'; // Hide the image preview if no file is selected
+        imgPreview.src = "{{ url('images/default-profile.jpg') }}"; // Tampilkan gambar default jika tidak ada gambar
+        imgPreview.style.display = 'block'; // Tetap tampilkan gambar
     }
 }
+
+
+function previewImage(imageNumber) {
+    const input = document.getElementById('image' + imageNumber);
+    const preview = document.getElementById('imgPreview' + imageNumber);
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        preview.src = e.target.result;  // Set source untuk gambar preview
+        preview.style.display = 'block'; // Pastikan gambar terlihat
+    };
+
+    if (input.files && input.files[0]) {
+        reader.readAsDataURL(input.files[0]); // Baca file sebagai Data URL
+    } else {
+        preview.src = "";  // Kosongkan preview jika tidak ada file yang dipilih
+    }
+}
+

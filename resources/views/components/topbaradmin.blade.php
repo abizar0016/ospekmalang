@@ -1,16 +1,10 @@
 <div class="topbar">
     <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-    <div class="search-admin">
-        <label class="label-admin">
-            <input type="text" placeholder="Cari...">
-            <ion-icon name="search-outline"></ion-icon>
-        </label>
-    </div>
     <div class="user-profil">
         @if (Auth::user()->image)
-            <img src="{{ asset(Auth::user()->image) }}" alt="User Image" style="max-width:50px; max-height:50px; border-radius:50%;">
+            <img src="{{ asset(Auth::user()->image) }}" alt="User Image" style="max-width:50px; max-height:50px; border-radius:50%;object-fit:cover">
         @else
-            <img src="{{ url('images/default-profile.jpg') }}" alt="Default Image" style="max-width:50px; max-height:50px; border-radius:50%;">
+            <img src="{{ url('images/default-profile.jpg') }}" alt="Default Image" style="max-width:50px; max-height:50px; border-radius:50%; object-fit:cover">
         @endif
     </div>
 </div>

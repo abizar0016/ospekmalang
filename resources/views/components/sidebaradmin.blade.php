@@ -3,7 +3,7 @@
         <ul>
             <li>
                 <a href="{{ url('admin') }}">
-                    <span class="icon"><img src="{{ url('images/adminicon.png') }}" alt=""></span>
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
                     <span class="tittle">Ospek Malang</span>
                 </a>
             </li>
@@ -24,7 +24,7 @@
 
             <li>
                 <a href="{{ url('admin/product') }}">
-                    <span class="icon"><ion-icon name="logo-dropbox"></ion-icon></span>
+                    <span class="icon"><ion-icon name="cube-outline"></ion-icon></span>
                     <span class="tittle">Produk</span>
                 </a>
             </li>

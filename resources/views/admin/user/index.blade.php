@@ -12,11 +12,11 @@
 
 
     <div class="detail">
+        <div class="cardHeader">
+            <h2>Akun Pengguna</h2>
+            <a href="{{ route('admin.user.create') }}"><button>Tambah Akun</button></a>
+        </div>
         <div class="user" id="user">
-            <div class="cardHeader">
-                <h2>Akun Pengguna</h2>
-                <a href="{{ route('admin.user.create') }}"><button>Tambah Akun</button></a>
-            </div>
 
             <table>
                 <thead>
@@ -34,7 +34,7 @@
                     @foreach ($users as $user)
                         <tr class="list">
                             <td class="image-profile"><img src="{{ $user->image ? asset($user->image) : asset('images/default-profile.jpg') }}" alt="" width="50px" height="50px"
-                                    style="border-radius: 50%; object-fit:cover;"></td>
+                                    style="border-radius: 50%; object-fit:contain;"></td>
                             <td class="name-tbl">{{ $user->uname }}</td>
                             <td class="email-tbl">{{ $user->email }}</td>
                             <td class="phone-tbl">{{ $user->phone }}</td>

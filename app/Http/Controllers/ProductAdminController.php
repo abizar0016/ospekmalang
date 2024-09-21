@@ -31,6 +31,6 @@ class ProductAdminController extends Controller
         $product = Product::findOrFail($id); // Cari produk berdasarkan ID
         $product->delete();
 
-        return redirect()->route('admin.product.index')->with('success', 'Pesan berhasil dihapus');
+        return redirect()->route('admin.product.index')->with('success', 'Produk berhasil dihapus');
     }
 }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('product_id')
                 ->constrained('products')
                 ->onDelete('cascade');
-            $table->float('price');
             $table->enum('payment_status', ['dibayar', 'jatuh tempo', 'belum dibayar']);
             $table->enum('order_status', ['tertunda', 'terkirim', 'dalam pengerjaan']);
             $table->timestamps();
