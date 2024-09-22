@@ -31,6 +31,6 @@ class UserAdminController extends Controller
     public function delete(User $id)
     {
         $id->delete();
-        return redirect()->back()->with('success', 'User successfully deleted.');
+        return redirect()->route('admin.index')->with('success', 'User successfully deleted.');
     }
 }
