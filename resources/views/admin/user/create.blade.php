@@ -1,6 +1,6 @@
 <x-head></x-head>
 
-<body class="animation">
+<body>
 
     <x-sidebaradmin></x-sidebaradmin>
 
@@ -17,10 +17,10 @@
 
             <form action="{{ route('admin.user.create.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div class="cardHeader">
+                    <h2>Tambah Akun</h2>
+                </div>
                 <div class="card-view">
-                    <div class="cardHeader">
-                        <h2>Tambah Akun</h2>
-                    </div>
                     <div class="detail-list">
                         <div class="input-group">
                             <div class="input-group-item">

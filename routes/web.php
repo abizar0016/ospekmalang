@@ -18,6 +18,7 @@ use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\UpdateProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutPageController;
 
 //not fount page
 
@@ -27,14 +28,42 @@ Route::fallback(function () {
 // Halaman Utama
 Route::prefix('/')->group(function () {
     Route::get('/', function () {
+        if (Auth::check()) {
+            // Cek status pengguna dan arahkan sesuai peran
+            if (Auth::user()->status === 'admin') {
+                return redirect()->route('admin.index');
+            } else {
+                return redirect()->route('user.index');
+            }
+        }
+
         return view('guest.index');
     })->name('guest.index');
 
     Route::get('produk', function () {
+
+        if (Auth::check()) {
+            // Cek status pengguna dan arahkan sesuai peran
+            if (Auth::user()->status === 'admin') {
+                return redirect()->route('admin.index');
+            } else {
+                return redirect()->route('user.index');
+            }
+        }
+
         return view('guest.produk');
     })->name('guest.produk');
 
     Route::get('about', function () {
+        if (Auth::check()) {
+            // Cek status pengguna dan arahkan sesuai peran
+            if (Auth::user()->status === 'admin') {
+                return redirect()->route('admin.index');
+            } else {
+                return redirect()->route('user.index');
+            }
+        }
+        
         return view('guest.about');
     })->name('guest.about');
 });
@@ -46,13 +75,10 @@ Route::group(['middleware' => ['auth']],function(){
         Route::delete('/{id}', [UserPageController::class, 'delete'])->name('user.cart.delete');
     
         Route::get('/product', [UserPageController::class, 'productView'])->name('user.product');
-    
-        Route::get('/checkout', function () {
-            return view('user.checkout');
-        })->name('user.checkout');
-
+        
+        Route::get('/checkout', [CheckoutPageController::class, 'index'])->name('user.checkout');
+        
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-
     });
 });
 

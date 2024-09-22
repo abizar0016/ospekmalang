@@ -37,9 +37,9 @@
 
 
                             <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name m-b-1 hov-cl1 trans-04">
+                                <p class="header-cart-item-name m-b-1 hov-cl1 trans-04">
                                     {{ $item->product->name }}
-                                </a>
+                                </p>
 
                                 <span class="header-cart-item-info">
                                     Size: {{ $item->product->size ?? '-' }}
@@ -67,12 +67,12 @@
                     </div>
 
                     <div class="header-cart-buttons flex-w w-full">
-                        <a href=""
+                        <a href="{{ route('user.product') }}"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                            Lainnya
+                            Tambah
                         </a>
 
-                        <a href=""
+                        <a href="{{ route('user.checkout') }}"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Checkout
                         </a>
@@ -308,6 +308,13 @@
     <!-- Product -->
     <section class="bg0 p-t-23 p-b-140 m-t-50">
         <div class="container">
+            <!-- Product Grid -->
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="p-b-10">
                 <h3 class="ltext-103 cl5">
                     Ringkasan Produk
@@ -330,12 +337,6 @@
             </div>
 
 
-            <!-- Product Grid -->
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
 
             <div class="products-container mt-4">
 

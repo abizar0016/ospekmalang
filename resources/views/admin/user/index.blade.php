@@ -1,15 +1,15 @@
 <x-head></x-head>
-<body class="animation">    
+<body>    
 
 <x-sidebaradmin></x-sidebaradmin>
 
 <div class="main">
     <x-topbaradmin></x-topbaradmin>
-    @if (Session::has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ Session::get('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
 
 

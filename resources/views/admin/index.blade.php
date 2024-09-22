@@ -1,6 +1,6 @@
 <x-head></x-head>
 
-<body class="animation">
+<body>
 
     <x-sidebaradmin></x-sidebaradmin>
 

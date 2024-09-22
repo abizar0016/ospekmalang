@@ -1,6 +1,6 @@
 <x-headform></x-headform>
 
-<body>
+<body class="animsition">
 
     <div class="container">
 

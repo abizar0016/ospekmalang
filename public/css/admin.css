@@ -215,21 +215,33 @@ body {
     font-size: 1.2rem;
 }
 
-.user-profil {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
+.user-profil{
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+}
+
+.user-profil a{
+    display: flex;
+    align-items: center;
+}
+
+.user-profil a button{
+    border: 1px solid #333;
+    padding: 10px;
+    transition: background .4s ;
+    border-radius: 8px;
+}
+
+.user-profil a button:hover{
+    color: #fff;
+    background: #333;
+    transition: background .4s ;
 }
 
 .user-profil img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
 }
 
@@ -253,6 +265,7 @@ body {
     justify-content: space-between;
     cursor: pointer;
     box-shadow: 0 7px 25px #0008;
+    transition: background .3s ease-in-out;
 }
 
 .cardBox .card .numbers {
@@ -275,6 +288,7 @@ body {
 
 .cardBox .card:hover {
     background: var(--blue);
+    transition: background .3s ease-in-out;
 }
 
 .cardBox .card:hover .numbers,
@@ -409,7 +423,7 @@ table thead td {
     padding: 10px;
     background-color: var(--black2);
     color: #fff;
-    transition: .4s ease-in-out;
+    transition: background .3s ease-in-out;
 }
 
 .user table tbody tr {
@@ -419,8 +433,7 @@ table thead td {
 .cardHeader button:hover {
     background-color: var(--blue);
     color: var(--white);
-    scale: 1.1;
-    transition: .4s ease-in-out;
+    transition: background .3s ease-in-out;
 }
 
 .user table tr td:last-child {
@@ -487,6 +500,7 @@ table tr td button {
 table tr td button:hover {
     background: var(--blue);
     color: var(--white);
+    transition: background .4s ease-in-out;
 }
 
 

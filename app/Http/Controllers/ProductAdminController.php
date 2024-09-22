@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -17,13 +18,16 @@ class ProductAdminController extends Controller
 
     public function show($id)
     {
-        abort(404, 'Invalid user ID.');
         if (!is_numeric($id)) {
+            abort(404, 'ID produk tidak valid.');
         }
-
+    
         $product = Product::findOrFail($id);
-        return view('admin.product.view', compact('product'));
+        $categorys = Category::all();
+        
+        return view('admin.product.view', compact('product', 'categorys'));
     }
+    
 
     // Menghapus produk
     public function delete($id)

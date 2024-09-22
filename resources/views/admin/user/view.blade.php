@@ -1,6 +1,6 @@
 <x-head></x-head>
 
-<body class="animation">
+<body>
 
     <x-sidebaradmin></x-sidebaradmin>
 
@@ -8,11 +8,11 @@
         <x-topbaradmin></x-topbaradmin>
 
         <div class="detail">
+            <div class="cardHeader">
+                <h2>Informasi Akun</h2>
+            </div>
             <div class="card-view">
 
-                <div class="cardHeader">
-                    <h2>Informasi Akun</h2>
-                </div>
                 <div class="user-profile">
                     <img class="user-image"
                         src="{{ $user->image ? url($user->image) : asset('images/default-profile.jpg') }}"

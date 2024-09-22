@@ -65,8 +65,7 @@
                                     </a>
                                 </li>
                                 <li class="profil-list">
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                     </form>
                                     <a href="#"
@@ -89,17 +88,65 @@
             <a href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}" alt="IMG-LOGO"></a>
         </div>
 
-        <!-- Icon header -->
-        <div class="wrap-icon-header flex-w flex-r-m m-r-15" onclick="toggleSearch()">
-            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-                <i class="zmdi zmdi-search"></i>
+        <div class="flex-w flex-c-m m-tb-10">
+
+            <div class="flex-c-m  pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
             </div>
+        </div>
+
+        <!-- Search product -->
+        <div class="dis-none panel-search w-full p-t-10 p-b-15">
+            <div class="bor8 dis-flex p-l-1">
+                <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                    <i class="zmdi zmdi-search"></i>
+                </button>
+
+                <form action="">
+                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                </form>
+            </div>
+        </div>
+
+        <!-- Icon header -->
+        <div class="wrap-icon-header flex-w flex-r-m" onclick="toggleSearch()">
 
             <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                data-notify="2">
+                data-notify="{{ $cartCount }}">
                 <i class="zmdi zmdi-shopping-cart"></i>
             </div>
         </div>
+
+        <a href="#">
+            <div class="profile-image">
+                @if (Auth::user()->image)
+                    <img src="{{ asset(Auth::user()->image) }}" alt="User Image">
+                @else
+                    <img src="{{ url('images/default-profile.jpg') }}" alt="Default Image">
+                @endif
+
+                <ul class="menu-profil">
+                    <li class="profil-list">
+                        <a href="#">
+                            <span class="tittle">
+                                Edit Profil
+                            </span>
+                        </a>
+                    </li>
+                    <li class="profil-list">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                            style="display: none;">
+                            @csrf
+                        </form>
+                        <a href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <span class="tittle">Keluar</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </a>
 
         <!-- Button show menu -->
         <div class="btn-show-menu-mobile hamburger hamburger--squeeze">

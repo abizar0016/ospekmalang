@@ -72,7 +72,7 @@ class UserPageController extends Controller
         // Contoh logika untuk menghapus item dari keranjang
         Cart::findOrFail($id)->delete();
     
-        return redirect()->route('user.index')->with('success', 'Item berhasil dihapus');
+        return redirect()->back()->with('success', 'Item berhasil dihapus');
     }
 }
 

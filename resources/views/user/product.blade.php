@@ -1,6 +1,6 @@
 <x-head></x-head>
 
-<body class="animation">
+<body class="animsition">
     @include('components.userheader')
 
     <!-- Cart -->
@@ -22,14 +22,23 @@
                 <ul class="header-cart-wrapitem w-full">
                     @foreach ($cartItems as $item)
                         <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img">
+                            <form id="delete-item-{{ $item->id }}"
+                                action="{{ route('user.cart.delete', $item->id) }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+
+                            <div class="header-cart-item-img"
+                                onclick="document.getElementById('delete-item-{{ $item->id }}').submit();">
                                 <img src="{{ asset('images/' . $item->product->image1) }}" alt="IMG">
                             </div>
 
+
                             <div class="header-cart-item-txt">
-                                <a href="#" class="header-cart-item-name m-b-1 hov-cl1 trans-04">
+                                <p class="header-cart-item-name m-b-1 hov-cl1 trans-04">
                                     {{ $item->product->name }}
-                                </a>
+                                </p>
 
                                 <span class="header-cart-item-info">
                                     Size: {{ $item->product->size ?? '-' }}
@@ -57,12 +66,12 @@
                     </div>
 
                     <div class="header-cart-buttons flex-w w-full">
-                        <a href=""
+                        <a href="{{ route('user.product') }}"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                             Lainnya
                         </a>
 
-                        <a href=""
+                        <a href="{{ route('user.checkout') }}"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Checkout
                         </a>
@@ -76,6 +85,13 @@
     <!-- Product -->
     <section class="bg0 p-t-23 p-b-140 m-t-50">
         <div class="container">
+            <!-- Product Grid -->
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="p-b-10">
                 <h3 class="ltext-103 cl5">
                     Semua Produk
@@ -95,19 +111,36 @@
                         </button>
                     @endforeach
                 </div>
+
+                <div class="flex-w flex-c-m m-tb-10">
+
+                    <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                        <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                        <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                        Cari
+                    </div>
+                </div>
+
+                <!-- Search product -->
+                <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                    <div class="bor8 dis-flex p-l-15">
+                        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+
+                        <form action="">
+                            <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
+                                placeholder="Search">
+                        </form>
+                    </div>
+                </div>
             </div>
 
 
             <!-- Product Grid -->
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
             <div class="products-container mt-4">
 
-                @foreach ($products as $product)
+                @foreach ($products->take(8) as $product)
                     <div class="isotope-item {{ $product->category->id }}">
                         <div class="block2">
                             <div class="block2-pic hov-img0">
@@ -274,16 +307,16 @@
                         </div>
 
                         <div class="col-md-6 col-lg-5 p-b-30">
-                            <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                <h4 class="mtext-105 cl2 js-name-detail p-b-14" id="modal-product-name">
+                            <div class="p-r-50 p-t-5 p-lr-0-lg  product-list">
+                                <h4 class="name-product" id="modal-product-name">
                                     {{ $product->name }}
                                 </h4>
 
-                                <span class="mtext-106 cl2" id="modal-product-price">
+                                <span class="price-product">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </span>
 
-                                <p class="stext-102 cl3 p-t-23" id="modal-product-description">
+                                <p class="description-product text-disabled" id="modal-product-description">
                                     {{ $product->descriptions }}
                                 </p>
 
@@ -293,9 +326,9 @@
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <label for="quantity">Quantity:</label>
-                                        <input type="number" name="quantity" value="1" min="1"
-                                            max="{{ $product->stock }}">
-                                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                        <input type="number" name="quantity" class="text-disabled" value="1"
+                                            min="1" max="{{ $product->stock }}">
+                                        <button type="submit" class="add-btn hov-btn1">Add to Cart</button>
                                     </form>
                                 </div>
                             </div>

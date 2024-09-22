@@ -734,7 +734,13 @@ a {
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
-    display: flex;
+    display: flex;  
+  }
+
+  .profile-image img{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
   }
 
   .container-menu-desktop {
@@ -1750,7 +1756,6 @@ button.mfp-close {
 
 .show-search::after,
 .show-filter::after {
-  content: "";
   position: absolute;
   display: block;
 
@@ -2584,7 +2589,6 @@ input.num-product::-webkit-inner-spin-button {
 
 .size-113 {
   width: 38px;
-  height: 60px;
 }
 
 .size-114 {
@@ -3877,13 +3881,13 @@ input.num-product::-webkit-inner-spin-button {
   padding: 10px 0;
 }
 
+.profil-list a:hover{
+  color: #6c7ae0;
+}
+
 .profil-list a {
   text-decoration: none;
   color: #333;
-}
-
-.profil-list a:hover {
-  color: #007bff; /* Warna saat di-hover */
 }
 
 .name-product{
@@ -3916,3 +3920,4 @@ input.num-product::-webkit-inner-spin-button {
   border-radius: 8px;
   font-weight: 500;
 }
+

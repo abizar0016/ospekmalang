@@ -1,6 +1,6 @@
 <x-head></x-head>
 
-<body class="animation">
+<body>
     <x-sidebaradmin></x-sidebaradmin>
 
     <div class="main">
@@ -16,10 +16,10 @@
             <form action="{{ route('admin.user.update.post', $user->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                <div class="cardHeader">
+                    <h2>Perbarui Akun</h2>
+                </div>
                 <div class="card-view">
-                    <div class="cardHeader">
-                        <h2>Perbarui Akun</h2>
-                    </div>
                     <div class="detail-list">
                         <label for="image">Gambar Profil :</label>
                         <div class="input-singgle">
