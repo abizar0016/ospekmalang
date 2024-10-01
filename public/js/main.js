@@ -210,7 +210,6 @@
     });
 
 })(jQuery);
-
 document.addEventListener('DOMContentLoaded', function () {
     const filterButtons = document.querySelectorAll('.filter-button');
     const productItems = document.querySelectorAll('.isotope-item');
@@ -230,8 +229,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
-
     // Menangani klik pada tombol filter
     filterButtons.forEach(button => {
         button.addEventListener('click', function () {
@@ -244,6 +241,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Inisialisasi tampilan produk
     filterProducts('*');
+
+    // Tampilkan modal pertama atau produk tertentu (misalnya id=1)
+    showModal(1);  // Ganti dengan ID produk yang diinginkan
 });
 
 function showModal(id) {
@@ -256,7 +256,6 @@ function showModal(id) {
     document.getElementById('modal-' + id).style.display = 'block';
 }
 
-
 function changeImage(imageUrl, productId) {
     console.log('Changing image for product:', productId, 'to:', imageUrl); // Debugging
     var mainImage = document.getElementById('mainProductImage-' + productId);
@@ -267,3 +266,51 @@ function changeImage(imageUrl, productId) {
         mainLink.href = imageUrl;
     }
 }
+
+window.onload = function() {
+    var modal = document.getElementById("successModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    if (modal) {
+        modal.style.display = "block";
+
+        // Tutup modal otomatis setelah 3 detik (3000 ms)
+        setTimeout(function() {
+            modal.style.display = "none";
+        }, 3000);
+
+        // Tutup modal ketika tombol close diklik
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Tutup modal ketika klik di luar modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    }
+}
+
+// Menampilkan popup
+function showPopup() {
+    var modal = document.getElementById("popupModal");
+    modal.style.display = "flex"; // Menampilkan popup
+
+    // Menyembunyikan popup setelah 3 detik
+    setTimeout(function() {
+        modal.style.display = "none"; // Menyembunyikan popup
+    }, 3000);
+}
+
+// Menutup popup ketika tombol OK ditekan
+document.getElementById("popupButton").onclick = function() {
+    document.getElementById("popupModal").style.display = "none"; // Menyembunyikan popup
+}
+
+// Panggil showPopup() ketika halaman dimuat atau saat tertentu
+window.onload = function() {
+    showPopup(); // Tampilkan popup saat halaman dimuat
+}
+

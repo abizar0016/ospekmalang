@@ -8,9 +8,13 @@
         <x-topbaradmin></x-topbaradmin>
 
         @if (Session::has('success'))
-            <div class="alert alert-success" role="alert">
-                {{ Session::get('success') }}
+        <div id="successModal" class="popupModal">
+            <div class="popupModal-content">
+                <span class="close">&times;</span>
+                <p>{{ Session::get('success') }}</p>
             </div>
+        </div>
+        
         @endif
 
         <div class="detail">

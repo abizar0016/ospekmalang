@@ -45,40 +45,47 @@
     <!--===============================================================================================-->
     <script src="{{ url('vendor/sweetalert/sweetalert.min.js') }}"></script>
     <script>
-        $('.js-addwish-b2').on('click', function(e) {
-            e.preventDefault();
-        });
-
+        // Menangani klik pada tombol tambah ke wishlist
         $('.js-addwish-b2').each(function() {
             var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-            $(this).on('click', function() {
-                swal(nameProduct, "is added to wishlist !", "success");
-
+            $(this).on('click', function(e) {
+                e.preventDefault();
+                swal(nameProduct, "is added to wishlist!", "success");
                 $(this).addClass('js-addedwish-b2');
                 $(this).off('click');
             });
         });
-
+    
+        // Menangani klik pada tombol tambah ke wishlist di detail produk
         $('.js-addwish-detail').each(function() {
             var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
             $(this).on('click', function() {
-                swal(nameProduct, "is added to wishlist !", "success");
-
+                swal(nameProduct, "is added to wishlist!", "success");
                 $(this).addClass('js-addedwish-detail');
                 $(this).off('click');
             });
         });
-
-        /*---------------------------------------------*/
-
+    
+        // Menangani klik pada tombol tambah ke keranjang
         $('.js-addcart-detail').each(function() {
-            var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-            $(this).on('click', function() {
-                swal(nameProduct, "is added to cart !", "success");
+            var nameProduct = $(this).closest('.product-list').find('.name-product').html();
+            $(this).on('click', function(e) {
+                e.preventDefault(); // Mencegah formulir dikirim langsung
+    
+                // Tampilkan SweetAlert
+                swal({
+                    title: nameProduct,
+                    text: "is added to cart!",
+                    icon: "success",
+                    button: "OK",
+                }).then(() => {
+                    // Kirim formulir setelah pengguna menekan tombol OK
+                    $(this).closest('form').submit();
+                });
             });
         });
     </script>
+    
     <!--===============================================================================================-->
     <script src="{{ url('vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script>

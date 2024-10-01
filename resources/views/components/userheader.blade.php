@@ -87,27 +87,8 @@
         <div class="logo-mobile">
             <a href="{{ url('/') }}"><img src="{{ url('images/logo.png') }}" alt="IMG-LOGO"></a>
         </div>
-
-        <div class="flex-w flex-c-m m-tb-10">
-
-            <div class="flex-c-m  pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-                <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-                <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-            </div>
-        </div>
-
         <!-- Search product -->
-        <div class="dis-none panel-search w-full p-t-10 p-b-15">
-            <div class="bor8 dis-flex p-l-1">
-                <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                    <i class="zmdi zmdi-search"></i>
-                </button>
 
-                <form action="">
-                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-                </form>
-            </div>
-        </div>
 
         <!-- Icon header -->
         <div class="wrap-icon-header flex-w flex-r-m" onclick="toggleSearch()">

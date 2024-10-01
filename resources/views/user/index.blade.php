@@ -309,12 +309,7 @@
     <section class="bg0 p-t-23 p-b-140 m-t-50">
         <div class="container">
             <!-- Product Grid -->
-            @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
+
             <div class="p-b-10">
                 <h3 class="ltext-103 cl5">
                     Ringkasan Produk
@@ -334,6 +329,29 @@
                         </button>
                     @endforeach
                 </div>
+
+                <div class="flex-w flex-c-m m-tb-10">
+
+                    <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+                        <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+                        <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                        Cari
+                    </div>
+                </div>
+
+                <!-- Search product -->
+                <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                    <div class="bor8 dis-flex p-l-15">
+                        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+
+                        <form action="">
+                            <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product"
+                                placeholder="Search">
+                        </form>
+                    </div>
+                </div>
             </div>
 
 
@@ -341,20 +359,11 @@
             <div class="products-container mt-4">
 
                 @foreach ($products->take(8) as $product)
-                    <div class="isotope-item {{ $product->category->id }}">
+                    <div class="isotope-item {{ $product->category->id }} js-show-modal1"
+                        onclick="showModal({{ $product->id }})">
                         <div class="block2">
                             <div class="block2-pic hov-img0">
                                 <img src="{{ url('images/' . $product->image1) }}" alt="IMG-PRODUCT">
-                                <a href="#"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
-                                    data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                    data-price="Rp. {{ $product->price }}"
-                                    data-description="{{ $product->description }}"
-                                    data-image="{{ url('images/' . $product->image1) }}"
-                                    onclick="showModal({{ $product->id }})">
-                                    Lihat Cepat
-                                </a>
-
                             </div>
                             <div class="block2-txt flex-w flex-t p-t-14">
                                 <div class="block2-txt-child1 flex-col-l">
@@ -370,6 +379,13 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+
+            <div class="flex-c-m flex-w w-full p-t-45">
+                <a href="{{ url('user/product') }}"
+                    class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                    Lainnya
+                </a>
             </div>
 
         </div>
@@ -465,17 +481,15 @@
 
     <!-- Modal1 -->
     @foreach ($products as $product)
-        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20" id="modal-{{ $product->id }}">
+        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20 {{ $loop->first ? 'modal-open' : '' }}"
+            id="modal-{{ $product->id }}">
             <div class="overlay-modal1 js-hide-modal1"></div>
-
             <div class="container">
                 <div class=" bg0 p-t-20 p-b-20 p-lr-15-lg how-pos3-parent">
                     <div class="product-container">
                         <button class="how-pos3 hov3 trans-04 js-hide-modal1">
                             <img src="{{ url('images/icon-close.png') }}" alt="CLOSE">
                         </button>
-
-
                         <!-- Modal content here -->
                         <ul class="image-list">
                             <li class="image-list-items">
@@ -508,7 +522,7 @@
                         </div>
 
                         <div class="col-md-6 col-lg-5 p-b-30">
-                            <div class="p-r-50 p-t-5 p-lr-0-lg  product-list">
+                            <div class="p-r-50 p-t-5 p-lr-0-lg product-list">
                                 <h4 class="name-product" id="modal-product-name">
                                     {{ $product->name }}
                                 </h4>
@@ -521,16 +535,15 @@
                                     {{ $product->descriptions }}
                                 </p>
 
-                                <!--  -->
                                 <div class="p-t-33">
                                     <form action="{{ route('cart.add') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <label for="quantity">Quantity:</label>
-                                        <input type="number" name="quantity" class="text-disabled" value="1"
-                                            min="1" max="{{ $product->stock }}">
-                                        <button type="submit" class="add-btn hov-btn1">Add to Cart</button>
+                                        <input type="number" name="quantity" class="text-disabled" value="1" min="1" max="{{ $product->stock }}">
+                                        <button type="submit" class="add-btn hov-btn1 js-addcart-detail">Tambah</button>
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -539,5 +552,6 @@
             </div>
         </div>
     @endforeach
+
 
     <x-script></x-script>

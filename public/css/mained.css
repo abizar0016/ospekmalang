@@ -3921,3 +3921,51 @@ input.num-product::-webkit-inner-spin-button {
   font-weight: 500;
 }
 
+/* Popup Modal */
+.popupModal {
+  display: none; /* Default tidak terlihat */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Background hitam transparan */
+  justify-content: center;
+  align-items: center;
+}
+
+.popupModal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px; /* Sudut membulat */
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.popupModal-icon {
+  font-size: 50px;
+  color: green;
+}
+
+.popupModal-message {
+  margin: 10px 0;
+}
+
+.popupModal-footer {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #717fe0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #5a65c9; /* Warna saat hover */
+}
