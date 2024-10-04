@@ -136,6 +136,8 @@
 
 </body>
 
+<x-script></x-script>
+
 {{-- script --}}
 <script src="{{ url('js/admins.js') }}"></script>
 <!------------------ ionicons ----------------------->
