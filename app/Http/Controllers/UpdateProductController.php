@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -11,7 +12,7 @@ class UpdateProductController extends Controller
     public function index($id)
     {
         $product = Product::findOrFail($id);
-        $categories = Category::all();
+        $categories = Categories::all();
         return view('admin.product.update', compact('product', 'categories'));
     }
 

@@ -33,14 +33,14 @@
                                 <label for="image2">Gambar Produk 2:</label>
                                 <img id="imgPreview2" class="img-preview"
                                     style="width: 100px; height: 100px; object-fit:contain;"
-                                    src="{{ asset('images/' . $product->image1) }}">
+                                    src="{{ asset('images/' . $product->image2) }}">
                             </div>
 
                             <div class="input-grup">
                                 <label for="image3">Gambar Produk 3:</label>
                                 <img id="imgPreview3" class="img-preview"
                                     style="width: 100px; height: 100px; object-fit:contain;"
-                                    src="{{ asset('images/' . $product->image1) }}">
+                                    src="{{ asset('images/' . $product->image3) }}">
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@
 
                         <div class="input-singgle">
                             <label for="category">Kategori:</label>
-                            <input type="text" class="text-disabled" value="{{ $product->category->name }}" readonly>
+                            <input type="text" class="text-disabled" value="{{ $product->categories->name }}" readonly>
                         </div>
                     </div>
                 </div>

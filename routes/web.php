@@ -18,6 +18,7 @@ use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\UpdateProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CheckoutPageController;
 
 //not fount page
@@ -131,6 +132,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('admin/product/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
 
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin.oder.index');
+
+    Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories.index');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

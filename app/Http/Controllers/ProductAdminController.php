@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -23,7 +24,7 @@ class ProductAdminController extends Controller
         }
     
         $product = Product::findOrFail($id);
-        $categorys = Category::all();
+        $categorys = Categories::all();
         
         return view('admin.product.view', compact('product', 'categorys'));
     }

@@ -322,10 +322,10 @@
                     Semua Produk
                 </button>
                 <div class="category-buttons">
-                    @foreach ($categories as $category)
+                    @foreach ($categories as $categories)
                         <button class="filter-button stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                            data-filter="{{ $category->id }}">
-                            {{ $category->name }}
+                            data-filter="{{ $categories->id }}">
+                            {{ $categories->name }}
                         </button>
                     @endforeach
                 </div>
@@ -359,7 +359,7 @@
             <div class="products-container mt-4">
 
                 @foreach ($products->take(8) as $product)
-                    <div class="isotope-item {{ $product->category->id }} js-show-modal1"
+                    <div class="isotope-item {{ $product->categories->id }} js-show-modal1"
                         onclick="showModal({{ $product->id }})">
                         <div class="block2">
                             <div class="block2-pic hov-img0">

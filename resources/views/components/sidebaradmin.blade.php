@@ -35,6 +35,13 @@
                     <span class="tittle">Pesanan</span>
                 </a>
             </li>
+
+            <li>
+                <a href="{{ url('admin/categories') }}">
+                    <span class="icon"><ion-icon name="apps-outline"></ion-icon></span>
+                    <span class="tittle">Kategori</span>
+                </a>
+            </li>
             
             <li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

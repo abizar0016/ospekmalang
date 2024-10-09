@@ -19,7 +19,7 @@
                 @csrf
                 @method('PUT')
                 <div class="cardHeader">
-                    <h2>Lihat Produk</h2>
+                    <h2>Perbarui Produk</h2>
                 </div>
                 <div class="card-product">
                     <div class="detail-list">
@@ -35,14 +35,14 @@
                                 <label for="image2">Gambar Produk 2:</label>
                                 <img id="imgPreview2" class="img-preview"
                                     style="width: 100px; height: 100px; object-fit:contain;"
-                                    src="{{ asset('images/' . $product->image1) }}">
+                                    src="{{ asset('images/' . $product->image2) }}">
                             </div>
 
                             <div class="input-grup">
                                 <label for="image3">Gambar Produk 3:</label>
                                 <img id="imgPreview3" class="img-preview"
                                     style="width: 100px; height: 100px; object-fit:contain;"
-                                    src="{{ asset('images/' . $product->image1) }}">
+                                    src="{{ asset('images/' . $product->image3) }}">
                             </div>
                         </div>
 

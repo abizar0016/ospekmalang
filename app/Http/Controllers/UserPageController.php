@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Cart;
+use App\Models\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class UserPageController extends Controller
         $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
 
         // Ambil kategori dan produk berdasarkan filter
-        $categories = Category::all();
+        $categories = Categories::all();
         $products = Product::when($categoryFilter, function ($query, $categoryFilter) {
             return $query->whereHas('category', function ($query) use ($categoryFilter) {
                 $query->where('name', $categoryFilter);
@@ -49,7 +50,7 @@ class UserPageController extends Controller
         $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
 
         // Ambil kategori dan produk berdasarkan filter
-        $categories = Category::all();
+        $categories = Categories::all();
         $products = Product::when($categoryFilter, function ($query, $categoryFilter) {
             return $query->whereHas('category', function ($query) use ($categoryFilter) {
                 $query->where('name', $categoryFilter);

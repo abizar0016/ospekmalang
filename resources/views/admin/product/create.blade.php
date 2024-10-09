@@ -66,10 +66,10 @@
                     </div>
 
                     <div class="input-singgle">
-                        <label for="category">Kategori:</label>
+                        <label for="categori">Kategori:</label>
                         <select name="category_id" required class="text-disabled">
-                            @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @foreach($categories as $categori)
+                            <option value="{{ $categori->id }}">{{ $categori->name }}</option>
                         @endforeach
                         </select>
                     </div>

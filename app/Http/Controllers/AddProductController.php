@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Log;
 
 class AddProductController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();  
+        $categories = Categories::all();  
         return view('admin.product.create', compact('categories'));
     }
 

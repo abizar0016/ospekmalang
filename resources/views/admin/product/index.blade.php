@@ -62,7 +62,7 @@
                                 <td>{{ $product->descriptions }}</td>
                                 <td>Rp. {{ number_format($product->price, 0, ',', '.') }}</td>
                                 <td>{{ $product->stock }}</td>
-                                <td>{{ $product->category->name }}</td>
+                                <td>{{ $product->categories->name }}</td>
                                 <td>
                                     <a href="{{ route('admin.product.view', $product->id) }}"><button><ion-icon name="eye-outline"></ion-icon></button></a>
                                     <a href="{{ route('admin.product.update', $product->id) }}"><button><ion-icon name="pencil-outline"></ion-icon></button></a>

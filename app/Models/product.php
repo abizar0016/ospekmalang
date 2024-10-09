@@ -36,8 +36,8 @@ class Product extends Model
     // Kolom yang secara otomatis akan dikelola oleh Eloquent
     public $timestamps = false;
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Categories::class, 'category_id');
     }
 }
