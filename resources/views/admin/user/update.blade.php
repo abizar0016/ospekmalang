@@ -49,20 +49,17 @@
                             </div>
                             <div class="input-group-item">
                                 <label for="phone">Nomor Ponsel :</label>
-                                <input required type="number" name="phone" value="{{ $user->phone }}"
-                                    class="text-disabled">
+                                <input type="number" name="phone" value="{{ $user->phone }}" class="text-disabled">
                             </div>
                         </div>
                         <div class="input-group">
                             <div class="input-group-item">
                                 <label for="dob">Tanggal Lahir :</label>
-                                <input required type="date" name="dob" value="{{ $user->dob }}"
-                                    class="text-disabled">
+                                <input type="date" name="dob" value="{{ $user->dob }}" class="text-disabled">
                             </div>
                             <div class="input-group-item">
                                 <label for="city">Kota :</label>
-                                <input required type="text" name="city" value="{{ $user->city }}"
-                                    class="text-disabled">
+                                <input type="text" name="city" value="{{ $user->city }}" class="text-disabled">
                             </div>
                         </div>
                         <div class="input-singgle">
@@ -71,7 +68,7 @@
                         </div>
                         <div class="input-singgle">
                             <label for="status">Peran :</label>
-                            <select name="status" required class="text-disabled">
+                            <select name="status" class="text-disabled">
                                 <option value="user" {{ $user->status == 'user' ? 'selected' : '' }}>User</option>
                                 <option value="admin" {{ $user->status == 'admin' ? 'selected' : '' }}>Admin</option>
                             </select>
@@ -82,9 +79,18 @@
                 <div class="button-group">
                     <a href="{{ route('admin.user') }}" class="btn back-btn">Kembali</a>
                     <input type="submit" value="Kirim" class="btn update-btn">
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger">
+                            {{ Session::get('error') }}
+                        </div>
+                    @endif
+
                 </div>
             </form>
         </div>
+
+
+
     </div>
 
 </body>

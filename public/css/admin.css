@@ -370,7 +370,7 @@ table thead td {
     text-align: center;
 }
 
-.status.delivered {
+.status.dikirim {
     padding: 2px 4px;
     background: #8de02c;
     color: var(--white);
@@ -379,7 +379,7 @@ table thead td {
     font-weight: 500;
 }
 
-.status.pending {
+.status.tertunda {
     padding: 2px 4px;
     background: #f9ca3f;
     color: var(--white);
@@ -388,7 +388,7 @@ table thead td {
     font-weight: 500;
 }
 
-.status.return {
+.status.dikembalikan{
     padding: 2px 4px;
     background: #f00;
     color: var(--white);
@@ -397,7 +397,7 @@ table thead td {
     font-weight: 500;
 }
 
-.status.inProgress {
+.status.dikerjakan {
     padding: 2px 4px;
     background: #1795ce;
     color: var(--white);
@@ -423,7 +423,7 @@ table thead td {
     padding: 10px;
     background-color: var(--black2);
     color: #fff;
-    transition: background .3s ease-in-out;
+    transition: background .5s ease-in-out;
 }
 
 .user table tbody tr {
@@ -433,7 +433,7 @@ table thead td {
 .cardHeader button:hover {
     background-color: var(--blue);
     color: var(--white);
-    transition: background .3s ease-in-out;
+    transition: background .5s ease-in-out;
 }
 
 .user table tr td:last-child {
@@ -488,19 +488,17 @@ table tbody tr:hover td {
 table tr td button {
     padding: 5px 15px;
     background: var(--black2);
-    color: var(--white);
+    color: var(--blue);
     margin: 5px;
-}
-
-.user table tr td button:hover {
-    background: var(--blue);
-    color: var(--white);
+    border-radius: 10px;
+    box-shadow: 2px 4px 10px #333;
+    transition: background .3s ease-in-out;
 }
 
 table tr td button:hover {
     background: var(--blue);
     color: var(--white);
-    transition: background .4s ease-in-out;
+    transition: background .3s ease-in-out;
 }
 
 

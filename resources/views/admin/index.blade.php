@@ -1,26 +1,18 @@
 <x-head></x-head>
 
 <body>
-
     <x-sidebaradmin></x-sidebaradmin>
-
-    {{-- content --}}
 
     <div class="main">
         <x-topbaradmin></x-topbaradmin>
 
-
-        {{-- Pengguna --}}
-
         <div class="cardBox" id="beranda">
-            <a href="{{ url('admin/user') }}">
-
+            <a href="{{ route('admin.user') }}">
                 <div class="card">
                     <div class="">
                         <div class="numbers">{{ $userCount }}</div>
                         <div class="cardName">Pengguna</div>
                     </div>
-
                     <div class="iconBox">
                         <ion-icon name="person-outline"></ion-icon>
                     </div>
@@ -33,20 +25,18 @@
                         <div class="numbers">{{ $productCount }}</div>
                         <div class="cardName">Produk</div>
                     </div>
-
                     <div class="iconBox">
                         <ion-icon name="cube-outline"></ion-icon>
                     </div>
                 </div>
             </a>
 
-            <a href="{{ route('admin.oder.index') }}">
+            <a href="">
                 <div class="card">
                     <div class="">
                         <div class="numbers">{{ $orderCount }}</div>
                         <div class="cardName">Pesanan</div>
                     </div>
-
                     <div class="iconBox">
                         <ion-icon name="cart-outline"></ion-icon>
                     </div>
@@ -56,12 +46,10 @@
 
         <div class="detail">
             <div class="cardHeader">
-                <h2>
-                    Pesanan Terbaru
-                </h2>
+                <h2>Pesanan Terbaru</h2>
             </div>
-            <div class="recentOrders">
 
+            <div class="recentOrders">
                 <table>
                     <thead>
                         <tr>
@@ -76,58 +64,26 @@
                     </thead>
 
                     <tbody>
+                        @foreach($recentOrders as $order)
                         <tr>
-                            <td>Abizar</td>
-                            <td>Malang</td>
-                            <td>Celana</td>
-                            <td>Rp. 45.000</td>
-                            <td>Dibayar</td>
-                            <td><span class="status pending">Tertunda</span></td>
+                            <td>{{ $order->user->uname }}</td>
+                            <td>{{ $order->user->city }}</td>
+                            <td>{{ $order->product->name }}</td>
+                            <td>Rp. {{ number_format($order->product->price, 0, ',', '.') }}</td>
+                            <td>{{ $order->payment_status }}</td>
+                            <td><span class="status {{ strtolower($order->order_status) }}">{{ $order->order_status}}</span></td>
                             <td>
-                                <button>Lihat</button>
-                                <button>Perbarui</button>
-                                <button>Hapus</button>
+                                <a href=""><button><ion-icon name="pencil-outline"></ion-icon></button></a>
+                                <form action="" method="POST" style="display:inline;" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Abizar</td>
-                            <td>Malang</td>
-                            <td>Sepatu</td>
-                            <td>Rp. 61.000</td>
-                            <td>Dibayar</td>
-                            <td><span class="status delivered">Terkirim</span></td>
-                            <td>
-                                <button>Lihat</button>
-                                <button>Perbarui</button>
-                                <button>Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Abizar</td>
-                            <td>Malang</td>
-                            <td>Baju</td>
-                            <td>Rp. 74.000</td>
-                            <td>Jatuh Tempo</td>
-                            <td><span class="status inProgress">Dalam Pengerjaan</span></td>
-                            <td>
-                                <button>Lihat</button>
-                                <button>Perbarui</button>
-                                <button>Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Abizar</td>
-                            <td>Malang</td>
-                            <td>Sabuk</td>
-                            <td>Rp. 16.000</td>
-                            <td>Dibayar</td>
-                            <td><span class="status return">Pengembalian</span></td>
-                            <td>
-                                <button>Lihat</button>
-                                <button>Perbarui</button>
-                                <button>Hapus</button>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -137,10 +93,6 @@
 </body>
 
 <x-script></x-script>
-
-{{-- script --}}
 <script src="{{ url('js/admins.js') }}"></script>
-<!------------------ ionicons ----------------------->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>

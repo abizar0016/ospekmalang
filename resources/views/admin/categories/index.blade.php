@@ -42,7 +42,6 @@
                             <tr>
                                 <td>{{ $categori->name }}</td>
                                 <td>
-                                    <a href=""><button><ion-icon name="eye-outline"></ion-icon></button></a>
                                     <a href=""><button><ion-icon name="pencil-outline"></ion-icon></button></a>
                                     <form action="" method="POST" style="display:inline;" enctype="multipart/form-data">
                                         @csrf
