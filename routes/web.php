@@ -5,21 +5,18 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AddUserController;
-use App\Http\Controllers\MessageController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\UserAdminController;
 use App\Http\Controllers\AddProductController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\UpdateProductController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\CheckoutPageController;
 
 //not fount page
 
@@ -77,7 +74,7 @@ Route::group(['middleware' => ['auth']],function(){
     
         Route::get('/product', [UserPageController::class, 'productView'])->name('user.product');
         
-        Route::get('/checkout', [CheckoutPageController::class, 'index'])->name('user.checkout');
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('user.checkout');
         
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
     });

@@ -87,10 +87,6 @@
         <div class="container">
             <!-- Product Grid -->
             @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
             @endif
             <div class="p-b-10">
                 <h3 class="ltext-103 cl5">
@@ -100,7 +96,7 @@
 
             <!-- Filter Buttons -->
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 filter-button active" data-filter="*">
+                <button class="stext-106 cl6 hov1 bor3 trans-04  m-r-32 m-tb-5 filter-button active" data-filter="*">
                     Semua Produk
                 </button>
                 <div class="category-buttons">
@@ -141,7 +137,7 @@
             <div class="products-container mt-4">
 
                 @foreach ($products->take(8) as $product)
-                    <div class="isotope-item {{ $product->category->id }}">
+                    <div class="isotope-item {{ $product->categories->id }}">
                         <div class="block2">
                             <div class="block2-pic hov-img0">
                                 <img src="{{ url('images/' . $product->image1) }}" alt="IMG-PRODUCT">
