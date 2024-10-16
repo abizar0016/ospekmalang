@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <div class="container" style="margin-top:100px;">
+        <div class="container" style="margin-top:120px;">
             <h1>Pilih Barang untuk Checkout</h1>
 
             @if ($errors->any())
@@ -95,36 +95,49 @@
             <form action="" method="POST">
                 @csrf
 
-                <table class="table table-bordered">
+                <table class="table mt-5" style=" border-spacing: 0 10px; border-color:transparent;">
                     <thead>
                         <tr>
                             <th>Pilih</th>
+                            <th></th>
                             <th>Nama Barang</th>
                             <th>Jumlah</th>
-                            <th>Harga</th>
+                            <th>Harga Satuan</th>
+                            <th>Total Harga Barang</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($cartItems as $item)
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="selected_items[]" value="{{ $item['id'] }}">
+                                    <input type="checkbox" class="item-checkbox"
+                                        data-price="{{ $item->product->price }}"
+                                        data-quantity="{{ $item->quantity }}">
+                                </td>
+                                <td style="text-align: center;"><img src="{{ asset('images/' . $item->product->image1) }}" alt="Product Image 1"
+                                        style="width: 100px; height: 100px;object-fit:contain">
                                 </td>
                                 <td>{{ $item->product->name }}</td>
                                 <td>{{ $item->quantity }}</td>
-                                <td>Rp. {{ number_format($item->product->price * $item->quantity, 0, ',', '.') }}
-                                </td> <!-- Total harga -->
+                                <td>Rp. {{ number_format($item->product->price, 0, ',', '.') }}</td>
+                                <td>Rp. {{ number_format($item->product->price * $item->quantity, 0, ',', '.') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4">Keranjang belanja kosong.</td>
+                                <td colspan="5">Keranjang belanja kosong.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
 
-                <button type="submit" class="btn btn-primary">Proses Checkout</button>
+                <!-- Area untuk menampilkan total harga -->
+                <div class="d-flex align-items-center float-end mt-5" style="position: fixed; right:100px; bottom:100px;">
+                    <button type="submit" class="btn btn-primary">Proses Checkout</button>
+                    <h3 class="ml-4">Total Harga: Rp. <span id="total-price">0</span></h3>
+                </div>
+
             </form>
+
         </div>
 
     </div>
