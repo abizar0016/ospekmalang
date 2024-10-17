@@ -541,7 +541,7 @@
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <label for="quantity">Quantity:</label>
                                         <input type="number" name="quantity" class="text-disabled" value="1" min="1" max="{{ $product->stock }}">
-                                        <button type="submit" class="add-btn hov-btn1 js-addcart-detail">Tambah</button>
+                                        <button type="submit" class="add-btn hov-btn1">Tambah</button>
                                     </form>
                                 </div>
                                 

@@ -207,30 +207,24 @@ $(document).on('click', '.add-btn, .js-addcart-detail', function (e) {
             if (response.success) {
                 // Tampilkan swal untuk memberi tahu produk berhasil ditambahkan
                 swal(nameProduct, "is added to cart!", "success");
-
+        
                 // Tambahkan class js-addedcart-detail untuk menandai produk sudah ditambahkan
                 $(e.currentTarget).addClass('js-addedcart-detail');
                 $(e.currentTarget).off('click'); // Matikan event klik agar tidak bisa ditambahkan dua kali
             } else {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Failed to add product to cart.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
+                // Tampilkan swal untuk memberi tahu produk gagal ditambahkan
+                swal('Error!', response.message || 'Failed to add product to cart.', 'error');
             }
         },
         error: function (xhr) {
             console.error(xhr.responseText);
-            Swal.fire({
-                title: 'Error!',
-                text: 'Error occurred: ' + xhr.responseText,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+            // Tampilkan swal untuk memberi tahu terjadi kesalahan
+            swal('Error!', 'Error occurred: ' + xhr.responseText, 'error');
         }
+        
     });
 });
+
 
     $(".js-select2").each(function () {
         $(this).select2({
