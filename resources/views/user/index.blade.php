@@ -543,8 +543,8 @@
                                         <input type="number" name="quantity" class="text-disabled" value="1" min="1" max="{{ $product->stock }}">
                                         <button type="submit" class="add-btn hov-btn1 js-addcart-detail">Tambah</button>
                                     </form>
-                                    
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

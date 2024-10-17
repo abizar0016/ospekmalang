@@ -44,28 +44,13 @@
     var headerDesktop = $('.container-menu-desktop');
     var wrapMenu = $('.wrap-menu-desktop');
 
-    if ($('.top-bar').length > 0) {
-        var posWrapHeader = $('.top-bar').height();
-    }
-    else {
-        var posWrapHeader = 0;
-    }
-
-    if ($(window).scrollTop() > posWrapHeader) {
-        $(headerDesktop).addClass('fix-menu-desktop');
-        $(wrapMenu).css('top', 0);
-    }
-    else {
-        $(headerDesktop).removeClass('fix-menu-desktop');
-        $(wrapMenu).css('top', posWrapHeader - $(this).scrollTop());
-    }
+    var posWrapHeader = ($('.top-bar').length > 0) ? $('.top-bar').height() : 0;
 
     $(window).on('scroll', function () {
         if ($(this).scrollTop() > posWrapHeader) {
             $(headerDesktop).addClass('fix-menu-desktop');
             $(wrapMenu).css('top', 0);
-        }
-        else {
+        } else {
             $(headerDesktop).removeClass('fix-menu-desktop');
             $(wrapMenu).css('top', posWrapHeader - $(this).scrollTop());
         }
@@ -100,7 +85,6 @@
                     $(arrowMainMenu).removeClass('turn-arrow-main-menu-m');
                 }
             });
-
         }
     });
 
@@ -136,6 +120,7 @@
         $('.js-panel-cart').removeClass('show-header-cart');
     });
 
+    
     /*==================================================================
     [ Sidebar ]*/
     $('.js-show-sidebar').on('click', function () {
@@ -169,13 +154,11 @@
         $(item).on('mouseenter', function () {
             var index = item.index(this);
             for (var i = 0; i <= index; i++) {
-                $(item[i]).removeClass('zmdi-star-outline');
-                $(item[i]).addClass('zmdi-star');
+                $(item[i]).removeClass('zmdi-star-outline').addClass('zmdi-star');
             }
 
             for (var j = i; j < item.length; j++) {
-                $(item[j]).addClass('zmdi-star-outline');
-                $(item[j]).removeClass('zmdi-star');
+                $(item[j]).addClass('zmdi-star-outline').removeClass('zmdi-star');
             }
         });
 
@@ -187,13 +170,11 @@
 
         $(this).on('mouseleave', function () {
             for (var i = 0; i <= rated; i++) {
-                $(item[i]).removeClass('zmdi-star-outline');
-                $(item[i]).addClass('zmdi-star');
+                $(item[i]).removeClass('zmdi-star-outline').addClass('zmdi-star');
             }
 
             for (var j = i; j < item.length; j++) {
-                $(item[j]).addClass('zmdi-star-outline');
-                $(item[j]).removeClass('zmdi-star');
+                $(item[j]).addClass('zmdi-star-outline').removeClass('zmdi-star');
             }
         });
     });
@@ -209,7 +190,69 @@
         $('.js-modal1').removeClass('show-modal1');
     });
 
+    // Menggunakan jQuery untuk AJAX
+// Menggunakan jQuery untuk AJAX dan swal bersamaan
+$(document).on('click', '.add-btn, .js-addcart-detail', function (e) {
+    e.preventDefault(); // Mencegah form submit default
+    
+    var form = $(this).closest('form'); // Ambil form terdekat
+    var formData = form.serialize(); // Ambil data dari form
+    var nameProduct = $(this).closest('.product-list').find('.name-product').html(); // Ambil nama produk
+
+    $.ajax({
+        url: form.attr('action'), // Ambil URL dari atribut action form
+        method: form.attr('method'), // Ambil method dari form
+        data: formData, // Kirim data dari form
+        success: function (response) {
+            if (response.success) {
+                // Tampilkan swal untuk memberi tahu produk berhasil ditambahkan
+                swal(nameProduct, "is added to cart!", "success");
+
+                // Tambahkan class js-addedcart-detail untuk menandai produk sudah ditambahkan
+                $(e.currentTarget).addClass('js-addedcart-detail');
+                $(e.currentTarget).off('click'); // Matikan event klik agar tidak bisa ditambahkan dua kali
+            } else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to add product to cart.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        },
+        error: function (xhr) {
+            console.error(xhr.responseText);
+            Swal.fire({
+                title: 'Error!',
+                text: 'Error occurred: ' + xhr.responseText,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+});
+
+    $(".js-select2").each(function () {
+        $(this).select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $(this).next('.dropDownSelect2')
+        });
+    });
+
+    $('.gallery-lb').each(function () { // the containers for all your galleries
+        $(this).magnificPopup({
+            delegate: 'a', // the selector for gallery item
+            type: 'image',
+            gallery: {
+                enabled: true
+            },
+            mainClass: 'mfp-fade'
+        });
+    });
+
+
 })(jQuery);
+
 document.addEventListener('DOMContentLoaded', function () {
     const filterButtons = document.querySelectorAll('.filter-button');
     const productItems = document.querySelectorAll('.isotope-item');
@@ -260,14 +303,14 @@ function changeImage(imageUrl, productId) {
     console.log('Changing image for product:', productId, 'to:', imageUrl); // Debugging
     var mainImage = document.getElementById('mainProductImage-' + productId);
     var mainLink = document.getElementById('mainProductLink-' + productId);
-    
+
     if (mainImage && mainLink) {
         mainImage.src = imageUrl;
         mainLink.href = imageUrl;
     }
 }
 
-window.onload = function() {
+window.onload = function () {
     var modal = document.getElementById("successModal");
     var span = document.getElementsByClassName("close")[0];
 
@@ -275,17 +318,17 @@ window.onload = function() {
         modal.style.display = "block";
 
         // Tutup modal otomatis setelah 3 detik (3000 ms)
-        setTimeout(function() {
+        setTimeout(function () {
             modal.style.display = "none";
         }, 3000);
 
         // Tutup modal ketika tombol close diklik
-        span.onclick = function() {
+        span.onclick = function () {
             modal.style.display = "none";
         }
 
         // Tutup modal ketika klik di luar modal
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
@@ -299,29 +342,29 @@ function showPopup() {
     modal.style.display = "flex"; // Menampilkan popup
 
     // Menyembunyikan popup setelah 3 detik
-    setTimeout(function() {
+    setTimeout(function () {
         modal.style.display = "none"; // Menyembunyikan popup
     }, 3000);
 }
 
 // Menutup popup ketika tombol OK ditekan
-document.getElementById("popupButton").onclick = function() {
+document.getElementById("popupButton").onclick = function () {
     document.getElementById("popupModal").style.display = "none"; // Menyembunyikan popup
 }
 
 // Panggil showPopup() ketika halaman dimuat atau saat tertentu
-window.onload = function() {
+window.onload = function () {
     showPopup(); // Tampilkan popup saat halaman dimuat
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Ambil semua checkbox item
     const checkboxes = document.querySelectorAll('.item-checkbox');
     const totalPriceElement = document.getElementById('total-price');
 
     // Tambahkan event listener ke setiap checkbox
-    checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
             updateTotalPrice();  // Panggil fungsi setiap kali checkbox berubah
         });
     });
@@ -330,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let totalPrice = 0;
 
         // Iterasi setiap checkbox yang dicentang
-        checkboxes.forEach(function(checkbox) {
+        checkboxes.forEach(function (checkbox) {
             if (checkbox.checked) {
                 const price = parseFloat(checkbox.getAttribute('data-price'));
                 const quantity = parseInt(checkbox.getAttribute('data-quantity'));
@@ -355,4 +398,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-

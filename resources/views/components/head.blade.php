@@ -5,6 +5,8 @@
     <title>Ospek Malang</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="images/icons/favicon.png" />
     <!--===============================================================================================-->
@@ -36,6 +38,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ url('css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url('css/mained.css') }}">

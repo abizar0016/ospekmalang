@@ -16,16 +16,16 @@ class CartController extends Controller
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1'
         ]);
-
+    
         // Simpan ke cart
         Cart::create([
             'user_id' => Auth::id(),  // ID pengguna yang sedang login
             'product_id' => $request->product_id,
             'quantity' => $request->quantity
         ]);
-
-        // Redirect ke halaman sebelumnya atau cart
-        return redirect()->back()->with('success', 'Product added to cart!');
+    
+        // Respons untuk AJAX
+        return response()->json(['success' => true, 'message' => 'Product added to cart!']);
     }
+    
 }
-
