@@ -79,3 +79,44 @@ function previewImage(imageNumber) {
     }
 }
 
+// Fungsi untuk membuka modal
+function openModal() {
+    var modal = document.getElementById("categoryModal");
+    modal.style.display = "block";
+}
+
+function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = "block";
+    } else {
+        console.error("Modal with ID '" + modalId + "' not found.");
+    }
+}
+
+function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = "none";
+    } else {
+        console.error("Modal with ID '" + modalId + "' not found.");
+    }
+}
+
+
+
+// Fungsi untuk menutup modal
+function closeModal() {
+    var modal = document.getElementById("categoryModal");
+    modal.style.display = "none";
+}
+
+// Tutup modal saat pengguna klik di luar konten modal
+window.onclick = function(event) {
+    var modal = document.getElementById("categoryModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+

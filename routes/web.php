@@ -70,13 +70,16 @@ Route::prefix('/')->group(function () {
 Route::group(['middleware' => ['auth']],function(){
     Route::prefix('user')->group(function () {
         Route::get('/', [UserPageController::class, 'index'])->name('user.index');
-        Route::delete('/{id}', [UserPageController::class, 'delete'])->name('user.cart.delete');
+        Route::delete('cart/{id}', [UserPageController::class, 'delete'])->name('user.cart.delete');
     
         Route::get('/product', [UserPageController::class, 'productView'])->name('user.product');
         
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('user.checkout');
         
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
+        Route::get('/cart', [CartController::class, 'getCart'])->name('user.cart');
+
     });
 });
 
@@ -131,6 +134,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin.oder.index');
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories.index');
+
+    Route::post('admin/categories/add', [CategoriesController::class, 'add'])->name('admin.categories.add');
+
+    Route::delete('admin/categories/delete/{id}', [CategoriesController::class, 'delete'])->name(('admin.categories.delete'));
+
+    Route::put('admin/categories/update/{id}', [CategoriesController::class, 'update'])->name('admin.categories.update');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

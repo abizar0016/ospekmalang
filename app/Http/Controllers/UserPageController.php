@@ -69,12 +69,17 @@ class UserPageController extends Controller
     }
 
     public function delete($id)
-    {
+{
+    try {
         // Contoh logika untuk menghapus item dari keranjang
         Cart::findOrFail($id)->delete();
     
-        return redirect()->back()->with('success', 'Item berhasil dihapus');
+        return response()->json(['success' => true, 'message' => 'Item berhasil dihapus']);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => 'Gagal menghapus item: ' . $e->getMessage()], 500);
     }
+}
+
 }
 
 
