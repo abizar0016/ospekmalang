@@ -114,21 +114,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('admin/product', [ProductAdminController::class, 'index'])->name('admin.product.index');
 
-    //-------------------------------------------CREATE PRODUCT-------------------------------------------------------//
+    Route::post('admin/product/create', [ProductAdminController::class, 'create'])->name('admin.product.create');
 
-    Route::get('admin/product/create', [AddProductController::class, 'index'])->name('admin.product.create');
-    Route::post('admin/product/create', [AddProductController::class, 'create'])->name('admin.product.create.post');
+    Route::put('admin/product/update/{id}', [ProductAdminController::class, 'update'])->name('admin.product.update');
 
-    //------------------------------------------VIEW PRODUCT---------------------------------------------//
-
-    Route::get('admin/product/view/{id}', [ProductAdminController::class, 'show'])->name('admin.product.view');
-
-    //-----------------------------------------UPDATE PRODUCT------------------------------------------------------//
-
-    Route::get('admin/product/update/{id}', [UpdateProductController::class, 'index'])->name('admin.product.update');
-    Route::put('admin/product/update/{id}', [UpdateProductController::class, 'update'])->name('admin.product.update.post');
-
-    //---------------------------------------DELETE PRODUCT--------------------------------------------------------//
     Route::delete('admin/product/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
 
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin.oder.index');

@@ -3854,7 +3854,7 @@ input.num-product::-webkit-inner-spin-button {
   max-height: 0;
   right: -70px;
   top: 100%;
-  width: 100px;
+  width: 150px;
   text-align: center;
   visibility: hidden;
   padding: 0;
@@ -3879,6 +3879,8 @@ input.num-product::-webkit-inner-spin-button {
 .profil-list {
   list-style-type: none;
   padding: 10px 0;
+  color: #717fe0;
+  font-weight: 600;
 }
 
 .profil-list a:hover{

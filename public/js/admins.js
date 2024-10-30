@@ -18,13 +18,6 @@ toggle.onclick = function () {
     main.classList.toggle("active");
 };
 
-
-// Format Rupiah untuk input harga
-document.getElementById('productPrice').addEventListener('input', function (e) {
-    let value = e.target.value.replace(/[^,\d]/g, ''); // Pastikan hanya angka yang diambil
-    e.target.value = formatRupiah(value, 'Rp. '); // Format menjadi Rupiah
-});
-
 function formatRupiah(angka, prefix) {
     let number_string = angka.replace(/[^,\d]/g, '').toString();
     let split = number_string.split(',');
@@ -68,16 +61,18 @@ function previewImage(imageNumber) {
 
     const reader = new FileReader();
     reader.onload = function(e) {
-        preview.src = e.target.result;  // Set source untuk gambar preview
+        preview.src = e.target.result; // Set source untuk gambar preview
         preview.style.display = 'block'; // Pastikan gambar terlihat
     };
 
     if (input.files && input.files[0]) {
         reader.readAsDataURL(input.files[0]); // Baca file sebagai Data URL
     } else {
-        preview.src = "";  // Kosongkan preview jika tidak ada file yang dipilih
+        imgPreview.src = "{{ asset('images/' . ($product->{'image' + imageIndex} ?? '')) }}"; // menyesuaikan berdasarkan index
+
     }
 }
+
 
 // Fungsi untuk membuka modal
 function openModal() {
@@ -85,29 +80,20 @@ function openModal() {
     modal.style.display = "block";
 }
 
-function openModal(modalId) {
-    var modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = "block";
-    } else {
-        console.error("Modal with ID '" + modalId + "' not found.");
-    }
-}
-
-function closeModal(modalId) {
-    var modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = "none";
-    } else {
-        console.error("Modal with ID '" + modalId + "' not found.");
-    }
-}
-
-
-
 // Fungsi untuk menutup modal
 function closeModal() {
     var modal = document.getElementById("categoryModal");
+    modal.style.display = "none";
+}
+
+function openModal() {
+    var modal = document.getElementById("modal-add");
+    modal.style.display = "block";
+}
+
+// Fungsi untuk menutup modal
+function closeModal() {
+    var modal = document.getElementById("modal-add");
     modal.style.display = "none";
 }
 
@@ -119,4 +105,58 @@ window.onclick = function(event) {
     }
 }
 
+function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "block";
+}
 
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    const content = modal.querySelector(".modal-content");
+    
+    // Tambahkan kelas animasi zoomOut
+    content.style.animation = "zoomOut 0.5s ease-in-out";
+    
+    // Tunggu sampai animasi selesai sebelum menyembunyikan modal
+    setTimeout(() => {
+        modal.style.display = "none"; 
+        content.style.animation = ""; 
+    }, 500); 
+}
+
+
+window.onclick = function(event) {
+    var modals = document.getElementsByClassName("modal");
+    for (var i = 0; i < modals.length; i++) {
+        if (event.target === modals[i]) {
+            closeModal(modals[i].id);
+        }
+    }
+}
+
+function openTab(evt, tabName) {
+    // Cari modal yang terkait dengan tombol yang diklik
+    const modalContent = evt.target.closest('.modal-content');
+    
+    // Dapatkan semua elemen dengan kelas "tab-content" di dalam modal ini
+    const tabcontent = modalContent.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].classList.remove("active");
+    }
+
+    // Dapatkan semua tombol dengan kelas "tab-button" di dalam modal ini
+    const tabbuttons = modalContent.getElementsByClassName("tab-button");
+    for (let i = 0; i < tabbuttons.length; i++) {
+        tabbuttons[i].classList.remove("active");
+    }
+
+    // Aktifkan tab yang dipilih dan tombolnya
+    modalContent.querySelector(`#${tabName}`).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+    
+
+function setMainImage(src) {
+    document.getElementById("mainImage").src = src;
+}
+        

@@ -79,7 +79,7 @@
     @foreach ($categories as $categori)
         <div class="modal" id="modal-{{ $categori->id }}" style="display: none;">
             <div class="modal-content">
-                <span class="close-btn" onclick="closeModal('modal-{{ $categori->id }}')">&times;</span>
+                <button class="close-btn" onclick="closeModal('modal-{{ $categori->id }}')">&times;</button>
                 <h2>Update Kategori</h2>
                 <form action="{{ route('admin.categories.update', $categori->id) }}" method="POST"
                     id="categories-update-{{ $categori->id }}">
