@@ -39,31 +39,28 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    width: 300px;
+    width: 250px;
     height: 100%;
-    background: var(--black1);
-    transition: 0.5s;
+    background: #333; /* Mengubah warna latar belakang */
+    transition: width 0.3s, background 0.3s; /* Efek transisi halus */
     overflow: hidden;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk kedalaman */
 }
 
-.navigation ul {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.navigation ul{
+    padding: 0;
 }
 
 .navigation ul li {
     position: relative;
     width: 100%;
     list-style: none;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-radius: 8px; /* Rounded corners untuk elemen */
+    margin: 10px 0; /* Jarak antar elemen */
 }
 
-.navigation ul li:hover,
-.navigation ul li.hovered {
-    background: var(--white);
+.navigation ul li:hover {
+    background: rgba(255, 255, 255, 0.2); /* Efek hover lebih halus */
 }
 
 .navigation ul li a {
@@ -71,72 +68,42 @@ body {
     color: var(--white);
     display: flex;
     text-decoration: none;
+    padding: 15px; /* Menambah padding untuk elemen */
+    border-radius: 8px; /* Rounded corners untuk elemen link */
+    transition: background 0.3s; /* Transisi latar belakang halus */
 }
 
-.navigation ul li:hover a,
-.navigation ul li.hovered a {
-    color: var(--black1);
-}
-
-.navigation ul li:nth-child(1) {
-    margin-bottom: 40px;
+.navigation ul li:hover a {
+    background: rgba(255, 255, 255, 0.3); /* Warna latar belakang saat hover */
 }
 
 .navigation ul li a .icon {
     position: relative;
-    display: block;
-    height: 60px;
-    min-width: 60px;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 15px; /* Jarak antara ikon dan teks */
 }
 
 .navigation ul li a .icon ion-icon {
-    font-size: 1.75rem;
+    font-size: 1.5rem; /* Ukuran ikon lebih kecil untuk kesan elegan */
+    color: var(--white); /* Pastikan ikon memiliki warna yang kontras */
 }
 
 .navigation ul li a .tittle {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    height: 60px;
-    min-width: 60px;
-    text-align: start;
-    white-space: nowrap;
-}
-
-.navigation ul li:hover a::before,
-.navigation ul li.hovered a::before {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: -50px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--white);
-    pointer-events: none;
-}
-
-.navigation ul li:hover a::after,
-.navigation ul li.hovered a::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -50px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--white);
-    pointer-events: none;
+    font-size: 1rem; /* Ukuran teks yang seimbang */
+    color: var(--white); /* Warna teks */
+    font-weight: 500; /* Berat font yang sedikit lebih tebal */
 }
 
 .navigation.active {
-    width: 100px;
+    width: 100px; /* Ukuran saat navigasi aktif */
 }
+
+.navigation.active ul li a .tittle {
+    display: none; /* Menyembunyikan teks saat navigasi aktif */
+}
+
 
 .navigation ul li a span img {
     width: 30px;
@@ -148,13 +115,14 @@ body {
     filter: none;
 }
 
+/* Base Styling */
 .main {
     position: absolute;
-    width: calc(100% - 300px);
-    left: 300px;
+    width: calc(100% - 250px);
+    left: 250px;
     height: 100vh;
     background: var(--white);
-    transition: 0.5s;
+    transition: width 0.4s ease, left 0.4s ease;
 }
 
 .main.active {
@@ -166,24 +134,21 @@ body {
     width: 100%;
     height: 60px;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .detail {
-    width: 90%;
+    padding: 0 20px;
+    width: 100%;
     margin: 0 auto;
 }
 
 .toggle {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
     cursor: pointer;
 }
 
@@ -201,297 +166,172 @@ body {
 .search-admin label input {
     width: 100%;
     height: 40px;
-    border-radius: 40px;
-    padding: 5px 20px 5px 35px;
-    font-size: 18px;
+    border-radius: 20px;
+    padding: 5px 20px 5px 40px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     outline: none;
-    border: 1px solid var(--black2);
-}
-
-.search-admin label ion-icon {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 1.2rem;
+    transition: border-color 0.3s;
 }
 
 .user-profil {
     display: flex;
-    width: 200px;
-    justify-content: space-around;
-}
-
-.user-profil a {
-    display: flex;
     align-items: center;
+    gap: 20px;
 }
 
 .user-profil a button {
     border: 1px solid #333;
-    padding: 10px;
-    transition: background 0.4s;
-    border-radius: 8px;
+    padding: 8px 16px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
 }
 
 .user-profil a button:hover {
-    color: #fff;
     background: #333;
-    transition: background 0.4s;
+    color: #fff;
 }
 
 .user-profil img {
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
+/* Cards Styling */
 .cardBox {
-    position: relative;
-    display: flex;
-    width: 100%;
-    padding: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px;
+    gap: 30px;
+    padding: 20px;
 }
 
 .cardBox .card {
     position: relative;
-    background: var(--white);
-    padding: 30px;
-    border-radius: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    cursor: pointer;
-    box-shadow: 0 7px 25px #0008;
-    transition: background 0.3s ease-in-out;
-}
-
-.cardBox .card .numbers {
-    position: relative;
-    font-weight: 500;
-    font-size: 2.5rem;
-    color: var(--blue);
-}
-
-.cardBox .card .cardName {
-    color: var(--black2);
-    font-size: 1.1rem;
-    margin-top: 5px;
-}
-
-.cardBox .card .iconBox {
-    font-size: 3.5rem;
-    color: var(--black2);
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .cardBox .card:hover {
-    background: var(--blue);
-    transition: background 0.3s ease-in-out;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.cardBox .card:hover .numbers,
-.cardBox .card:hover .cardName,
-.cardBox .card:hover .iconBox {
-    color: var(--white);
+.cardBox .card .iconBox{
+    font-size: 50px;
 }
 
-.recentOrders {
-    position: relative;
-    max-height: 800px;
-    overflow-y: auto;
-    background: var(--white);
-    padding: 20px;
-    box-shadow: 0 7px 25px #0008;
-    border-radius: 20px;
-}
-
-.cardHeader {
-    display: flex;
-    margin: 20px 0 15px 0;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.cardHeader h2 {
+.cardBox .card .numbers {
     font-weight: 600;
+    font-size: 2rem;
     color: #333;
-    margin-bottom: 10px;
 }
 
-.cardHeader .view-btn {
-    position: relative;
-    padding: 5px 10px;
-    background: var(--blue);
-    color: var(--white);
-    text-decoration: none;
-    border-radius: 6px;
+.cardBox .card .cardName {
+    color: #666;
+    font-size: 1.1rem;
 }
 
+/* Table Styling */
 table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table thead td {
-    font-weight: 600;
-}
-
-.recentOrders table tr {
-    color: var(--black1);
-    border-bottom: 1px solid #0001;
-}
-
-.recentOrders table tr:last-child {
-    border-bottom: none;
-}
-
-.recentOrders table tr .aksi {
-    padding: 10px;
-    text-align: center;
-}
-
-.recentOrders table tr td {
-    padding: 10px;
-}
-
-.recentOrders table tr td:last-child {
-    text-align: end;
-}
-
-.recentOrders table tr td:last-child(2) {
-    text-align: end;
-}
-
-.recentOrders table tr td:last-child(3) {
-    text-align: center;
-}
-
-.status.dikirim {
-    padding: 2px 4px;
-    background: #8de02c;
-    color: var(--white);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.status.tertunda {
-    padding: 2px 4px;
-    background: #f9ca3f;
-    color: var(--white);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.status.dikembalikan {
-    padding: 2px 4px;
-    background: #f00;
-    color: var(--white);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.status.dikerjakan {
-    padding: 2px 4px;
-    background: #1795ce;
-    color: var(--white);
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.user {
-    position: relative;
-    width: 100%;
-    max-height: 500px;
-    padding: 20px;
-    box-shadow: 0 7px 25px #0008;
-    border-radius: 20px;
-    overflow-y: auto;
-}
-
-.cardHeader button {
-    font-size: 16px;
-    border-radius: 10px;
-    padding: 10px;
-    border: 1px solid #000;
-    transition: background 0.3s ease-in-out;
-}
-
-.user table tbody tr {
-    height: 60px;
-}
-
-.cardHeader button:hover {
-    background-color: #333;
-    color: var(--white);
-    transition: background 0.3s ease-in-out;
-}
-
-.user table tr td:last-child {
-    text-align: end;
-}
-
-.user table tr td:last-child(2) {
-    text-align: end;
-}
-
-.user table tr td:last-child(3) {
-    text-align: center;
-}
-
-.user table {
-    position: relative;
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-.user table thead td {
-    font-weight: 600;
+table th,
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
 }
 
-.user table tr:last-child {
-    border-bottom: none;
-}
-
-.user table tr .name-tbl,
-.user table tr .password-tbl,
-.user table tr .email-tbl,
-.user table tr .phone-tbl,
-.user table tr .city-tbl,
-.user table tr .bio-tbl {
-    max-width: 150px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-table tbody tr:hover td {
+table tr:hover td {
+    background-color: #f9f9f9;
     color: #333;
 }
 
-table tr td button {
-    padding: 5px 15px;
-    background: var(--black2);
-    color: var(--blue);
-    margin: 5px;
-    border-radius: 10px;
-    box-shadow: 2px 4px 10px #333;
-    transition: background 0.3s ease-in-out;
+.recentOrders {
+    max-height: 800px;
+    overflow-y: auto;
+    background: var(--white);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-table tr td button:hover {
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cardHeader h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.cardHeader .view-btn {
+    padding: 8px 16px;
     background: var(--blue);
-    color: var(--white);
-    transition: background 0.3s ease-in-out;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s;
 }
 
-/* Zoom-in Animation */
+.cardHeader .view-btn:hover {
+    background-color: #5a6fcc;
+}
+
+table tr td:last-child {
+    text-align: end;
+}
+
+table tr td:last-child(2) {
+    text-align: end;
+}
+
+table tr td:last-child(3) {
+    text-align: center;
+}
+
+/* Button Styling */
+.aksi-button {
+    padding: 8px 16px;
+    background-color: #333; /* Biru lembut untuk tampilan yang profesional */
+    color: #ffffff;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+    margin: 0 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.aksi-button:hover {
+    background-color: #333; /* Biru lebih gelap saat di-hover */
+    transform: translateY(-2px); /* Efek hover angkat */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.aksi-button:active {
+    background-color: #555; /* Biru yang lebih gelap untuk klik */
+    transform: translateY(0); /* Efek turun saat ditekan */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
 @keyframes zoomIn {
     from {
         transform: scale(0.7);
@@ -652,7 +492,10 @@ tbody::-webkit-scrollbar {
 
 .modal-content input[type="text"], 
 .modal-content input[type="number"], 
+.modal-content input[type="email"], 
 .modal-content input[type="file"], 
+.modal-content input[type="password"], 
+.modal-content input[type="date"], 
 .modal-content select, 
 .modal-content textarea {
     padding: 15px;
@@ -714,4 +557,14 @@ tbody::-webkit-scrollbar {
 
 .custom-file-button:hover {
     background-color: #5a66c7; /* Warna latar belakang saat hover */
+}
+
+@media (max-width: 768px) {
+    .navigation {
+        width: 250px;
+    }
+    .main {
+        width: calc(100% - 250px);
+        left: 250px;
+    }
 }

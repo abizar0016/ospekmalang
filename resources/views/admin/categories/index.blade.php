@@ -13,7 +13,7 @@
         @endif
 
         <div class="detail">
-            <div class="cardHeader">
+            <div class="cardHeader mt-5">
                 <h2>Kategori</h2>
                 <!-- Call openModal() for the add category modal when button is clicked -->
                 <button class="btn-categori" onclick="openModal('categoryModal')">Tambah Kategori</button>
@@ -24,13 +24,13 @@
                     <thead>
                         <tr>
                             <td>Nama Kategori</td>
-                            <td colspan="3">Aksi</td>
+                            <td colspan="2">Aksi</td>
                         </tr>
                     </thead>
                     <tbody>
                         @if ($categories->isEmpty())
                             <tr>
-                                <td colspan="6" style="padding-top: 30px; text-align:center;">Tidak Ada Kategori yang
+                                <td colspan="2" style="padding-top: 30px; text-align:center;">Tidak Ada Kategori yang
                                     Ditambahkan</td>
                             </tr>
                         @else
@@ -39,18 +39,20 @@
                                     <td>{{ $categori->name }}</td>
                                     <td>
                                         <!-- Open specific update modal for each category -->
-                                        <button onclick="openModal('modal-{{ $categori->id }}')">
-                                            <ion-icon name="pencil-outline"></ion-icon>
-                                        </button>
-                                        <form action="{{ route('admin.categories.delete', $categori->id) }}"
+                                        <button class="aksi-button" onclick="openModal('modal-{{ $categori->id }}')">
+                                            Perbarui </button>
+                                        <form id="delete-form-{{ $categori->id }}"
+                                            action="{{ route('admin.categories.delete', $categori->id) }}"
                                             method="POST" style="display:inline;" enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
-                                                onclick="return confirm('Are you sure you want to delete this order?')">
-                                                <ion-icon name="trash-outline"></ion-icon>
+                                            <button class="aksi-button delete-button" type="button"
+                                                data-form-id="delete-form-{{ $categori->id }}"
+                                                data-item-name="{{ $categori->name }}">
+                                                Hapus
                                             </button>
                                         </form>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -70,7 +72,7 @@
                 @csrf
                 <label for="name">Nama Kategori:</label>
                 <input type="text" id="name" name="name" required>
-                <button type="submit" class="add-btn">Tambah</button>
+                <button type="submit" class="add-btn">Kirim</button>
             </form>
         </div>
     </div>
@@ -87,7 +89,7 @@
                     @method('PUT')
                     <label for="name">Nama Kategori:</label>
                     <input type="text" name="name" value="{{ $categori->name }}" required>
-                    <button type="submit" class="add-btn">Update</button>
+                    <button type="submit" class="add-btn">Kirim</button>
                 </form>
             </div>
         </div>
@@ -97,4 +99,4 @@
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
+    <script src="{{ url('vendor/sweetalert/sweetalert.min.js') }}"></script>

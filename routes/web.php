@@ -87,27 +87,11 @@ Route::group(['middleware' => ['auth']],function(){
 
 Route::group(['middleware' => ['auth']], function () {
 
-    // --------------------VIEW ADMIN--------------------------//
-
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-    //--------------------------------VIEW MANAGE USER-------------------------------------//
-
     Route::get('admin/user', [UserAdminController::class, 'index'])->name('admin.user');
-    Route::get('admin/user/view/{id}', [UserAdminController::class, 'show'])->name('admin.user.view');
-
-    //---------------------------CREATE USER-----------------------------------------------------//
-
-    Route::get('admin/user/create', [AddUserController::class, 'index'])->name('admin.user.create');
-    Route::post('admin/user/create', [AddUserController::class, 'create'])->name('admin.user.create.post');
-
-    //---------------------------------UPDATE USER----------------------------------------------------------------------------//
-
-    Route::get('admin/user/update/{id}', [UpdateUserController::class, 'index'])->name('admin.user.update');
-    Route::put('admin/user/update/{id}', [UpdateUserController::class, 'update'])->name('admin.user.update.post');
-
-    //------------------------------------DELETE USER-----------------------------------------------------
-
+    Route::post('admin/user/create', [UserAdminController::class, 'create'])->name('admin.user.create');
+    Route::put('admin/user/update/{id}', [UserAdminController::class, 'update'])->name('admin.user.update');
     Route::delete('admin/user/{id}', [UserAdminController::class, 'delete'])->name('admin.user.delete');
 
     //---------------------------------------PRODUCT ADMIN--------------------------------------------------------//
@@ -121,6 +105,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('admin/product/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
 
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin.oder.index');
+    Route::put('admin/order/update/{id}', [OrderController::class, 'update'])->name('admin.order.update');
+    Route::delete('admin/order/delete/{id}', [OrderController::class, 'delete'])->name('admin.order.delete');
 
     Route::get('admin/categories', [CategoriesController::class, 'index'])->name('admin.categories.index');
 

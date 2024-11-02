@@ -136,21 +136,12 @@
             <!-- Product Grid -->
             <div class="products-container mt-4">
 
-                @foreach ($products->take(8) as $product)
-                    <div class="isotope-item {{ $product->categories->id }}">
+                @foreach ($products as $product)
+                    <div class="isotope-item {{ $product->categories->id }} js-show-modal1"
+                        onclick="showModal({{ $product->id }})">
                         <div class="block2">
                             <div class="block2-pic hov-img0">
                                 <img src="{{ url('images/' . $product->image1) }}" alt="IMG-PRODUCT">
-                                <a href="#"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1"
-                                    data-id="{{ $product->id }}" data-name="{{ $product->name }}"
-                                    data-price="Rp. {{ $product->price }}"
-                                    data-description="{{ $product->description }}"
-                                    data-image="{{ url('images/' . $product->image1) }}"
-                                    onclick="showModal({{ $product->id }})">
-                                    Lihat Cepat
-                                </a>
-
                             </div>
                             <div class="block2-txt flex-w flex-t p-t-14">
                                 <div class="block2-txt-child1 flex-col-l">
@@ -293,9 +284,7 @@
                                         <img id="mainProductImage-{{ $product->id }}"
                                             src="{{ asset('images/' . $product->image1) }}" alt="IMG-PRODUCT">
                                         <a id="mainProductLink-{{ $product->id }}"
-                                            href="{{ asset('images/' . $product->image1) }}"
-                                            class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04">
-                                            <i class="fa fa-expand"></i>
+                                            href="{{ asset('images/' . $product->image1) }}">
                                         </a>
                                     </div>
                                 </div>

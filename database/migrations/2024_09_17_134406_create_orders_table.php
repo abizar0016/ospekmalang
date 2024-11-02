@@ -18,7 +18,7 @@ return new class extends Migration
                 ->constrained('products')
                 ->onDelete('cascade');
             $table->enum('payment_status', ['dibayar', 'jatuh tempo', 'belum dibayar']);
-            $table->enum('order_status', ['tertunda', 'terkirim', 'dalam pengerjaan']);
+            $table->enum('order_status', ['tertunda', 'dikirim', 'dalam pengerjaan', 'dikembalikan']);
             $table->timestamps();
         });
     }

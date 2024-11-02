@@ -15,8 +15,8 @@ class Product extends Model
     // Menentukan primary key
     protected $primaryKey = 'id';
 
-    // Menentukan bahwa primary key bukan auto-incrementing
-    public $incrementing = false;
+    // Biarkan ini true untuk auto-incrementing id
+    public $incrementing = true;
 
     // Menentukan tipe data dari primary key
     protected $keyType = 'int';
@@ -33,8 +33,8 @@ class Product extends Model
         'category_id',
     ];
 
-    // Kolom yang secara otomatis akan dikelola oleh Eloquent
-    public $timestamps = false;
+    // Aktifkan pengelolaan timestamps
+    public $timestamps = true; // Tambahkan ini
 
     public function categories()
     {

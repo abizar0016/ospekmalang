@@ -14,7 +14,7 @@
             </div>
         @endif
         <div class="detail">
-            <div class="cardHeader">
+            <div class="cardHeader mt-5">
                 <h2>Produk</h2>
                 <button onclick="openModal('modal-add')">Tambah Produk</button>
             </div>
@@ -66,18 +66,17 @@
                                     <td>{{ $product->stock }}</td>
                                     <td>{{ $product->categories->name }}</td>
                                     <td>
-                                        <button onclick="openModal('modal-view-{{ $product->id }}')"><ion-icon
-                                                name="eye-outline"></ion-icon></button>
-                                        <button onclick="openModal('modal-update-{{ $product->id }}')"><ion-icon
-                                                name="pencil-outline"></ion-icon></button>
+                                        <button class="aksi-button"
+                                            onclick="openModal('modal-view-{{ $product->id }}')">Lihat</button>
+                                        <button class="aksi-button"
+                                            onclick="openModal('modal-update-{{ $product->id }}')">Perbarui</button>
                                         <form action="{{ route('admin.product.delete', $product->id) }}" method="POST"
                                             style="display:inline;" enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
+                                            <button class="aksi-button" type="submit"
                                                 onclick="return confirm('Are you sure you want to delete this product?')">
-                                                <ion-icon name="trash-outline"></ion-icon>
-                                            </button>
+                                                Hapus </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -94,16 +93,16 @@
             <button class="close-btn" onclick="closeModal('modal-add')">&times;</button>
             <h2>Tambah Produk</h2>
 
+
+            <!-- Tab Menu -->
+            <div class="tab-menu">
+                <button class="tab-button active" onclick="openTab(event, 'Informasi')">Informasi</button>
+                <button class="tab-button" onclick="openTab(event, 'Images')">Gambar</button>
+                <button class="tab-button" onclick="openTab(event, 'PriceStock')">Harga & Stok</button>
+            </div>
+
             <form action="{{ route('admin.product.create') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
-                <!-- Tab Menu -->
-                <div class="tab-menu">
-                    <button class="tab-button active" onclick="openTab(event, 'Informasi')">Informasi</button>
-                    <button class="tab-button" onclick="openTab(event, 'Images')">Gambar</button>
-                    <button class="tab-button" onclick="openTab(event, 'PriceStock')">Harga & Stok</button>
-                </div>
-
                 <!-- Tab Content -->
                 <div id="Informasi" class="tab-content active">
                     <div class="input-row">
@@ -183,137 +182,169 @@
 
     <!-- Modal for Viewing Product -->
     @foreach ($products as $product)
-    <!-- Modal View -->
-    <div class="modal" id="modal-view-{{ $product->id }}" style="display: none;">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('modal-view-{{ $product->id }}')">&times;</button>
-            <h2>Detail Produk</h2>
+        <!-- Modal View -->
+        <div class="modal" id="modal-view-{{ $product->id }}" style="display: none;">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-view-{{ $product->id }}')">&times;</button>
+                <h2>Detail Produk</h2>
 
-            <!-- Tab Menu -->
-            <div class="tab-menu">
-                <button class="tab-button active" onclick="openTab(event, 'Informasi-{{ $product->id }}')">Informasi</button>
-                <button class="tab-button" onclick="openTab(event, 'Images-{{ $product->id }}')">Gambar</button>
-                <button class="tab-button" onclick="openTab(event, 'PriceStock-{{ $product->id }}')">Harga & Stok</button>
-            </div>
-
-            <!-- Tab Content -->
-            <form>
-                <div id="Informasi-{{ $product->id }}" class="tab-content active">
-                    <div class="input-row">
-                        <div class="input-grup">
-                            <label for="name">Nama Produk:</label>
-                            <input type="text" name="name" value="{{ $product->name }}" readonly>
-                        </div>
-                        <div class="input-grup">
-                            <label for="category">Kategori:</label>
-                            <input type="text" name="category" value="{{ $product->categories->name }}" readonly>
-                        </div>
-                    </div>
-                    <label for="descriptions">Deskripsi:</label>
-                    <textarea name="descriptions" readonly>{{ $product->descriptions }}</textarea>
+                <!-- Tab Menu -->
+                <div class="tab-menu">
+                    <button class="tab-button active"
+                        onclick="openTab(event, 'Informasi-{{ $product->id }}')">Informasi</button>
+                    <button class="tab-button" onclick="openTab(event, 'Images-{{ $product->id }}')">Gambar</button>
+                    <button class="tab-button" onclick="openTab(event, 'PriceStock-{{ $product->id }}')">Harga &
+                        Stok</button>
                 </div>
-
-                <div id="Images-{{ $product->id }}" class="tab-content">
-                    <div class="image-container">
-                        <img class="img-preview" src="{{ asset('images/' . $product->image1) }}">
-                        <img class="img-preview" src="{{ asset('images/' . $product->image2) }}"
-                             onclick="setMainImage('{{ asset('images/' . $product->image2) }}')">
-                        <img class="img-preview" src="{{ asset('images/' . $product->image3) }}"
-                             onclick="setMainImage('{{ asset('images/' . $product->image3) }}')">
-                    </div>
-                </div>
-
-                <div id="PriceStock-{{ $product->id }}" class="tab-content">
-                    <label for="price">Harga:</label>
-                    <input type="number" name="price" value="{{ $product->price }}" required>
-                    <label for="stock">Stok:</label>
-                    <input type="number" name="stock" value="{{ $product->stock }}" required>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Update -->
-    <div class="modal" id="modal-update-{{ $product->id }}" style="display: none;">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('modal-update-{{ $product->id }}')">&times;</button>
-            <h2>Perbarui Produk</h2>
-
-            <!-- Tab Menu -->
-            <div class="tab-menu">
-                <button class="tab-button active" onclick="openTab(event, 'UpdateInformasi-{{ $product->id }}')">Informasi</button>
-                <button class="tab-button" onclick="openTab(event, 'UpdateImages-{{ $product->id }}')">Gambar</button>
-                <button class="tab-button" onclick="openTab(event, 'UpdatePriceStock-{{ $product->id }}')">Harga & Stok</button>
-            </div>
-
-            <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
 
                 <!-- Tab Content -->
-                <div id="UpdateInformasi-{{ $product->id }}" class="tab-content active">
-                    <label for="name">Nama Produk:</label>
-                    <input type="text" name="name" value="{{ $product->name }}" required>
-
-                    <label for="category">Kategori:</label>
-                    <select name="category_id" required>
-                        @foreach ($categories as $categori)
-                            <option value="{{ $categori->id }}" {{ $product->category_id == $categori->id ? 'selected' : '' }}>
-                                {{ $categori->name }}
-                            </option>
-                        @endforeach
-                    </select>
-
-                    <label for="descriptions">Deskripsi:</label>
-                    <textarea name="descriptions" required>{{ $product->descriptions }}</textarea>
-                </div>
-
-                <!-- Tab Gambar -->
-                <div id="UpdateImages-{{ $product->id }}" class="tab-content">
-                    <div class="image-container">
-                        <img class="img-preview" src="{{ asset('images/' . $product->image1) }}">
-                        <img class="img-preview" src="{{ asset('images/' . $product->image2) }}"
-                             onclick="setMainImage('{{ asset('images/' . $product->image2) }}')">
-                        <img class="img-preview" src="{{ asset('images/' . $product->image3) }}"
-                             onclick="setMainImage('{{ asset('images/' . $product->image3) }}')">
+                <form>
+                    <div id="Informasi-{{ $product->id }}" class="tab-content active">
+                        <div class="input-row">
+                            <div class="input-grup">
+                                <label for="name">Nama Produk:</label>
+                                <input type="text" name="name" value="{{ $product->name }}" readonly>
+                            </div>
+                            <div class="input-grup">
+                                <label for="category">Kategori:</label>
+                                <input type="text" name="category" value="{{ $product->categories->name }}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <label for="descriptions">Deskripsi:</label>
+                        <textarea name="descriptions" readonly>{{ $product->descriptions }}</textarea>
                     </div>
-                    <div class="input-row mt-4">
-                        <button type="button" class="custom-file-button" onclick="document.getElementById('image1-{{ $product->id }}').click();">
-                            Ganti Gambar 1
-                        </button>
-                        <input type="file" id="image1-{{ $product->id }}" name="image1" onchange="previewImage(1)" style="display: none;">
 
-                        <button type="button" class="custom-file-button" onclick="document.getElementById('image2-{{ $product->id }}').click();">
-                            Ganti Gambar 2
-                        </button>
-                        <input type="file" id="image2-{{ $product->id }}" name="image2" onchange="previewImage(2)" style="display: none;">
-
-                        <button type="button" class="custom-file-button" onclick="document.getElementById('image3-{{ $product->id }}').click();">
-                            Ganti Gambar 3
-                        </button>
-                        <input type="file" id="image3-{{ $product->id }}" name="image3" onchange="previewImage(3)" style="display: none;">
+                    <div id="Images-{{ $product->id }}" class="tab-content">
+                        <div class="image-container">
+                            <img class="img-preview" src="{{ asset('images/' . $product->image1) }}">
+                            <img class="img-preview" src="{{ asset('images/' . $product->image2) }}"
+                                onclick="setMainImage('{{ asset('images/' . $product->image2) }}')">
+                            <img class="img-preview" src="{{ asset('images/' . $product->image3) }}"
+                                onclick="setMainImage('{{ asset('images/' . $product->image3) }}')">
+                        </div>
                     </div>
-                </div>
 
-                <!-- Tab Harga & Stok -->
-                <div id="UpdatePriceStock-{{ $product->id }}" class="tab-content">
-                    <label for="price">Harga:</label>
-                    <input type="number" name="price" value="{{ $product->price }}" required>
-
-                    <label for="stock">Stok:</label>
-                    <input type="number" name="stock" value="{{ $product->stock }}" required>
-                </div>
-
-                <!-- Button Update -->
-                <div class="button-container">
-                    <button type="submit">Update</button>
-                </div>
-            </form>
+                    <div id="PriceStock-{{ $product->id }}" class="tab-content">
+                        <label for="price">Harga:</label>
+                        <input type="number" name="price" value="{{ $product->price }}" required>
+                        <label for="stock">Stok:</label>
+                        <input type="number" name="stock" value="{{ $product->stock }}" required>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-@endforeach
 
+        <!-- Modal Update -->
+        <div class="modal" id="modal-update-{{ $product->id }}" style="display: none;">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeModal('modal-update-{{ $product->id }}')">&times;</button>
+                <h2>Perbarui Produk</h2>
 
+                <!-- Tab Menu -->
+                <div class="tab-menu">
+                    <button class="tab-button active"
+                        onclick="openTab(event, 'UpdateInformasi-{{ $product->id }}')">Informasi</button>
+                    <button class="tab-button"
+                        onclick="openTab(event, 'UpdateImages-{{ $product->id }}')">Gambar</button>
+                    <button class="tab-button" onclick="openTab(event, 'UpdatePriceStock-{{ $product->id }}')">Harga
+                        & Stok</button>
+                </div>
+
+                <form action="{{ route('admin.product.update', $product->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- Tab Content -->
+                    <div id="UpdateInformasi-{{ $product->id }}" class="tab-content active">
+                        <label for="name">Nama Produk:</label>
+                        <input type="text" name="name" value="{{ $product->name }}" required>
+
+                        <label for="category">Kategori:</label>
+                        <select name="category_id" required>
+                            @foreach ($categories as $categori)
+                                <option value="{{ $categori->id }}"
+                                    {{ $product->category_id == $categori->id ? 'selected' : '' }}>
+                                    {{ $categori->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <label for="descriptions">Deskripsi:</label>
+                        <textarea name="descriptions" required>{{ $product->descriptions }}</textarea>
+                    </div>
+
+                    <!-- Tab Gambar -->
+                    <div id="UpdateImages-{{ $product->id }}" class="tab-content">
+                        <div class="image-container">
+                            <img id="imgPreview1" onchange="previewImage" class="img-preview" src="{{ asset('images/' . $product->image1) }}">
+                            <img id="imgPreview2" class="img-preview" src="{{ asset('images/' . $product->image2) }}"
+                                onclick="setMainImage('{{ asset('images/' . $product->image2) }}')">
+                            <img id="imgPreview3" class="img-preview" src="{{ asset('images/' . $product->image3) }}"
+                                onclick="setMainImage('{{ asset('images/' . $product->image3) }}')">
+                        </div>
+                        <div class="input-row mt-4">
+                            <button type="button" class="custom-file-button"
+                                onclick="document.getElementById('image1-{{ $product->id }}').click();">
+                                Ganti Gambar 1
+                            </button>
+                            <input type="file" id="image1-{{ $product->id }}" name="image1"
+                                onchange="previewImage(1, {{ $product->id }})" style="display: none;">
+                    
+                            <button type="button" class="custom-file-button"
+                                onclick="document.getElementById('image2-{{ $product->id }}').click();">
+                                Ganti Gambar 2
+                            </button>
+                            <input type="file" id="image2-{{ $product->id }}" name="image2"
+                                onchange="previewImage(2, {{ $product->id }})" style="display: none;">
+                    
+                            <button type="button" class="custom-file-button"
+                                onclick="document.getElementById('image3-{{ $product->id }}').click();">
+                                Ganti Gambar 3
+                            </button>
+                            <input type="file" id="image3-{{ $product->id }}" name="image3"
+                                onchange="previewImage(3, {{ $product->id }})" style="display: none;">
+                        </div>
+                    </div>
+                    
+
+                    <!-- Tab Harga & Stok -->
+                    <div id="UpdatePriceStock-{{ $product->id }}" class="tab-content">
+                        <label for="price">Harga:</label>
+                        <input type="number" name="price" value="{{ $product->price }}" required>
+
+                        <label for="stock">Stok:</label>
+                        <input type="number" name="stock" value="{{ $product->stock }}" required>
+                    </div>
+
+                    <!-- Button Update -->
+                    <div class="button-container">
+                        <button type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endforeach
+
+    <script>
+        function previewImage(imageNumber, productId) {
+    const input = document.getElementById("image" + imageNumber + "-" + productId);
+    const preview = document.getElementById("imgPreview" + imageNumber + "-" + productId);
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        preview.src = e.target.result; // Set source untuk gambar preview
+        preview.style.display = "block"; // Pastikan gambar terlihat
+    };
+
+    if (input.files && input.files[0]) {
+        reader.readAsDataURL(input.files[0]); // Baca file sebagai Data URL
+    } else {
+        preview.src = "{{ asset('images/' . $product->image) }}"; // Set gambar default
+    }
+}
+    </script>
 
 </body>
 

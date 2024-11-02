@@ -7,18 +7,18 @@
     <!-- Cart -->
     <div class="wrap-header-cart js-panel-cart">
         <div class="s-full js-hide-cart"></div>
-    
+
         <div class="header-cart flex-col-l p-l-65 p-r-25">
             <div class="header-cart-title flex-w flex-sb-m p-b-8">
                 <span class="mtext-103 cl2">
                     Keranjang Anda
                 </span>
-    
+
                 <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
                     <i class="zmdi zmdi-close"></i>
                 </div>
             </div>
-    
+
             <div class="header-cart-content flex-w js-pscroll">
                 <ul class="header-cart-wrapitem w-full">
                     @foreach ($cartItems as $item)
@@ -29,20 +29,21 @@
                                 @csrf
                                 @method('DELETE')
                             </form>
-    
-                            <div class="header-cart-item-img delete-item" data-item-id="{{ $item->id }}" data-item-name="{{ $item->product->name }}">
+
+                            <div class="header-cart-item-img delete-item" data-item-id="{{ $item->id }}"
+                                data-item-name="{{ $item->product->name }}">
                                 <img src="{{ asset('images/' . $item->product->image1) }}" alt="IMG">
                             </div>
-    
+
                             <div class="header-cart-item-txt">
                                 <p class="header-cart-item-name m-b-1 hov-cl1 trans-04">
                                     {{ $item->product->name }}
                                 </p>
-    
+
                                 <span class="header-cart-item-info">
                                     Size: {{ $item->product->size ?? '-' }}
                                 </span>
-    
+
                                 <span class="header-cart-item-info">
                                     {{ $item->quantity }} x {{ number_format($item->product->price, 0, ',', '.') }}
                                 </span>
@@ -50,7 +51,7 @@
                         </li>
                     @endforeach
                 </ul>
-    
+
                 <div class="w-full">
                     <div class="header-cart-total w-full p-tb-40">
                         Total: Rp
@@ -63,13 +64,13 @@
                             '.',
                         ) }}
                     </div>
-    
+
                     <div class="header-cart-buttons flex-w w-full">
                         <a href="{{ route('user.product') }}"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                             Tambah
                         </a>
-    
+
                         <a href="{{ route('user.checkout') }}"
                             class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                             Checkout
@@ -77,10 +78,10 @@
                     </div>
                 </div>
             </div>
-    
+
         </div>
     </div>
-    
+
 
     <!-- Slider -->
     <section class="section-slide">
@@ -99,6 +100,13 @@
                                 <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
                                     Baju Ospek
                                 </h2>
+                            </div>
+
+                            <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+                                <a href="{{ route('user.product') }}"
+                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                    Belanja Sekarang
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -120,7 +128,12 @@
                                 </h2>
                             </div>
 
-
+                            <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
+                                <a href="{{ route('user.product') }}"
+                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                    Belanja Sekarang
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,6 +154,13 @@
                                     Ospek Lainnnya
                                 </h2>
                             </div>
+
+                            <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
+                                <a href="{{ route('user.product') }}"
+                                    class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                    Belanja Sekarang
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,53 +178,20 @@
                             Cerita Kami
                         </h3>
 
-                        Di Ospek Malang, kami memahami betapa pentingnya memulai perjalanan kampus Anda
-                        dengan penuh semangat dan persiapan yang matang. Itulah sebabnya kami hadir untuk
-                        menyediakan berbagai produk eksklusif yang dirancang khusus untuk membantu Anda
-                        memulai pengalaman ospek dengan gaya dan percaya diri.
-
-                        Ospek Malang adalah destinasi utama bagi mahasiswa baru yang mencari berbagai baju
-                        dan perlengkapan ospek berkualitas tinggi. Kami menawarkan koleksi lengkap yang
-                        mencakup baju ospek, aksesori, dan perlengkapan lainnya yang diperlukan untuk
-                        membuat pengalaman ospek Anda lebih berkesan.
-                        </p>
+                        Di Ospek Malang, kami memahami pentingnya memulai perjalanan kampus dengan semangat dan
+                        persiapan yang matang. Kami hadir menyediakan berbagai produk eksklusif untuk membantu Anda
+                        memulai ospek dengan gaya dan percaya diri. Sebagai destinasi utama mahasiswa baru, Ospek Malang
+                        menawarkan koleksi lengkap baju ospek, aksesori, dan perlengkapan berkualitas tinggi yang
+                        dibutuhkan untuk pengalaman ospek yang berkesan. Kami berkomitmen menyediakan produk berkualitas
+                        dengan standar tinggi, pengalaman belanja yang mudah melalui platform online yang user-friendly,
+                        serta dukungan pelanggan yang siap membantu. Kami juga mendukung komunitas mahasiswa dengan
+                        memastikan setiap pelanggan baru merasa diterima dan siap menghadapi tantangan awal mereka
+                        dengan perlengkapan yang penuh gaya.
 
                     </div>
                 </div>
 
                 <div class="col-11 col-md-5 col-lg-4 m-lr-auto">
-                    <div class="hov-img0">
-                        <img src="{{ url('images/foto-about-1.png') }}" alt="IMG">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="order-md-2 col-md-7 col-lg-8 p-b-30">
-                    <div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
-                        <h3 class="mtext-111 cl2 p-b-16">
-                            Misi Kami
-                        </h3>
-
-                        <p class="stext-113 cl6 p-b-26">
-                            Menyediakan Produk Berkualitas: Kami berusaha keras untuk memastikan setiap
-                            produk yang kami tawarkan memenuhi standar kualitas tertinggi, memberikan nilai
-                            tambah kepada setiap pelanggan kami.
-                            <br>
-                            <br>
-                            Memberikan Pengalaman Belanja yang Mudah: Kami berkomitmen untuk memberikan
-                            pengalaman belanja yang mudah dan menyenangkan melalui platform online yang
-                            user-friendly, dengan pelayanan pelanggan yang siap membantu setiap saat.
-                            <br>
-                            <br>
-                            Mendukung Komunitas Mahasiswa: Kami ingin membantu mahasiswa baru merasa
-                            diterima dan siap untuk menghadapi tantangan pertama mereka dengan perlengkapan
-                            yang tepat dan penuh gaya.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
                     <div class="hov-img0">
                         <img src="{{ url('images/foto-about-2.png') }}" alt="IMG">
                     </div>
@@ -219,9 +206,9 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="{{ url('images/baju.jpg') }}" alt="IMG-BANNER">
+                        <img src="{{ url('images/baju.png') }}" alt="IMG-BANNER" style="height: 525px; width:390px">
 
-                        <a href="product.html"
+                        <a href="{{ route('user.product') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -246,9 +233,9 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="{{ url('images/celana.jpg') }}" alt="IMG-BANNER">
+                        <img src="{{ url('images/celana.png') }}" alt="IMG-BANNER" style="height: 525px; width:390px">
 
-                        <a href="product.html"
+                        <a href="{{ route('user.product') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -272,9 +259,9 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="{{ url('images/sabuk.jpg') }}" alt="IMG-BANNER">
+                        <img src="{{ url('images/sabuk.png') }}" alt="IMG-BANNER" style="height: 525px; width:390px">
 
-                        <a href="product.html"
+                        <a href="{{ route('user.product') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                             <div class="block1-txt-child1 flex-col-l">
                                 <span class="block1-name ltext-102 trans-04 p-b-8">
@@ -506,11 +493,9 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img id="mainProductImage-{{ $product->id }}"
                                             src="{{ asset('images/' . $product->image1) }}" alt="IMG-PRODUCT">
-                                        <a id="mainProductLink-{{ $product->id }}"
-                                            href="{{ asset('images/' . $product->image1) }}"
-                                            class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
+                                            <a id="mainProductLink-{{ $product->id }}"
+                                                href="{{ asset('images/' . $product->image1) }}">
+                                            </a>
                                     </div>
                                 </div>
                             </div>

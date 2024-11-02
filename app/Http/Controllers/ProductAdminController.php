@@ -12,7 +12,7 @@ class ProductAdminController extends Controller
     // Menampilkan daftar produk
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id', 'desc')->get();
         $categories = Category::all();
         // dd($products); // Debugging untuk melihat data
         return view('admin.product.index', compact('products', 'categories'));
@@ -66,7 +66,7 @@ class ProductAdminController extends Controller
         $product->price = $request->price;
         $product->stock = $request->stock;
         $product->category_id = $request->category_id; // Perbaikan bagian ini
-        $product->save();
+        $product->save(); 
 
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
     }
@@ -80,26 +80,28 @@ class ProductAdminController extends Controller
             'stock' => 'required|numeric',
             'category_id' => 'required|exists:categorys,id',
         ]);
-
+    
         $product = Product::findOrFail($id);
-
+    
+        // Memeriksa apakah ada file gambar yang diunggah
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $product->image = $imagePath;
         }
-
-        $product = Product::findOrFail($id);
+    
+        // Memperbarui informasi produk
         $product->name = $request->input('name');
         $product->descriptions = $request->input('descriptions');
         $product->price = $request->input('price');
         $product->stock = $request->input('stock');
         $product->category_id = $request->input('category_id');
-
+    
         // Simpan perubahan
         $product->save();
-
+    
         return redirect()->back()->with('success', 'Produk berhasil diperbarui');
     }
+    
 
     // Menghapus produk
     public function delete($id)

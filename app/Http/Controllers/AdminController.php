@@ -28,10 +28,11 @@ class AdminController extends Controller
         $sessions = $request->session()->get('uname');
         $userCount = User::count();
         $orderCount = Order::count();
+        $orders = Order::orderBy('id', 'desc')->get();
         $productCount = Product::count();
         $recentOrders = Order::with('user', 'product')->orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('admin.index', compact('orderCount', 'userCount', 'productCount', 'sessions', 'recentOrders'));
+        return view('admin.index', compact('orders','orderCount', 'userCount', 'productCount', 'sessions', 'recentOrders'));
     }
 
     public function logout()

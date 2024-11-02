@@ -12,18 +12,19 @@
             </div>
         @endif
         <div class="detail">
-            <div class="cardHeader">
+            <div class="cardHeader mt-5">
                 <h2>Pesanan</h2>
             </div>
             <div class="user" id="user">
                 <table>
                     <thead>
                         <tr>
-                            <td>Nama Pembeli</td>
-                            <td>Nama Barang</td>
-                            <td>Waktu Memesan</td>
-                            <td>Status Pembayaran</td>
-                            <td>Status Pengiriman</td>
+                            <td>Pembeli</td>
+                            <td>Kota</td>
+                            <td>Barang</td>
+                            <td>Harga</td>
+                            <td>Pembayaran</td>
+                            <td>Status</td>
                             <td colspan="3">Aksi</td>
                         </tr>
                     </thead>
@@ -38,27 +39,25 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>{{ $order->user->uname }}</td>
+                                    <td>{{ $order->user->city }}</td>
                                     <td>{{ $order->product->name }}</td>
-                                    <td>{{ $order->created_at }}</td>
-                                    <td>Rp. {{ $order->payment_status }}</td>
+                                    <td>Rp. {{ number_format($order->product->price, 0, ',', '.') }}</td>
+                                    <td>{{ $order->payment_status }}</td>
                                     <td><span
                                             class="status {{ strtolower($order->order_status) }}">{{ $order->order_status }}</span>
                                     </td>
                                     <td>
-                                        <button onclick="openModal('modal-view-{{ $order->id }}')">
-                                            <ion-icon name="eye-outline"></ion-icon>
-                                        </button>
-                                        <button onclick="openModal('modal-update-{{ $order->id }}')">
-                                            <ion-icon name="pencil-outline"></ion-icon>
-                                        </button>
-                                        <form action="" method="POST" style="display:inline;"
-                                            enctype="multipart/form-data">
+                                        <button class="aksi-button" onclick="openModal('modal-view-{{ $order->id }}')">
+                                            Lihat </button>
+                                        <button class="aksi-button" onclick="openModal('modal-update-{{ $order->id }}')">
+                                            Perbarui </button>
+                                        <form action="{{ route('admin.order.delete', $order->id) }}" method="POST"
+                                            style="display:inline;" enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
+                                            <button class="aksi-button" type="submit"
                                                 onclick="return confirm('Are you sure you want to delete this order?')">
-                                                <ion-icon name="trash-outline"></ion-icon>
-                                            </button>
+                                                Hapus </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -95,7 +94,7 @@
             <div class="modal-content">
                 <button class="close-btn" onclick="closeModal('modal-update-{{ $order->id }}')">&times;</button>
                 <h2>Update Pesanan</h2>
-                <form action="" method="POST">
+                <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
