@@ -97,6 +97,16 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   src: url('../fonts/Montserrat/Montserrat-Bold.ttf');
 }
 
+/*//////////////////////////////////////////////////////////////////
+[HTML]*/
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ RS PLUGIN ]*/
@@ -1012,40 +1022,10 @@ a {
   width: 60px;
   position: relative;
   margin-right: 20px;
-  cursor: pointer;
-}
+  }
 
 .header-cart-item-img img {
   width: 100%;
-}
-
-.header-cart-item-img::after {
-  content: '\e870';
-  font-family: Linearicons-Free;
-  font-size: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  opacity: 0;
-}
-
-.header-cart-item-img:hover:after {
-  opacity: 1;
 }
 
 /*---------------------------------------------*/
@@ -3923,51 +3903,195 @@ input.num-product::-webkit-inner-spin-button {
   font-weight: 500;
 }
 
-/* Popup Modal */
-.popupModal {
-  display: none; /* Default tidak terlihat */
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Background hitam transparan */
-  justify-content: center;
-  align-items: center;
-}
-
-.popupModal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px; /* Sudut membulat */
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-}
-
-.popupModal-icon {
-  font-size: 50px;
-  color: green;
-}
-
-.popupModal-message {
-  margin: 10px 0;
-}
-
-.popupModal-footer {
-  margin-top: 20px;
-}
-
 .btn {
-  padding: 10px 20px;
-  background-color: #717fe0;
+  padding: 7px 20px;
+  background-color: #333;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
 }
 
 .btn:hover {
-  background-color: #5a65c9; /* Warna saat hover */
+  background-color: #333; 
+  color: #fff;
+  transform: translateY(-2px); /* Efek hover angkat */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);}
+
+/* General Table Styling */
+.table {
+  width: 100%;
+  background: #fff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  border: none;
+}
+
+.table th {
+  background-color: #333;
+  color: #fff;
+  font-weight: 600;
+}
+
+.table td {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Image Styling */
+.table td img {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+/* Checkbox Alignment */
+.cart-checkbox, #select-all {
+  cursor: pointer;
+  margin-left: 15px; /* Adds space to the left */
+}
+
+/* Add bottom padding to avoid covering products */
+.checkout-container {
+  padding-bottom: 100px; /* Adjust as needed for space */
+}
+
+/* Fixed Checkout Section Styling */
+.checkout-total-bar {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0px -4px 12px 12px rgba(0, 0, 0, 0.15);
+  }
+
+.checkout-total-bar h3 {
+  margin-left: 20px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.checkout-total-bar .btn {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.profile-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 20px;
+  margin: auto;
+  width: 60%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.profile-card h2 {
+  font-weight: 600;
+  color: #333;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.input-grup {
+  width: 48%;
+}
+
+.edit-profile::after {
+  content: "\f303"; /* Kode untuk ikon pensil di Font Awesome */
+  font-family: "Font Awesome 5 Free"; /* Nama font untuk Font Awesome */
+  font-weight: 900; /* Pastikan ikon terlihat dengan benar */
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Background transparan hitam */
+  color: #fff; /* Warna ikon */
+  opacity: 0; /* Awalnya tidak terlihat */
+  transition: opacity 0.3s; /* Efek transisi */
+  border-radius: 50%; /* Membuat overlay berbentuk lingkaran */
+}
+
+.edit-profile:hover::after {
+  opacity: 1; /* Tampilkan ikon saat di-hover */
+}
+
+
+.image-profile {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.image-profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.image-profile img:hover {
+  transform: scale(1.05);
+}
+
+.profile-card input[type="text"],
+.profile-card input[type="email"],
+.profile-card input[type="date"],
+.profile-card textarea {
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.profile-card input[type="text"]:focus,
+.profile-card input[type="email"]:focus,
+.profile-card input[type="date"]:focus,
+.profile-card textarea:focus {
+  border:2px solid #333;
+  box-shadow: 0 0 5px rgba(113, 127, 224, 0.5);
+}
+
+.profile-card textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+.profile-card button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }

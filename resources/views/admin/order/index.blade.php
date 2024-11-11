@@ -1,4 +1,5 @@
 <x-head></x-head>
+<link rel="stylesheet" type="text/css" href="{{ url('css/admin.css') }}">
 
 <body class="animation">
 
@@ -19,13 +20,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <td>Pembeli</td>
-                            <td>Kota</td>
-                            <td>Barang</td>
-                            <td>Harga</td>
-                            <td>Pembayaran</td>
-                            <td>Status</td>
-                            <td colspan="3">Aksi</td>
+                            <th>Pembeli</th>
+                            <th>Kota</th>
+                            <th>Barang</th>
+                            <th>Harga</th>
+                            <th>Pembayaran</th>
+                            <th>Status</th>
+                            <th class="aksi" colspan="3">Aksi</th>
                         </tr>
                     </thead>
 
@@ -65,6 +66,25 @@
                         @endif
                     </tbody>
                 </table>
+                @if ($orders->hasPages())
+                <div class="pagination">
+                    @if ($orders->onFirstPage())
+                        <span class="page-item disabled">Previous</span>
+                    @else
+                        <a class="page-item" href="{{ $orders->previousPageUrl() }}">Previous</a>
+                    @endif
+    
+                    @for ($i = 1; $i <= $orders->lastPage(); $i++)
+                        <a class="page-item {{ $i == $orders->currentPage() ? 'active' : '' }}" href="{{ $orders->url($i) }}">{{ $i }}</a>
+                    @endfor
+    
+                    @if ($orders->hasMorePages())
+                        <a class="page-item" href="{{ $orders->nextPageUrl() }}">Next</a>
+                    @else
+                        <span class="page-item disabled">Next</span>
+                    @endif
+                </div>
+            @endif
             </div>
         </div>
     </div>
@@ -119,7 +139,7 @@
                         </option>
                     </select>
 
-                    <button type="submit">Update</button>
+                    <button type="submit" class="submit-btn">Kirim</button>
                 </form>
             </div>
         </div>

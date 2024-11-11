@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function index(){
-        $orders = Order::orderBy('id', 'desc')->get();
+        $orders = Order::orderBy('id', 'desc')->paginate(5);
     
         return view('admin.order.index', compact('orders'));
     }
@@ -25,19 +25,19 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
 
         // Update status pembayaran dan status pesanan
-        $order->payment_status = $request->input('payment_status');
-        $order->order_status = $request->input('order_status');
+        $order->payment_status = $request->payment_status;
+        $order->order_status = $request->order_status;
         
         // Simpan perubahan
         $order->save();
 
         // Redirect atau respon balik
-        return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui.');
+        return response()->json(['success' => 'User telah ditambahkan']);
     }
 
     public function delete(Order $id){
         $id->delete();
-        return redirect()->back()->with('sucess', 'Kategori Berhasil di Hapus');
+        return response()->json(['success' => 'Data telah dihapus']);
     }
 
 }

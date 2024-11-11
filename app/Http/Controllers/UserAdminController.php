@@ -10,7 +10,7 @@ class UserAdminController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::orderBy('id', 'desc')->get();
+        $users = User::orderBy('id', 'desc')->paginate(5);
         $sessions = $request->session()->get('uname');
         return view('admin.user.index', compact('users', 'sessions'));
     }

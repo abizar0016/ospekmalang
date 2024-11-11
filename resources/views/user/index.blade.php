@@ -23,14 +23,8 @@
                 <ul class="header-cart-wrapitem w-full">
                     @foreach ($cartItems as $item)
                         <li class="header-cart-item flex-w flex-t m-b-12">
-                            <form id="delete-item-{{ $item->id }}"
-                                action="{{ route('user.cart.delete', $item->id) }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                            </form>
 
-                            <div class="header-cart-item-img delete-item" data-item-id="{{ $item->id }}"
+                            <div class="header-cart-item-img" data-item-id="{{ $item->id }}"
                                 data-item-name="{{ $item->product->name }}">
                                 <img src="{{ asset('images/' . $item->product->image1) }}" alt="IMG">
                             </div>
@@ -233,7 +227,8 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="{{ url('images/celana.png') }}" alt="IMG-BANNER" style="height: 525px; width:390px">
+                        <img src="{{ url('images/celana.png') }}" alt="IMG-BANNER"
+                            style="height: 525px; width:390px">
 
                         <a href="{{ route('user.product') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -259,7 +254,8 @@
                 <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img src="{{ url('images/sabuk.png') }}" alt="IMG-BANNER" style="height: 525px; width:390px">
+                        <img src="{{ url('images/sabuk.png') }}" alt="IMG-BANNER"
+                            style="height: 525px; width:390px">
 
                         <a href="{{ route('user.product') }}"
                             class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -493,9 +489,9 @@
                                     <div class="wrap-pic-w pos-relative">
                                         <img id="mainProductImage-{{ $product->id }}"
                                             src="{{ asset('images/' . $product->image1) }}" alt="IMG-PRODUCT">
-                                            <a id="mainProductLink-{{ $product->id }}"
-                                                href="{{ asset('images/' . $product->image1) }}">
-                                            </a>
+                                        <a id="mainProductLink-{{ $product->id }}"
+                                            href="{{ asset('images/' . $product->image1) }}">
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -522,7 +518,7 @@
                                         <label for="quantity">Quantity:</label>
                                         <input type="number" name="quantity" class="text-disabled" value="1"
                                             min="1" max="{{ $product->stock }}">
-                                        <button type="submit" class="add-btn hov-btn1">Tambah</button>
+                                        <button type="submit" class="btn">Tambah</button>
                                     </form>
                                 </div>
 
@@ -533,6 +529,6 @@
             </div>
         </div>
     @endforeach
+</body>
 
-
-    <x-script></x-script>
+<x-script></x-script>

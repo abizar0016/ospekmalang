@@ -20,20 +20,13 @@
 
                 <div class="header-cart-content flex-w js-pscroll">
                     <ul class="header-cart-wrapitem w-full">
-                        @foreach ($cartItems as $item)
+                        @foreach ($Items as $item)
                             <li class="header-cart-item flex-w flex-t m-b-12">
-                                <form id="delete-item-{{ $item->id }}"
-                                    action="{{ route('user.cart.delete', $item->id) }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
 
                                 <div class="header-cart-item-img"
                                     onclick="document.getElementById('delete-item-{{ $item->id }}').submit();">
                                     <img src="{{ asset('images/' . $item->product->image1) }}" alt="IMG">
                                 </div>
-
 
                                 <div class="header-cart-item-txt">
                                     <p class="header-cart-item-name m-b-1 hov-cl1 trans-04">
@@ -57,7 +50,7 @@
                         <div class="header-cart-total w-full p-tb-40">
                             Total: Rp
                             {{ number_format(
-                                $cartItems->sum(function ($item) {
+                                $Items->sum(function ($item) {
                                     return $item->product->price * $item->quantity;
                                 }),
                                 0,
@@ -83,7 +76,7 @@
             </div>
         </div>
 
-        <div class="container" style="margin-top:120px;">
+        <div class="container checkout-container" style="margin-top:120px;">
             <h1>Pilih Barang untuk Checkout</h1>
 
             @if ($errors->any())
@@ -92,55 +85,87 @@
                 </div>
             @endif
 
-            <form action="" method="POST">
-                @csrf
-
-                <table class="table mt-5" style=" border-spacing: 0 10px; border-color:transparent;">
-                    <thead>
+            <table class="table mt-5" style="border-spacing: 0 10px; border-color: transparent;">
+                <thead>
+                    <tr>
+                        <th>Gambar</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Harga Satuan</th>
+                        <th>Total Harga Barang</th>
+                        <th>Aksi</th> <!-- Column for delete button -->
+                        <th style="display: flex; justify-content:space-around">Pilih Semua <input type="checkbox"
+                                id="select-all" onchange="toggleSelectAll()"></th> <!-- Checkbox on the right -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($Items as $cart)
                         <tr>
-                            <th>Pilih</th>
-                            <th></th>
-                            <th>Nama Barang</th>
-                            <th>Jumlah</th>
-                            <th>Harga Satuan</th>
-                            <th>Total Harga Barang</th>
+                            <td style="text-align: center;">
+                                <img src="{{ asset('images/' . $cart->product->image1) }}" alt="Product Image 1"
+                                    style="width: 100px; height: 100px; object-fit: contain;">
+                            </td>
+                            <td>{{ $cart->product->name }}</td>
+                            <td>{{ $cart->quantity }}</td>
+                            <td>Rp. {{ number_format($cart->product->price, 0, ',', '.') }}</td>
+                            <td>Rp. {{ number_format($cart->product->price * $cart->quantity, 0, ',', '.') }}</td>
+                            <td>
+                                <form id="delete-cart-{{ $cart->id }}"
+                                    action="{{ route('user.checkout.delete', $cart->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn delete-cart-button" type="button"
+                                        data-form-id="delete-cart-{{ $cart->id }}">
+                                        Hapus
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <input type="checkbox" class="cart-checkbox" data-id="{{ $cart->product->id }}"
+                                    data-price="{{ $cart->product->price }}" data-quantity="{{ $cart->quantity }}"
+                                    onchange="updateTotal()">
+                            </td>   
                         </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($cartItems as $item)
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="item-checkbox"
-                                        data-price="{{ $item->product->price }}"
-                                        data-quantity="{{ $item->quantity }}">
-                                </td>
-                                <td style="text-align: center;"><img src="{{ asset('images/' . $item->product->image1) }}" alt="Product Image 1"
-                                        style="width: 100px; height: 100px;object-fit:contain">
-                                </td>
-                                <td>{{ $item->product->name }}</td>
-                                <td>{{ $item->quantity }}</td>
-                                <td>Rp. {{ number_format($item->product->price, 0, ',', '.') }}</td>
-                                <td>Rp. {{ number_format($item->product->price * $item->quantity, 0, ',', '.') }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5">Keranjang belanja kosong.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-
-                <!-- Area untuk menampilkan total harga -->
-                <div class="d-flex align-items-center float-end mt-5" style="position: fixed; right:100px; bottom:100px;">
-                    <button type="submit" class="btn btn-primary">Proses Checkout</button>
-                    <h3 class="ml-4">Total Harga: Rp. <span id="total-price">0</span></h3>
-                </div>
-
-            </form>
-
+                    @empty
+                        <tr>
+                            <td style="text-align: center" colspan="7">Keranjang belanja kosong.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
 
+        <div class="checkout-total-bar">
+            <button type="button" class="btn    " onclick="showPaymentModal()">Lanjutkan Pembayaran</button>
+            <h3 class="ml-4">Total Harga: Rp. <span id="total-price">0</span></h3>
+        </div>
     </div>
 
+     <!-- Modal for Payment Information -->
+     <div id="paymentModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closePaymentModal()">&times;</span>
+            <h2>Informasi Pembayaran</h2>
+            <form id="paymentForm" action="{{ route('user.payment.process') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="recipientName">Nama Penerima:</label>
+                    <input type="text" id="recipientName" name="recipient_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipientPhone">Nomor Penerima:</label>
+                    <input type="text" id="recipientPhone" name="recipient_phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipientAddress">Alamat Penerima:</label>
+                    <textarea id="recipientAddress" name="recipient_address" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Bayar</button>
+            </form>
+        </div>
+    </div>
 
-    <x-script></x-script>
+</body>
+
+<x-script></x-script>

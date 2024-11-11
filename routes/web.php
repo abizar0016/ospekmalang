@@ -4,11 +4,13 @@ use App\Http\Kernel;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckUserRole;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AddUserController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\UserAdminController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\UpdateProductController;
+use App\Http\Controllers\UserProfileController;
 
 //not fount page
 
@@ -70,12 +73,18 @@ Route::prefix('/')->group(function () {
 Route::group(['middleware' => ['auth']],function(){
     Route::prefix('user')->group(function () {
         Route::get('/', [UserPageController::class, 'index'])->name('user.index');
-        Route::delete('cart/{id}', [UserPageController::class, 'delete'])->name('user.cart.delete');
-    
+            
         Route::get('/product', [UserPageController::class, 'productView'])->name('user.product');
         
-        Route::get('/checkout', [CheckoutController::class, 'index'])->name('user.checkout');
+        Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
+        Route::put('/profile/update/{id}', [UserProfileController::class, 'update'])->name('user.profile.update');
         
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('user.checkout');
+        Route::delete('/checkout/delete/{id}', [CheckoutController::class, 'delete'])->name('user.checkout.delete');
+        Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('user.payment.process');
+        
+        Route::get('/payment', [PaymentController::class, 'index'])->name('user.payment');
+
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
         Route::get('/cart', [CartController::class, 'getCart'])->name('user.cart');
@@ -104,7 +113,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::delete('admin/product/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
 
-    Route::get('admin/order', [OrderController::class, 'index'])->name('admin.oder.index');
+    Route::get('admin/order', [OrderController::class, 'index'])->name('admin.order.index');
     Route::put('admin/order/update/{id}', [OrderController::class, 'update'])->name('admin.order.update');
     Route::delete('admin/order/delete/{id}', [OrderController::class, 'delete'])->name('admin.order.delete');
 

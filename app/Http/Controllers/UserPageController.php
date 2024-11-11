@@ -30,7 +30,7 @@ class UserPageController extends Controller
         })->get();
 
         // Ambil semua pengguna
-        $users = User::all();
+        $users = Auth::user();
 
         $cartCount = $cartItems->sum('quantity'); // Menghitung total quantity
 

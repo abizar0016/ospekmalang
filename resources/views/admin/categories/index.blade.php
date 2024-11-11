@@ -1,4 +1,5 @@
 <x-head></x-head>
+<link rel="stylesheet" type="text/css" href="{{ url('css/admin.css') }}">
 
 <body class="animation">
     <x-sidebaradmin></x-sidebaradmin>
@@ -16,21 +17,22 @@
             <div class="cardHeader mt-5">
                 <h2>Kategori</h2>
                 <!-- Call openModal() for the add category modal when button is clicked -->
-                <button class="btn-categori" onclick="openModal('categoryModal')">Tambah Kategori</button>
+                <button class="link" onclick="openModal('categoryModal')">Tambah Kategori</button>
             </div>
 
             <div class="user" id="user">
                 <table>
                     <thead>
                         <tr>
-                            <td>Nama Kategori</td>
-                            <td colspan="2">Aksi</td>
+                            <th style="padding-right: 50rem">Nama Kategori</th>
+                            <th colspan="2" class="aksi">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if ($categories->isEmpty())
                             <tr>
-                                <td colspan="2" style="padding-top: 30px; text-align:center;">Tidak Ada Kategori yang
+                                <td colspan="2" style="padding-top: 1.875rem; text-align:center;">Tidak Ada Kategori
+                                    yang
                                     Ditambahkan</td>
                             </tr>
                         @else
@@ -59,6 +61,27 @@
                         @endif
                     </tbody>
                 </table>
+
+                @if ($categories->hasPages())
+                    <div class="pagination">
+                        @if ($categories->onFirstPage())
+                            <span class="page-item disabled">Previous</span>
+                        @else
+                            <a class="page-item" href="{{ $categories->previousPageUrl() }}">Previous</a>
+                        @endif
+
+                        @for ($i = 1; $i <= $categories->lastPage(); $i++)
+                            <a class="page-item {{ $i == $categories->currentPage() ? 'active' : '' }}"
+                                href="{{ $categories->url($i) }}">{{ $i }}</a>
+                        @endfor
+
+                        @if ($categories->hasMorePages())
+                            <a class="page-item" href="{{ $categories->nextPageUrl() }}">Next</a>
+                        @else
+                            <span class="page-item disabled">Next</span>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -72,7 +95,7 @@
                 @csrf
                 <label for="name">Nama Kategori:</label>
                 <input type="text" id="name" name="name" required>
-                <button type="submit" class="add-btn">Kirim</button>
+                <button type="submit" class="submit-btn">Kirim</button>
             </form>
         </div>
     </div>
@@ -89,7 +112,7 @@
                     @method('PUT')
                     <label for="name">Nama Kategori:</label>
                     <input type="text" name="name" value="{{ $categori->name }}" required>
-                    <button type="submit" class="add-btn">Kirim</button>
+                    <button type="submit" class="submit-btn">Kirim</button>
                 </form>
             </div>
         </div>

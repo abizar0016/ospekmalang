@@ -13,8 +13,10 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->onDelete('cascade');
-            $table->string('alamat');
-            $table->foreignId('product_id')
+                $table->string('recipient_name');
+                $table->text('recipient_address');
+                $table->string('recipient_phone');
+                $table->foreignId('product_id')
                 ->constrained('products')
                 ->onDelete('cascade');
             $table->enum('payment_status', ['dibayar', 'jatuh tempo', 'belum dibayar']);

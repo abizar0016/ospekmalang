@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function index() {
-        $categories = Category::orderBy('id', 'desc')->get();
+        $categories = Category::orderBy('id', 'desc')->paginate(5);
         return view('admin.categories.index', compact('categories'));
     }
 

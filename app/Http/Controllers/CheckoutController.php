@@ -11,24 +11,28 @@ use Illuminate\Support\Facades\Auth;
 class CheckoutController extends Controller
 {
     public function index(){
-        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
-        $cartCount = $cartItems->sum('quantity'); // Menghitung total quantity
+        $Items = Cart::where('user_id', Auth::id())->with('product')->get();
+        $cartCount = $Items->sum('quantity'); // Menghitung total quantity
 
-        return view('user.checkout', compact('cartItems','cartCount'));
+        return view('user.checkout', compact('Items','cartCount'));
     }
 
-    public function processCheckout(Request $request)
+    public function delete(Cart $id){
+        $id->delete();
+        return response()->json(['success' => 'Item telah dihapus']);
+    }
+    
+    public function processPayment(Request $request)
     {
-        // Ambil barang yang dipilih untuk di-checkout
-        $selectedItems = $request->input('selected_items', []);
-
-        if (empty($selectedItems)) {
-            return redirect()->back()->withErrors('Pilih setidaknya satu barang untuk checkout.');
-        }
-
-        // Lakukan proses checkout untuk barang yang dipilih
-        // Misalnya, simpan ke database atau kirim ke gateway pembayaran
-
-        return redirect()->route('payment.page')->with('success', 'Barang berhasil di-checkout!');
+        // Memastikan data sudah sampai
+        $products = $request->input('products');
+        $quantities = $request->input('quantities');
+        $prices = $request->input('prices');
+    
+        // Cek data yang dikirim untuk debugging
+        dd($products, $quantities, $prices);  // Menggunakan dd() untuk melihat data yang diterima
+    
+        return view('user.payment', compact('products', 'quantities', 'prices'));
     }
+    
 }

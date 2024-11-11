@@ -218,78 +218,6 @@
                 .find(".name-product")
                 .html();
 
-            // Menonaktifkan tombol untuk menghindari penggandaan
-            $(document).on("click", ".delete-item", function () {
-                var itemId = $(this).data("item-id");
-                var formId = "delete-item-" + itemId;
-                var nameProduct = $(this).data("item-name");
-
-                swal({
-                    title: "Anda yakin ingin menghapus " + nameProduct + "?",
-                    text: "Item ini akan dihapus dari keranjang!",
-                    icon: "warning",
-                    buttons: {
-                        cancel: {
-                            text: "Batal",
-                            value: null,
-                            visible: true,
-                            className: "",
-                            closeModal: true, // Memungkinkan modal ditutup
-                        },
-                        confirm: {
-                            text: "Ya, hapus!",
-                            value: true,
-                            visible: true,
-                            className: "confirm-button",
-                            closeModal: true, // Memungkinkan modal ditutup
-                        },
-                    },
-                }).then((result) => {
-                    if (result) {
-                        // Tampilkan pesan "Menghapus..."
-                        swal({
-                            title: "Menghapus...",
-                            text: "Sedang menghapus item dari keranjang...",
-                            icon: "info",
-                            buttons: false, // Menyembunyikan tombol "OK"
-                            timer: 1000, // Menampilkan selama 1 detik
-                        });
-
-                        // Submit the form via AJAX
-                        $.ajax({
-                            url: $("#" + formId).attr("action"),
-                            method: "POST",
-                            data: $("#" + formId).serialize(),
-                            success: function (response) {
-                                if (response.success) {
-                                    // Tampilkan pesan berhasil
-                                    swal({
-                                        title: "Berhasil!",
-                                        text: response.message,
-                                        icon: "success",
-                                        timer: 1000,
-                                        buttons: false, // Menyembunyikan tombol "OK"
-                                    }).then(() => {
-                                        // Reload halaman setelah menampilkan pesan
-                                        location.reload();
-                                    });
-                                } else {
-                                    // Tampilkan pesan kesalahan jika ada
-                                    swal("Error!", response.message, "error");
-                                }
-                            },
-                            error: function (xhr) {
-                                // Tampilkan pesan kesalahan umum jika terjadi kesalahan
-                                var errorMessage =
-                                    xhr.responseJSON?.message ||
-                                    "Terjadi kesalahan saat menghapus item.";
-                                swal("Error!", errorMessage, "error");
-                            },
-                        });
-                    }
-                });
-            });
-
             $.ajax({
                 url: form.attr("action"),
                 method: form.attr("method"),
@@ -486,53 +414,6 @@ function changeImage(imageUrl, productId) {
         mainLink.href = imageUrl;
     }
 }
-
-window.onload = function () {
-    var modal = document.getElementById("successModal");
-    var span = document.getElementsByClassName("close")[0];
-
-    if (modal) {
-        modal.style.display = "block";
-
-        // Tutup modal otomatis setelah 3 detik (3000 ms)
-        setTimeout(function () {
-            modal.style.display = "none";
-        }, 3000);
-
-        // Tutup modal ketika tombol close diklik
-        span.onclick = function () {
-            modal.style.display = "none";
-        };
-
-        // Tutup modal ketika klik di luar modal
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
-    }
-};
-
-// Menampilkan popup
-function showPopup() {
-    var modal = document.getElementById("popupModal");
-    modal.style.display = "flex"; // Menampilkan popup
-
-    // Menyembunyikan popup setelah 3 detik
-    setTimeout(function () {
-        modal.style.display = "none"; // Menyembunyikan popup
-    }, 3000);
-}
-
-// Menutup popup ketika tombol OK ditekan
-document.getElementById("popupButton").onclick = function () {
-    document.getElementById("popupModal").style.display = "none"; // Menyembunyikan popup
-};
-
-// Panggil showPopup() ketika halaman dimuat atau saat tertentu
-window.onload = function () {
-    showPopup(); // Tampilkan popup saat halaman dimuat
-};
 
 document.addEventListener("DOMContentLoaded", function () {
     // Ambil semua checkbox item

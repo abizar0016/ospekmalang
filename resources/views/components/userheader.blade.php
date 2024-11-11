@@ -46,7 +46,7 @@
                             <img src="{{ url('images/default-profile.jpg') }}" alt="Default Image">
                         @endif
                         <ul class="menu-profil">
-                            <a href="#">
+                            <a href="{{ route('user.profile') }}">
                             <li class="profil-list">
                                     <span class="tittle">Edit Profil</span>
                                 </li>

@@ -12,7 +12,7 @@ class ProductAdminController extends Controller
     // Menampilkan daftar produk
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->get();
+        $products = Product::orderBy('id', 'desc')->paginate(5);
         $categories = Category::all();
         // dd($products); // Debugging untuk melihat data
         return view('admin.product.index', compact('products', 'categories'));

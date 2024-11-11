@@ -1,12 +1,11 @@
 $(document).ready(function () {
-
-    $("#user-add").on("submit", function (e) {
+    $("#user-add").on("submit", function (e) {  
         e.preventDefault();
         const form = $(this)[0]; // Ambil form HTML asli
-    
+
         // Buat objek FormData dari form untuk menyertakan file
         const formData = new FormData(form);
-    
+
         $.ajax({
             url: $(this).attr("action"),
             type: "POST",
@@ -31,14 +30,14 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr) {
-                let errorMessage = 
-                xhr.responseJSON?.message || "Gagal menambahkan data";
+                let errorMessage =
+                    xhr.responseJSON?.message || "Gagal menambahkan data";
                 swal("Error!", errorMessage, "error");
             },
         });
-    });   
-    
-    $("form[id^='user-update-']").on("submit", function(e) {
+    });
+
+    $("form[id^='user-update-']").on("submit", function (e) {
         e.preventDefault(); // Mencegah form dikirim langsung
         const form = $(this);
 
@@ -48,7 +47,7 @@ $(document).ready(function () {
             data: new FormData(this),
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 if (response.success) {
                     swal({
                         title: "Sukses!",
@@ -58,24 +57,29 @@ $(document).ready(function () {
                         buttons: false,
                     }).then(() => location.reload());
                 } else {
-                    swal("Error!", response.message || "Terjadi kesalahan.", "error");
+                    swal(
+                        "Error!",
+                        response.message || "Terjadi kesalahan.",
+                        "error"
+                    );
                 }
             },
-            error: function(xhr) {
-                let errorMessage = xhr.responseJSON?.message || "Gagal memperbarui data.";
+            error: function (xhr) {
+                let errorMessage =
+                    xhr.responseJSON?.message || "Gagal memperbarui data.";
                 swal("Error!", errorMessage, "error");
             },
         });
     });
 
-    $(".delete-button").on("click", function (event) {
+    $(".delete-user-button").on("click", function (event) {
         event.preventDefault(); // Mencegah pengiriman form secara langsung
         const formId = $(this).data("form-id"); // Ambil ID form dari tombol
         const nameUser = $(this).data("item-name"); // Ambil nama pengguna untuk konfirmasi
-    
+
         swal({
             title: "Apakah Anda yakin ingin menghapus " + nameUser + "?",
-            text: "Anda tidak dapat mengembalikan aksi ini!",
+            text: "Anda tidak dapat mengembalikan data ini!",
             icon: "warning",
             buttons: {
                 cancel: {
@@ -103,7 +107,7 @@ $(document).ready(function () {
                     buttons: false, // Menyembunyikan tombol "OK"
                     timer: 1000, // Menampilkan selama 1 detik
                 });
-    
+
                 // Submit the form via AJAX
                 $.ajax({
                     url: $("#" + formId).attr("action"),
@@ -138,7 +142,113 @@ $(document).ready(function () {
             }
         });
     });
-    
+
+    $("form[id^='order-update-']").on("submit", function (e) {
+        e.preventDefault(); // Mencegah form dikirim langsung
+        const form = $(this);
+
+        $.ajax({
+            url: form.attr("action"),
+            type: "POST",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response.success) {
+                    swal({
+                        title: "Sukses!",
+                        text: response.message,
+                        icon: "success",
+                        timer: 1000,
+                        buttons: false,
+                    }).then(() => location.reload());
+                } else {
+                    swal(
+                        "Error!",
+                        response.message || "Terjadi kesalahan.",
+                        "error"
+                    );
+                }
+            },
+            error: function (xhr) {
+                let errorMessage =
+                    xhr.responseJSON?.message || "Gagal memperbarui data.";
+                swal("Error!", errorMessage, "error");
+            },
+        });
+    });
+
+    //Handler untuk hapus order
+    $(".delete-order-button").on("click", function (event) {
+        event.preventDefault(); // Mencegah pengiriman form secara langsung
+        const formId = $(this).data("form-id"); // Ambil ID form dari tombol
+        const orderName = $(this).data("item-name"); // Ambil nama order untuk konfirmasi
+
+        swal({
+            title: "Apakah Anda yakin ingin menghapus " + orderName + "?",
+            text: "Anda tidak dapat mengembalikan data ini!",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Batal",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Ya, hapus!",
+                    value: true,
+                    visible: true,
+                    className: "confirm-button",
+                    closeModal: true,
+                },
+            },
+        }).then((result) => {
+            if (result) {
+                // Tampilkan pesan "Menghapus..."
+                swal({
+                    title: "Menghapus...",
+                    text: "Sedang menghapus item...",
+                    icon: "info",
+                    buttons: false,
+                    timer: 1000,
+                });
+
+                // Kirim form melalui AJAX
+                $.ajax({
+                    url: $("#" + formId).attr("action"),
+                    method: "POST",
+                    data: $("#" + formId).serialize() + "&_method=DELETE", // Tambahkan _method=DELETE
+                    success: function (response) {
+                        if (response.success) {
+                            // Tampilkan pesan berhasil
+                            swal({
+                                title: "Berhasil!",
+                                text: response.message,
+                                icon: "success",
+                                timer: 1000,
+                                buttons: false,
+                            }).then(() => {
+                                // Muat ulang halaman setelah pesan sukses
+                                location.reload();
+                            });
+                        } else {
+                            // Tampilkan pesan kesalahan jika ada
+                            swal("Error!", response.message, "error");
+                        }
+                    },
+                    error: function (xhr) {
+                        // Tampilkan pesan kesalahan umum jika terjadi kesalahan
+                        const errorMessage =
+                            xhr.responseJSON?.message ||
+                            "Terjadi kesalahan saat menghapus item.";
+                        swal("Error!", errorMessage, "error");
+                    },
+                });
+            }
+        });
+    });
 
     // Handler untuk penambahan data kategori
     $("#categories-add").on("submit", function (e) {
@@ -153,7 +263,7 @@ $(document).ready(function () {
                 if (response.success) {
                     swal({
                         title: "Sukses!",
-                        text: response.message, 
+                        text: response.message,
                         icon: "success",
                         timer: 1000,
                         buttons: false,
@@ -178,7 +288,7 @@ $(document).ready(function () {
     $("[id^=categories-update-]").on("submit", function (e) {
         e.preventDefault();
         const form = $(this);
-    
+
         // Tampilkan pesan "Mengubah..."
         swal({
             title: "Mengubah...",
@@ -187,7 +297,7 @@ $(document).ready(function () {
             buttons: false,
             timer: 1000, // Tampilkan selama 1 detik
         });
-    
+
         $.ajax({
             url: form.attr("action"),
             type: "POST",
@@ -219,7 +329,6 @@ $(document).ready(function () {
             },
         });
     });
-    
 
     // Handler untuk penghapusan data
     $(".delete-button").on("click", function (event) {
@@ -295,26 +404,6 @@ $(document).ready(function () {
 });
 jquery;
 
-// Hover
-let list = document.querySelectorAll(".navigation li");
-
-function activeLink() {
-    list.forEach((item) => {
-        item.classList.remove("hovered");
-    });
-    this.classList.add("hovered");
-}
-
-// Toggle
-let toggle = document.querySelector(".toggle");
-let navigation = document.querySelector(".navigation");
-let main = document.querySelector(".main");
-
-toggle.onclick = function () {
-    navigation.classList.toggle("active");
-    main.classList.toggle("active");
-};
-
 function formatRupiah(angka, prefix) {
     let number_string = angka.replace(/[^,\d]/g, "").toString();
     let split = number_string.split(",");
@@ -331,57 +420,27 @@ function formatRupiah(angka, prefix) {
     return prefix + rupiah;
 }
 
-function previewImageProfile() {
-    const fileInput = document.getElementById("image");
-    const file = fileInput.files[0];
-    const imgPreview = document.querySelector(".img-preview");
-
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-            imgPreview.src = e.target.result;
-            imgPreview.style.display = "block"; // Pastikan gambar ditampilkan
-        };
-
-        reader.readAsDataURL(file);
-    } else {
-        imgPreview.src = "{{ url('images/default-profile.jpg') }}"; // Tampilkan gambar default jika tidak ada gambar
-        imgPreview.style.display = "block"; // Tetap tampilkan gambar
-    }
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
 }
 
-function previewImage(imageNumber, productId) {
-    const input = document.getElementById("image" + imageNumber + "-" + productId);
-    const preview = document.getElementById("imgPreview" + imageNumber + "-" + productId);
-
-    const reader = new FileReader();
-    reader.onload = function (e) {
-        preview.src = e.target.result; // Set source untuk gambar preview
-        preview.style.display = "block"; // Pastikan gambar terlihat
-    };
-
-    if (input.files && input.files[0]) {
-        reader.readAsDataURL(input.files[0]); // Baca file sebagai Data URL
-    } else {
-        preview.src = "{{ asset('images/' . ($product->{'image' + imageNumber} ?? '')) }}"; // Set gambar default
-    }
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
 }
 
-
-function previewImage(userId) {
-    const input = document.getElementById(`image-${userId}`);
-    const imgPreview = document.getElementById(`imgPreview-${userId}`);
-
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            imgPreview.src = e.target.result; // Set source image preview
-        }
-        reader.readAsDataURL(input.files[0]);
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
     }
+    tablinks = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
 }
-
 
 // Fungsi untuk membuka modal
 function openModal() {
@@ -435,35 +494,95 @@ function closeModal(modalId) {
 
 window.onclick = function (event) {
     var modals = document.getElementsByClassName("modal");
-    for (var i = 0; i < modals.length; i++) {
-        if (event.target === modals[i]) {
-            closeModal(modals[i].id);
-        }
+    if (event.target == modals) {
+        modals.style.display = "none";
     }
 };
 
 function openTab(evt, tabName) {
-    // Cari modal yang terkait dengan tombol yang diklik
+    evt.preventDefault();
+    console.log("Tab opened:", tabName);
+
     const modalContent = evt.target.closest(".modal-content");
 
-    // Dapatkan semua elemen dengan kelas "tab-content" di dalam modal ini
     const tabcontent = modalContent.getElementsByClassName("tab-content");
     for (let i = 0; i < tabcontent.length; i++) {
         tabcontent[i].classList.remove("active");
     }
 
-    // Dapatkan semua tombol dengan kelas "tab-button" di dalam modal ini
     const tabbuttons = modalContent.getElementsByClassName("tab-button");
     for (let i = 0; i < tabbuttons.length; i++) {
         tabbuttons[i].classList.remove("active");
     }
 
-    // Aktifkan tab yang dipilih dan tombolnya
-    modalContent.querySelector(`#${tabName}`).classList.add("active");
+    const selectedTab = modalContent.querySelector(`#${tabName}`);
+    if (selectedTab) {
+        selectedTab.classList.add("active");
+    }
     evt.currentTarget.classList.add("active");
 }
 
-function setMainImage(src) {
-    document.getElementById("mainImage").src = src;
+// Function for handling profile image preview in "Add User" modal
+function userImageAdd() {
+    const input = document.getElementById("image"); // Specific to add modal
+    const preview = document.getElementById("imgPreview"); // Preview in add modal
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = "block"; // Show preview if hidden initially
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = ""; // Optionally reset to default image
+        preview.style.display = "none";
+    }
 }
-// Menangani aksi penambahan kategori
+
+// Function for handling profile image preview in "Update User" modal
+function userImageUpdate(userId) {
+    const input = document.getElementById(`image-${userId}`);
+    const preview = document.getElementById(`imgPreview-${userId}`);
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result; // Set the preview image source
+        };
+        reader.readAsDataURL(input.files[0]); // Read the file as a Data URL
+    } else {
+        preview.src = ""; // Clear preview or reset to a default image if needed
+    }
+}
+
+
+function productImage(imgNumber) {
+    const input = document.getElementById(`customImage${imgNumber}`);
+    const preview = document.getElementById(`customImgPreview${imgNumber}`);
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        preview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function productImageUpdate(imgNumber, productId) {
+    const input = document.getElementById(
+        `customImageUpdate${imgNumber}-${productId}`
+    );
+    const preview = document.getElementById(
+        `customImgPreviewUpdate${imgNumber}-${productId}`
+    );
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result; // Set the preview image source
+        };
+        reader.readAsDataURL(input.files[0]); // Read the file as a Data URL
+    } else {
+        preview.src = ""; // Clear preview or reset to a default image if needed
+    }
+}

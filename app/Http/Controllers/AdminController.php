@@ -30,14 +30,14 @@ class AdminController extends Controller
         $orderCount = Order::count();
         $orders = Order::orderBy('id', 'desc')->get();
         $productCount = Product::count();
-        $recentOrders = Order::with('user', 'product')->orderBy('created_at', 'desc')->take(5)->get();
+        $recentOrders = Order::with('user', 'product')->orderBy('created_at', 'desc')->get();
 
         return view('admin.index', compact('orders','orderCount', 'userCount', 'productCount', 'sessions', 'recentOrders'));
     }
 
     public function logout()
     {
-        Auth::logout(); // Pastikan logout dilakukan
+        Auth::logout();
         return redirect('/');
     }
 }
