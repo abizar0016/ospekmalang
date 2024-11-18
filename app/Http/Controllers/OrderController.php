@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 use App\Models\Order;
-
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
     public function index(){
         $orders = Order::orderBy('id', 'desc')->paginate(5);
+        $orderItems = OrderItem::with('user', 'product', 'order')->orderBy('created_at', 'desc')->get();
     
-        return view('admin.order.index', compact('orders'));
+        return view('admin.order.index', compact('orders','orderItems'));
     }
 
     public function update(Request $request, $id)
     {
         // Validasi input
         $request->validate([
-            'payment_status' => 'required|string',
-            'order_status' => 'required|string',
+            'status' => 'required|string',
         ]);
 
         // Cari pesanan berdasarkan ID
         $order = Order::findOrFail($id);
 
         // Update status pembayaran dan status pesanan
-        $order->payment_status = $request->payment_status;
-        $order->order_status = $request->order_status;
+        $order->status = $request->status;
         
         // Simpan perubahan
         $order->save();

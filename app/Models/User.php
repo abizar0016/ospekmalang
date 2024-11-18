@@ -37,4 +37,15 @@ class User extends Authenticatable
         // Mengembalikan true jika status pengguna adalah 'admin'
         return $this->status === 'admin';
     }
+
+    public function cartItems()
+    {
+        return $this->hasMany(Cart::class); // Ganti 'CartItem' dengan nama model yang sesuai
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class ); // Pastikan foreign key sesuai
+    }
+    
 }

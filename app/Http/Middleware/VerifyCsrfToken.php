@@ -13,7 +13,7 @@ class VerifyCsrfToken
      * @var array<int, string>
      */
     protected $except = [
-        // Tambahkan URI yang tidak ingin dicek CSRF di sini
+        'user/midtrans/callback', // Abaikan CSRF untuk route ini
     ];
 
     /**

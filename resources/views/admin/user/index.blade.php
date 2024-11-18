@@ -60,7 +60,6 @@
                                             Hapus
                                         </button>
                                     </form>
-
                                 </td>
 
                             </tr>
@@ -69,24 +68,25 @@
                     </tbody>
                 </table>
                 @if ($users->hasPages())
-                <div class="pagination">
-                    @if ($users->onFirstPage())
-                        <span class="page-item disabled">Previous</span>
-                    @else
-                        <a class="page-item" href="{{ $users->previousPageUrl() }}">Previous</a>
-                    @endif
-    
-                    @for ($i = 1; $i <= $users->lastPage(); $i++)
-                        <a class="page-item {{ $i == $users->currentPage() ? 'active' : '' }}" href="{{ $users->url($i) }}">{{ $i }}</a>
-                    @endfor
-    
-                    @if ($users->hasMorePages())
-                        <a class="page-item" href="{{ $users->nextPageUrl() }}">Next</a>
-                    @else
-                        <span class="page-item disabled">Next</span>
-                    @endif
-                </div>
-            @endif
+                    <div class="pagination">
+                        @if ($users->onFirstPage())
+                            <span class="page-item disabled">Previous</span>
+                        @else
+                            <a class="page-item" href="{{ $users->previousPageUrl() }}">Previous</a>
+                        @endif
+
+                        @for ($i = 1; $i <= $users->lastPage(); $i++)
+                            <a class="page-item {{ $i == $users->currentPage() ? 'active' : '' }}"
+                                href="{{ $users->url($i) }}">{{ $i }}</a>
+                        @endfor
+
+                        @if ($users->hasMorePages())
+                            <a class="page-item" href="{{ $users->nextPageUrl() }}">Next</a>
+                        @else
+                            <span class="page-item disabled">Next</span>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -287,6 +287,26 @@
             </div>
         </div>
     @endforeach
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+            } else {
+                console.error(`Modal with ID '${modalId}' not found.`);
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            } else {
+                console.error(`Modal with ID '${modalId}' not found.`);
+            }
+        }
+    </script>
 
     <x-script></x-script>
 

@@ -250,7 +250,157 @@ $(document).ready(function () {
         });
     });
 
-    // Handler untuk penambahan data kategori
+    $("#add-product").on("submit", function (e) {
+        e.preventDefault();
+        const form = $(this)[0]; // Ambil elemen form asli
+        const formData = new FormData(form); // Buat FormData untuk menangani file
+    
+        // Kirim data melalui AJAX
+        $.ajax({
+            url: $(this).attr("action"),
+            type: "POST",
+            data: formData,
+            contentType: false, // Penting agar FormData dapat mengirimkan file
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    swal({
+                        title: "Sukses!",
+                        text: response.message,
+                        icon: "success",
+                        timer: 1000,
+                        buttons: false,
+                    }).then(() => {
+                        location.reload(); // Reload halaman
+                    });
+                } else {
+                    swal("Error", response.message || "Terjadi kesalahan.", "error");
+                }
+            },
+            error: function (xhr) {
+                let errors = xhr.responseJSON?.errors || {};
+                let messages = Object.values(errors).flat().join("\n");
+                swal("Error!", messages || "Gagal menambahkan produk.", "error");
+            },
+            
+        });
+    });
+
+
+    $("[id^=product-update-]").on("submit", function (e) {
+        e.preventDefault();
+        const form = $(this);
+
+        // Tampilkan pesan "Mengubah..."
+        swal({
+            title: "Mengubah...",
+            text: "Sedang memperbarui kategori...",
+            icon: "info",
+            buttons: false,
+            timer: 1000, // Tampilkan selama 1 detik
+        });
+
+        $.ajax({
+            url: form.attr("action"),
+            type: "POST",
+            data: form.serialize(),
+            success: function (response) {
+                if (response.success) {
+                    // Tampilkan pesan sukses
+                    swal({
+                        title: "Sukses!",
+                        text: response.message,
+                        icon: "success",
+                        timer: 1000,
+                        buttons: false,
+                    }).then(() => location.reload());
+                } else {
+                    // Tampilkan pesan error jika ada
+                    swal(
+                        "Error!",
+                        response.message || "Terjadi kesalahan.",
+                        "error"
+                    );
+                }
+            },
+            error: function (xhr) {
+                // Tampilkan pesan error umum jika terjadi kesalahan
+                let errorMessage =
+                    xhr.responseJSON?.message || "Gagal memperbarui data.";
+                swal("Error!", errorMessage, "error");
+            },
+        });
+    });
+
+    
+    $(".delete-product").on("submit", function (event) {
+        event.preventDefault(); // Mencegah pengiriman form secara langsung
+        const form = $(this); // Ambil elemen form
+        const formId = form.attr("id"); // Ambil ID form
+        
+        swal({
+            title: "Apakah Anda yakin ingin menghapus?",
+            text: "Anda tidak dapat mengembalikan aksi ini!",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Batal",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Ya, hapus!",
+                    value: true,
+                    visible: true,
+                    className: "confirm-button",
+                    closeModal: true,
+                },
+            },
+        }).then((result) => {
+            if (result) {
+                // Tampilkan pesan "Menghapus..."
+                swal({
+                    title: "Menghapus...",
+                    text: "Sedang menghapus item...",
+                    icon: "info",
+                    buttons: false,
+                    timer: 1000,
+                });
+    
+                // Submit the form via AJAX
+                $.ajax({
+                    url: form.attr("action"),
+                    method: "POST", // Gunakan POST
+                    data: form.serialize(), // Serialisasi data form
+                    success: function (response) {
+                        if (response.success) {
+                            // Tampilkan pesan berhasil
+                            swal({
+                                title: "Berhasil!",
+                                text: response.message,
+                                icon: "success",
+                                timer: 1000,
+                                buttons: false,
+                            }).then(() => {
+                                location.reload(); // Reload halaman
+                            });
+                        } else {
+                            swal("Error!", response.message, "error");
+                        }
+                    },
+                    error: function (xhr) {
+                        var errorMessage =
+                            xhr.responseJSON?.message || "Terjadi kesalahan saat menghapus item.";
+                        swal("Error!", errorMessage, "error");
+                    },
+                });
+            }
+        });
+    });
+    
+
     $("#categories-add").on("submit", function (e) {
         e.preventDefault(); // Mencegah form dikirim langsung
         const form = $(this);
@@ -402,6 +552,7 @@ $(document).ready(function () {
         });
     });
 });
+
 jquery;
 
 function formatRupiah(angka, prefix) {
@@ -420,14 +571,6 @@ function formatRupiah(angka, prefix) {
     return prefix + rupiah;
 }
 
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = "block";
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
-}
-
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tab-content");
@@ -440,56 +583,6 @@ function openTab(evt, tabName) {
     }
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
-}
-
-// Fungsi untuk membuka modal
-function openModal() {
-    var modal = document.getElementById("categoryModal");
-    modal.style.display = "block";
-}
-
-// Fungsi untuk menutup modal
-function closeModal() {
-    var modal = document.getElementById("categoryModal");
-    modal.style.display = "none";
-}
-
-function openModal() {
-    var modal = document.getElementById("modal-add");
-    modal.style.display = "block";
-}
-
-// Fungsi untuk menutup modal
-function closeModal() {
-    var modal = document.getElementById("modal-add");
-    modal.style.display = "none";
-}
-
-// Tutup modal saat pengguna klik di luar konten modal
-window.onclick = function (event) {
-    var modal = document.getElementById("categoryModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-};
-
-function openModal(modalId) {
-    var modal = document.getElementById(modalId);
-    modal.style.display = "block";
-}
-
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    const content = modal.querySelector(".modal-content");
-
-    // Tambahkan kelas animasi zoomOut
-    content.style.animation = "zoomOut 0.5s ease-in-out";
-
-    // Tunggu sampai animasi selesai sebelum menyembunyikan modal
-    setTimeout(() => {
-        modal.style.display = "none";
-        content.style.animation = "";
-    }, 500);
 }
 
 window.onclick = function (event) {

@@ -117,6 +117,18 @@
             </div>
         </div>
     @endforeach
+    <script>
+        function openModal() {
+    var modal = document.getElementById("categoryModal");
+    modal.style.display = "block";
+}
+
+// Fungsi untuk menutup modal
+function closeModal() {
+    var modal = document.getElementById("categoryModal");
+    modal.style.display = "none";
+}
+    </script>
 
     <script src="{{ url('js/admins.js') }}"></script>
     <!-- Ionicons -->

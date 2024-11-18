@@ -20,6 +20,12 @@ use App\Http\Controllers\UpdateUserController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\UpdateProductController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Middleware\MidtransConfig;
+use App\Models\Order;
+
+Route::get('/some-path', function () {
+    // Akses Midtrans API di sini
+})->middleware(MidtransConfig::class);
 
 //not fount page
 
@@ -42,7 +48,6 @@ Route::prefix('/')->group(function () {
     })->name('guest.index');
 
     Route::get('produk', function () {
-
         if (Auth::check()) {
             // Cek status pengguna dan arahkan sesuai peran
             if (Auth::user()->status === 'admin') {
@@ -64,38 +69,39 @@ Route::prefix('/')->group(function () {
                 return redirect()->route('user.index');
             }
         }
-        
+
         return view('guest.about');
     })->name('guest.about');
 });
 
 // Routes untuk User
-Route::group(['middleware' => ['auth']],function(){
+Route::group(['middleware' => ['auth']], function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserPageController::class, 'index'])->name('user.index');
-            
+
         Route::get('/product', [UserPageController::class, 'productView'])->name('user.product');
-        
+        Route::get('/order', [UserPageController::class, 'orderView'])->name('user.order');
+        Route::put('user/order/update/{id}', [OrderController::class, 'update'])->name('user.order.update');
+        Route::delete('/order/delete/{id}', [OrderController::class, 'delete'])->name('user.order.delete');
+
         Route::get('/profile', [UserProfileController::class, 'index'])->name('user.profile');
         Route::put('/profile/update/{id}', [UserProfileController::class, 'update'])->name('user.profile.update');
-        
+
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('user.checkout');
         Route::delete('/checkout/delete/{id}', [CheckoutController::class, 'delete'])->name('user.checkout.delete');
-        Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('user.payment.process');
-        
-        Route::get('/payment', [PaymentController::class, 'index'])->name('user.payment');
+        Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('user.checkout.proses');
+        Route::post('/midtrans/callback', [CheckoutController::class, 'handleCallback'])->name('user.checkout.handleback');
+
 
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
         Route::get('/cart', [CartController::class, 'getCart'])->name('user.cart');
-
     });
 });
 
 // Route untuk Admin
 
 Route::group(['middleware' => ['auth']], function () {
-
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
     Route::get('admin/user', [UserAdminController::class, 'index'])->name('admin.user');
@@ -121,13 +127,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('admin/categories/add', [CategoriesController::class, 'add'])->name('admin.categories.add');
 
-    Route::delete('admin/categories/delete/{id}', [CategoriesController::class, 'delete'])->name(('admin.categories.delete'));
+    Route::delete('admin/categories/delete/{id}', [CategoriesController::class, 'delete'])->name('admin.categories.delete');
 
     Route::put('admin/categories/update/{id}', [CategoriesController::class, 'update'])->name('admin.categories.update');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
 
 // Auth Routes
 Route::get('/register', function () {

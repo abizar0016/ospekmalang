@@ -208,133 +208,109 @@
     //[Cart]
 
     $(document).ready(function () {
-        $(document).on("click", ".add-btn, .js-addcart-detail", function (e) {
-            e.preventDefault();
 
-            var form = $(this).closest("form");
-            var formData = form.serialize();
-            var nameProduct = $(this)
-                .closest(".product-list")
-                .find(".name-product")
-                .html();
-
+        $("#handleback").on("submit", function (e) {
+            e.preventDefault(); // Mencegah form dikirim langsung
+            const form = $(this);
+    
             $.ajax({
                 url: form.attr("action"),
-                method: form.attr("method"),
-                data: formData,
+                type: "POST",
+                data: form.serialize(),
                 success: function (response) {
                     if (response.success) {
                         swal({
-                            title: nameProduct,
-                            text: "is added to cart!",
+                            title: "Sukses!",
+                            text: response.message,
                             icon: "success",
-                            timer: 1000, // Menampilkan selama 1 detik
-                            buttons: false,
-                        }).then(function () {
-                            // Refresh halaman setelah pesan ditutup
-                            location.reload();
-                        });
-                    } else {
-                        swal({
-                            title: "Error!",
-                            text:
-                                response.message ||
-                                "Failed to add product to cart.",
-                            icon: "error",
                             timer: 1000,
                             buttons: false,
-                        });
+                        }).then(() => location.reload());
+                    } else {
+                        swal(
+                            "Error!",
+                            response.message || "Terjadi kesalahan.",
+                            "error"
+                        );
                     }
                 },
                 error: function (xhr) {
-                    console.error(xhr.responseText);
-                    swal({
-                        title: "Error!",
-                        text: "Error occurred: " + xhr.responseText,
-                        icon: "error",
-                        timer: 1000,
-                        buttons: false,
-                    });
-                },
-                complete: function () {
-                    // Mengaktifkan kembali tombol setelah proses selesai
-                    $(this).prop("disabled", false).text("Tambah ke Keranjang");
+                    let errorMessage =
+                        xhr.responseJSON?.message || "Gagal menambahkan data.";
+                    swal("Error!", errorMessage, "error");
                 },
             });
         });
 
-        $(document).on("click", ".delete-item", function () {
-            var itemId = $(this).data("item-id");
-            var formId = "delete-item-" + itemId;
-            var nameProduct = $(this).data("item-name");
-        
-            swal({
-                title: "Anda yakin ingin menghapus " + nameProduct + "?",
-                text: "Item ini akan dihapus dari keranjang!",
-                icon: "warning",
-                buttons: {
-                    cancel: {
-                        text: "Batal",
-                        value: null,
-                        visible: true,
-                        className: "",
-                        closeModal: true, // Memungkinkan modal ditutup
-                    },
-                    confirm: {
-                        text: "Ya, hapus!",
-                        value: true,
-                        visible: true,
-                        className: "confirm-button",
-                        closeModal: true, // Memungkinkan modal ditutup
-                    },
-                },
-            }).then((result) => {
-                if (result) {
-                    // Tampilkan pesan "Menghapus..."
-                    swal({
-                        title: "Menghapus...",
-                        text: "Sedang menghapus item dari keranjang...",
-                        icon: "info",
-                        buttons: false, // Menyembunyikan tombol "OK"
-                        timer: 1000, // Menampilkan selama 1 detik
-                    });
-        
-                    // Submit the form via AJAX
-                    $.ajax({
-                        url: $("#" + formId).attr("action"),
-                        method: "POST",
-                        data: $("#" + formId).serialize(),
-                        success: function (response) {
-                            if (response.success) {
-                                // Tampilkan pesan berhasil
-                                swal({
-                                    title: "Berhasil!",
-                                    text: response.message,
-                                    icon: "success",
-                                    timer: 1000,
-                                    buttons: false, // Menyembunyikan tombol "OK"
-                                }).then(() => {
-                                    // Reload halaman setelah menampilkan pesan
-                                    location.reload();
-                                });
-                            } else {
-                                // Tampilkan pesan kesalahan jika ada
-                                swal("Error!", response.message, "error");
-                            }
-                        },
-                        error: function (xhr) {
-                            // Tampilkan pesan kesalahan umum jika terjadi kesalahan
-                            var errorMessage =
-                                xhr.responseJSON?.message ||
-                                "Terjadi kesalahan saat menghapus item.";
-                            swal("Error!", errorMessage, "error");
-                        },
-                    });
-                }
-            });
-        });
-        
     });
+
+    $(".delete-order").on("submit", function (event) {
+        event.preventDefault(); // Mencegah pengiriman form secara langsung
+        const formId = $(this).attr("id"); // Ambil ID form
+    
+        swal({
+            title: "Apakah Anda yakin ingin menghapus ?",
+            text: "Anda tidak dapat mengembalikan aksi ini!",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Batal",
+                    value: null,
+                    visible: true,
+                    className: "",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Ya, hapus!",
+                    value: true,
+                    visible: true,
+                    className: "confirm-button",
+                    closeModal: true,
+                },
+            },
+        }).then((result) => {
+            if (result) {
+                // Tampilkan pesan "Menghapus..."
+                swal({
+                    title: "Menghapus...",
+                    text: "Sedang menghapus item...",
+                    icon: "info",
+                    buttons: false,
+                    timer: 1000,
+                });
+    
+                // Submit the form via AJAX
+                $.ajax({
+                    url: $("#" + formId).attr("action"),
+                    method: "POST", // Gunakan POST
+                    data: $("#" + formId).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            // Tampilkan pesan berhasil
+                            swal({
+                                title: "Berhasil!",
+                                text: response.message,
+                                icon: "success",
+                                timer: 1000,
+                                buttons: false,
+                            }).then(() => {
+                                location.reload(); // Reload halaman
+                            });
+                        } else {
+                            swal("Error!", response.message, "error");
+                        }
+                    },
+                    error: function (xhr) {
+                        var errorMessage =
+                            xhr.responseJSON?.message || "Terjadi kesalahan saat menghapus item.";
+                        swal("Error!", errorMessage, "error");
+                    },
+                });
+            }
+        });
+    });
+    
+    
 
     //===========================================================================================================
 
@@ -415,46 +391,68 @@ function changeImage(imageUrl, productId) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Ambil semua checkbox item
-    const checkboxes = document.querySelectorAll(".item-checkbox");
-    const totalPriceElement = document.getElementById("total-price");
+// Fungsi untuk memperbarui total harga dan produk yang dipilih
+// Fungsi untuk memperbarui total harga dan produk yang dipilih
+function updateTotal() {
+    let total = 0;
+    let selectedProducts = [];
 
-    // Tambahkan event listener ke setiap checkbox
-    checkboxes.forEach(function (checkbox) {
-        checkbox.addEventListener("change", function () {
-            updateTotalPrice(); // Panggil fungsi setiap kali checkbox berubah
-        });
+    // Menentukan produk yang dipilih dan menghitung total harga
+    document.querySelectorAll('.cart-checkbox:checked').forEach(function(checkbox) {
+        // Mendapatkan harga dan kuantitas produk dengan validasi
+        let price = parseInt(checkbox.getAttribute('data-price'));
+        if (isNaN(price)) {
+            price = 0;  // Pastikan harga valid, jika tidak maka 0
+        }
+        
+        let quantity = parseInt(checkbox.getAttribute('data-quantity')) || 1; // Menggunakan 1 jika kuantitas tidak valid
+        if (quantity <= 0) {
+            quantity = 1;  // Pastikan kuantitas valid, jika tidak maka 1
+        }
+
+        let productId = checkbox.getAttribute('data-id');
+
+        // Menambahkan harga dan kuantitas ke total
+        total += price * quantity;
+        
+        // Menambahkan produk yang dipilih ke array
+        selectedProducts.push({ id: productId, quantity: quantity });
     });
 
-    function updateTotalPrice() {
-        let totalPrice = 0;
+    // Menampilkan total harga dengan format Rupiah
+    document.getElementById('total-price').textContent = total.toLocaleString('id-ID');
 
-        // Iterasi setiap checkbox yang dicentang
-        checkboxes.forEach(function (checkbox) {
-            if (checkbox.checked) {
-                const price = parseFloat(checkbox.getAttribute("data-price"));
-                const quantity = parseInt(
-                    checkbox.getAttribute("data-quantity")
-                );
+    // Menyimpan produk yang dipilih dalam input tersembunyi (dalam format JSON)
+    document.getElementById('selected_products').value = JSON.stringify(selectedProducts);
+}
 
-                // Debugging
-                console.log("Price:", price, "Quantity:", quantity);
+// Fungsi untuk menandai atau menghapus semua checkbox
+function toggleSelectAll() {
+    let selectAll = document.getElementById('select-all');
+    let checkboxes = document.querySelectorAll('.cart-checkbox');
+    
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = selectAll.checked;
+    });
 
-                // Hitung total harga
-                totalPrice += price * quantity;
-            }
-        });
+    updateTotal(); // Update total setelah memilih semua
+}
 
-        // Debugging hasil total price
-        console.log("Total Price:", totalPrice);
-
-        // Update total harga di DOM
-        if (totalPriceElement) {
-            totalPriceElement.textContent = totalPrice.toLocaleString("id-ID", {
-                style: "currency",
-                currency: "IDR",
-            });
-        }
+// Mengikat event ketika DOM sudah siap
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener untuk checkbox "select-all"
+    const selectAllCheckbox = document.getElementById('select-all');
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', toggleSelectAll);
+    } else {
+        console.warn("Checkbox 'select-all' tidak ditemukan.");
     }
+
+    // Event listener untuk setiap checkbox produk
+    document.querySelectorAll('.cart-checkbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', updateTotal);
+    });
+
+    // Pastikan total awal dihitung saat halaman dimuat
+    updateTotal();
 });

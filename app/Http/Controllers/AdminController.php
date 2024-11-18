@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Pastikan import ini ada
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 
 class AdminController extends Controller
 {
@@ -28,11 +29,11 @@ class AdminController extends Controller
         $sessions = $request->session()->get('uname');
         $userCount = User::count();
         $orderCount = Order::count();
-        $orders = Order::orderBy('id', 'desc')->get();
+        $orders = Order::with('orderitem', 'user')->orderBy('id', 'desc')->get();
         $productCount = Product::count();
-        $recentOrders = Order::with('user', 'product')->orderBy('created_at', 'desc')->get();
+        $orderItems = OrderItem::with('user', 'product', 'order')->orderBy('created_at', 'desc')->get();
 
-        return view('admin.index', compact('orders','orderCount', 'userCount', 'productCount', 'sessions', 'recentOrders'));
+        return view('admin.index', compact('orderItems','orderCount', 'userCount', 'productCount', 'sessions', 'orders'));
     }
 
     public function logout()

@@ -20,13 +20,10 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Pembeli</th>
-                            <th>Kota</th>
-                            <th>Barang</th>
-                            <th>Harga</th>
-                            <th>Pembayaran</th>
-                            <th>Status</th>
-                            <th class="aksi" colspan="3">Aksi</th>
+                        <th>Id</th>
+                        <th>Total</th>
+                        <th style="padding-right: 35rem">Status</th>
+                        <th class="aksi" colspan="3">Aksi</th>
                         </tr>
                     </thead>
 
@@ -37,58 +34,63 @@
                                     Sekarang</td>
                             </tr>
                         @else
-                            @foreach ($orders as $order)
-                                <tr>
-                                    <td>{{ $order->user->uname }}</td>
-                                    <td>{{ $order->user->city }}</td>
-                                    <td>{{ $order->product->name }}</td>
-                                    <td>Rp. {{ number_format($order->product->price, 0, ',', '.') }}</td>
-                                    <td>{{ $order->payment_status }}</td>
-                                    <td><span
-                                            class="status {{ strtolower($order->order_status) }}">{{ $order->order_status }}</span>
-                                    </td>
-                                    <td>
-                                        <button class="aksi-button" onclick="openModal('modal-view-{{ $order->id }}')">
-                                            Lihat </button>
-                                        <button class="aksi-button" onclick="openModal('modal-update-{{ $order->id }}')">
-                                            Perbarui </button>
-                                        <form action="{{ route('admin.order.delete', $order->id) }}" method="POST"
-                                            style="display:inline;" enctype="multipart/form-data">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="aksi-button" type="submit"
-                                                onclick="return confirm('Are you sure you want to delete this order?')">
-                                                Hapus </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                        @foreach ($orders as $order)
+                            <tr>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->total_price }}</td>
+                                <td>{{ $order->status }}</td>
+                                <td>
+
+                                    <button onclick="openModal('modal-view-{{ $order->id }}')" class="aksi-button">
+                                        Lihat
+                                    </button>
+                                    <button onclick="openModal('modal-update-{{ $order->id }}')"
+                                        class="aksi-button">
+                                        Edit
+                                    </button>
+                                    <form id="order-delete-{{ $order->id }}"
+                                        action="{{ route('admin.order.delete', $order->id) }}" method="POST"
+                                        style="display:inline;" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="aksi-button delete-order-button"
+                                            data-form-id="order-delete-{{ $order->id }}"
+                                            data-item-name="{{ $order->name }}">
+                                            Hapus
+                                        </button>
+                                    </form>
+
+                                </td>
+
+                            </tr>
+                        @endforeach
                         @endif
                     </tbody>
                 </table>
                 @if ($orders->hasPages())
-                <div class="pagination">
-                    @if ($orders->onFirstPage())
-                        <span class="page-item disabled">Previous</span>
-                    @else
-                        <a class="page-item" href="{{ $orders->previousPageUrl() }}">Previous</a>
-                    @endif
-    
-                    @for ($i = 1; $i <= $orders->lastPage(); $i++)
-                        <a class="page-item {{ $i == $orders->currentPage() ? 'active' : '' }}" href="{{ $orders->url($i) }}">{{ $i }}</a>
-                    @endfor
-    
-                    @if ($orders->hasMorePages())
-                        <a class="page-item" href="{{ $orders->nextPageUrl() }}">Next</a>
-                    @else
-                        <span class="page-item disabled">Next</span>
-                    @endif
-                </div>
-            @endif
+                    <div class="pagination">
+                        @if ($orders->onFirstPage())
+                            <span class="page-item disabled">Previous</span>
+                        @else
+                            <a class="page-item" href="{{ $orders->previousPageUrl() }}">Previous</a>
+                        @endif
+
+                        @for ($i = 1; $i <= $orders->lastPage(); $i++)
+                            <a class="page-item {{ $i == $orders->currentPage() ? 'active' : '' }}"
+                                href="{{ $orders->url($i) }}">{{ $i }}</a>
+                        @endfor
+
+                        @if ($orders->hasMorePages())
+                            <a class="page-item" href="{{ $orders->nextPageUrl() }}">Next</a>
+                        @else
+                            <span class="page-item disabled">Next</span>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>
-    @foreach ($orders as $order)
+    @foreach ($orderItems as $order)
         <!-- Modal for Viewing Order -->
         <div class="modal" id="modal-view-{{ $order->id }}" style="display: none;">
             <div class="modal-content">
@@ -97,17 +99,22 @@
                 <form>
                     <label for="name">Nama Pembeli :</label>
                     <input type="text" name="name" value="{{ $order->user->uname }}" readonly>
-                    <label for="name">Nama Barang :</label>
-                    <input type="text" name="name" value="{{ $order->product->name }}" readonly>
+                    
+                    <label for="name">Barang yang Dibeli :</label>
+                        @foreach ($orderItems as $item)
+                                <input type="text" name="product" value="{{ $order->product->name }} - {{ $order->quantity }} pcs" readonly>
+                        @endforeach
+                    
                     <label for="name">Waktu Memesan :</label>
-                    <input type="text" name="name" value="{{ $order->created_at }}" readonly>
-                    <label for="name">Status Pembayaran :</label>
-                    <input type="text" name="name" value="{{ $order->payment_status }}" readonly>
+                    <input type="text" name="name"
+                        value="{{ \Carbon\Carbon::parse($order->created_at)->locale('id')->translatedFormat('l, d F Y H:i') }}"
+                        readonly>
                     <label for="name">Status Pesanan :</label>
-                    <input type="text" name="name" value="{{ $order->order_status }}" readonly>
+                    <input type="text" name="name" value="{{ $order->order->status }}" readonly>
                 </form>
             </div>
         </div>
+        
 
         <!-- Modal for Updating Order -->
         <div class="modal" id="modal-update-{{ $order->id }}" style="display: none;">
@@ -118,24 +125,17 @@
                     @csrf
                     @method('PUT')
 
-                    <label for="payment_status">Status Pembayaran :</label>
-                    <select name="payment_status" required>
-                        <option value="dibayar" {{ $order->payment_status === 'dibayar' ? 'selected' : '' }}>Dibayar
-                        </option>
-                        <option value="jatuh tempo" {{ $order->payment_status === 'jatuh tempo' ? 'selected' : '' }}>
-                            Jatuh Tempo</option>
-                        <option value="belum dibayar"
-                            {{ $order->payment_status === 'belum dibayar' ? 'selected' : '' }}>Belum Dibayar</option>
-                    </select>
-
                     <label for="order_status">Status Pesanan :</label>
-                    <select name="order_status" required>
-                        <option value="tertunda" {{ $order->order_status === 'tertunda' ? 'selected' : '' }}>Tertunda
+                    <select name="status" required>
+                        <option value="tertunda" {{ $order->status === 'tertunda' ? 'selected' : '' }}>Tertunda
                         </option>
-                        <option value="terkirim" {{ $order->order_status === 'terkirim' ? 'selected' : '' }}>Terkirim
+                        <option value="dikirim" {{ $order->status === 'dikirim' ? 'selected' : '' }}>Dirkirim
                         </option>
-                        <option value="dalam pengerjaan"
-                            {{ $order->order_status === 'dalam pengerjaan' ? 'selected' : '' }}>Dalam Pengerjaan
+                        <option value="dikerjakan" {{ $order->status === 'dikerjakan' ? 'selected' : '' }}>
+                            Dikerjakan
+                        </option>
+                        <option value="dikembalikan" {{ $order->status === 'dikembalikan' ? 'selected' : '' }}>
+                            Dikembalikan
                         </option>
                     </select>
 
@@ -144,6 +144,26 @@
             </div>
         </div>
     @endforeach
+
+    <script>
+         // Fungsi untuk membuka modal
+         function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block'; // Menampilkan modal
+                document.body.style.overflow = 'hidden'; // Mencegah scroll di background
+            }
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none'; // Menyembunyikan modal
+                document.body.style.overflow = 'auto'; // Mengembalikan scroll di background
+            }
+        }
+    </script>
 
 
 </body>

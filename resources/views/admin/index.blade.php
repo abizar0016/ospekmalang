@@ -55,28 +55,21 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Pembeli</th>
-                            <th>Kota</th>
-                            <th>Barang</th>
-                            <th>Harga</th>
-                            <th>Pembayaran</th>
-                            <th>Status</th>
+                            <th>Id</th>
+                            <th>Total</th>
+                            <th style="padding-right: 35rem">Status</th>
                             <th class="aksi" colspan="3">Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($recentOrders->take(5) as $order)
+                        @foreach ($orders->take(5) as $order)
                             <tr>
-                                <td>{{ $order->user->uname }}</td>
-                                <td>{{ $order->user->city }}</td>
-                                <td>{{ $order->product->name }}</td>
-                                <td>Rp. {{ number_format($order->product->price, 0, ',', '.') }}</td>
-                                <td>{{ $order->payment_status }}</td>
-                                <td><span
-                                        class="status {{ strtolower($order->order_status) }}">{{ $order->order_status }}</span>
-                                </td>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->total_price }}</td>
+                                <td>{{ $order->status }}</td>
                                 <td>
+
                                     <button onclick="openModal('modal-view-{{ $order->id }}')" class="aksi-button">
                                         Lihat
                                     </button>
@@ -106,7 +99,7 @@
         </div>
     </div>
 
-    @foreach ($orders as $order)
+    @foreach ($orderItems as $order)
         <!-- Modal for Viewing Order -->
         <div class="modal" id="modal-view-{{ $order->id }}" style="display: none;">
             <div class="modal-content">
@@ -138,15 +131,11 @@
                         </div>
 
 
-                        <label for="order_date">Waktu Memesan :</label>
-                        <input type="text" name="order_date"
-                            value="{{ \Carbon\Carbon::parse($order->created_at)->locale('id')->translatedFormat('l, d F Y H:i') }}"
-                            readonly>
-
                         <div class="input-row">
                             <div class="input-grup">
-                                <label for="payment_status">Status Pembayaran :</label>
-                                <input type="text" name="payment_status" value="{{ $order->payment_status }}"
+                                <label for="order_date">Waktu Memesan :</label>
+                                <input type="text" name="order_date"
+                                    value="{{ \Carbon\Carbon::parse($order->created_at)->locale('id')->translatedFormat('l, d F Y H:i') }}"
                                     readonly>
                             </div>
                             <div class="input-grup">
@@ -155,9 +144,8 @@
                             </div>
                         </div>
 
-
                         <label for="address">Alamat Pengiriman :</label>
-                        <textarea name="address" readonly>{{ $order->alamat }}</textarea>
+                        <textarea name="address" readonly>{{ $order->user->city }}</textarea>
                     </form>
                 </div>
 
@@ -226,26 +214,16 @@
                     @csrf
                     @method('PUT')
 
-                    <label for="payment_status">Status Pembayaran :</label>
-                    <select name="payment_status" required>
-                        <option value="dibayar" {{ $order->payment_status === 'dibayar' ? 'selected' : '' }}>Dibayar
-                        </option>
-                        <option value="jatuh tempo" {{ $order->payment_status === 'jatuh tempo' ? 'selected' : '' }}>
-                            Jatuh Tempo</option>
-                        <option value="belum dibayar"
-                            {{ $order->payment_status === 'belum dibayar' ? 'selected' : '' }}>Belum Dibayar</option>
-                    </select>
-
                     <label for="order_status">Status Pesanan :</label>
-                    <select name="order_status" required>
-                        <option value="tertunda" {{ $order->order_status === 'tertunda' ? 'selected' : '' }}>Tertunda
+                    <select name="status" required>
+                        <option value="tertunda" {{ $order->status === 'tertunda' ? 'selected' : '' }}>Tertunda
                         </option>
-                        <option value="dikirim" {{ $order->order_status === 'dikirim' ? 'selected' : '' }}>Dirkirim
+                        <option value="dikirim" {{ $order->status === 'dikirim' ? 'selected' : '' }}>Dirkirim
                         </option>
-                        <option value="dikerjakan" {{ $order->order_status === 'dikerjakan' ? 'selected' : '' }}>
+                        <option value="dikerjakan" {{ $order->status === 'dikerjakan' ? 'selected' : '' }}>
                             Dikerjakan
                         </option>
-                        <option value="dikembalikan" {{ $order->order_status === 'dikembalikan' ? 'selected' : '' }}>
+                        <option value="dikembalikan" {{ $order->status === 'dikembalikan' ? 'selected' : '' }}>
                             Dikembalikan
                         </option>
                     </select>
@@ -256,6 +234,25 @@
         </div>
     @endforeach
 
+    <script>
+        // Fungsi untuk membuka modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block'; // Menampilkan modal
+                document.body.style.overflow = 'hidden'; // Mencegah scroll di background
+            }
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none'; // Menyembunyikan modal
+                document.body.style.overflow = 'auto'; // Mengembalikan scroll di background
+            }
+        }
+    </script>
 </body>
 
 <x-script></x-script>

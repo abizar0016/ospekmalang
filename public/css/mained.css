@@ -3818,6 +3818,7 @@ input.num-product::-webkit-inner-spin-button {
 .image-list img {
   width: 50px;
   height: 50px;
+  object-fit: contain;
 }
 
 .image-product {
@@ -3889,7 +3890,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .description-product{
-  height: 150px;
+  height: 50px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -3968,10 +3969,12 @@ input.num-product::-webkit-inner-spin-button {
 /* Fixed Checkout Section Styling */
 .checkout-total-bar {
   display: flex;
+  background:#fff;
   align-items: center;
   justify-content: end;
   position: fixed;
   bottom: 0;
+  right: 0;
   width: 100%;
   padding: 20px;
   box-shadow: 0px -4px 12px 12px rgba(0, 0, 0, 0.15);
@@ -4094,4 +4097,79 @@ input.num-product::-webkit-inner-spin-button {
   padding: 10px 20px;
   border-radius: 5px;
   transition: background-color 0.3s;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover, .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Mengatur teks pada kolom terakhir (td) */
+table tr td:last-child {
+  text-align: center;
+}
+
+/* Mengatur teks pada kolom kedua dari belakang (td) */
+table tr td:nth-last-child(2) {
+  text-align: center;
+}
+
+/* Mengatur teks pada kolom terakhir (th) */
+table tr th:last-child {
+  text-align: center;
+}
+
+/* Mengatur teks pada kolom kedua dari belakang (th) */
+table tr th:nth-last-child(2) {
+  text-align: center;
+}
+/* Mengatur teks pada kolom kedua dari belakang (th) */
+table tr th:nth-last-child(3) {
+  text-align: center;
+}
+
+table tr td:nth-last-child(4) {
+  text-align: center;
+}
+table tr th:nth-last-child(4) {
+  text-align: center;
+}
+
+table tr td:nth-last-child(3) {
+  text-align: center;
 }

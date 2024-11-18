@@ -1,6 +1,77 @@
 <x-head></x-head>
 
 <body class="animsition">
+    <style>
+        /* Form Container */
+        .form-elegant {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .form-elegant:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Label */
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Quantity Input */
+        .form-input {
+            width: 80px;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #fff;
+            color: #333;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #717fe0;
+            box-shadow: 0 0 5px rgba(113, 127, 224, 0.5);
+            outline: none;
+        }
+
+        /* Submit Button */
+        .form-btn {
+            padding: 10px 20px;
+            background-color: #717fe0;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .form-btn:hover {
+            background-color: #575ed1;
+            transform: translateY(-2px);
+        }
+
+        .form-btn:active {
+            background-color: #444ab8;
+            transform: translateY(0);
+        }
+    </style>
 
     <!-- Header -->
     @include('components.userheader')
@@ -22,27 +93,27 @@
             <div class="header-cart-content flex-w js-pscroll">
                 <ul class="header-cart-wrapitem w-full">
                     @foreach ($cartItems as $item)
-                        <li class="header-cart-item flex-w flex-t m-b-12">
+                    <li class="header-cart-item flex-w flex-t m-b-12">
 
-                            <div class="header-cart-item-img" data-item-id="{{ $item->id }}"
-                                data-item-name="{{ $item->product->name }}">
-                                <img src="{{ asset('images/' . $item->product->image1) }}" alt="IMG">
-                            </div>
+                        <div class="header-cart-item-img" data-item-id="{{ $item->id }}"
+                            data-item-name="{{ $item->product->name }}">
+                            <img src="{{ asset('images/' . $item->product->image1) }}" alt="IMG">
+                        </div>
 
-                            <div class="header-cart-item-txt">
-                                <p class="header-cart-item-name m-b-1 hov-cl1 trans-04">
-                                    {{ $item->product->name }}
-                                </p>
+                        <div class="header-cart-item-txt">
+                            <p class="header-cart-item-name m-b-1 hov-cl1 trans-04">
+                                {{ $item->product->name }}
+                            </p>
 
-                                <span class="header-cart-item-info">
-                                    Size: {{ $item->product->size ?? '-' }}
-                                </span>
+                            <span class="header-cart-item-info">
+                                Size: {{ $item->product->size ?? '-' }}
+                            </span>
 
-                                <span class="header-cart-item-info">
-                                    {{ $item->quantity }} x {{ number_format($item->product->price, 0, ',', '.') }}
-                                </span>
-                            </div>
-                        </li>
+                            <span class="header-cart-item-info">
+                                {{ $item->quantity }} x {{ number_format($item->product->price, 0, ',', '.') }}
+                            </span>
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
 
@@ -81,7 +152,7 @@
     <section class="section-slide">
         <div class="wrap-slick1">
             <div class="slick1">
-                <div class="item-slick1" style="background-image: url({{ url('images/bg-slide2.png') }});">
+                <div class="item-slick1" style="background-image: url({{ url('images/bg-slide2.png') }})">
                     <div class="container h-full">
                         <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
                             <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
@@ -301,24 +372,24 @@
                 </button>
                 <div class="category-buttons">
                     @foreach ($categories as $categories)
-                        <button class="filter-button stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                            data-filter="{{ $categories->id }}">
-                            {{ $categories->name }}
-                        </button>
+                    <button class="filter-button stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+                        data-filter="{{ $categories->id }}">
+                        {{ $categories->name }}
+                    </button>
                     @endforeach
                 </div>
 
-                <div class="flex-w flex-c-m m-tb-10">
+                <!-- <div class="flex-w flex-c-m m-tb-10">
 
                     <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
                         <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
                         <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
                         Cari
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Search product -->
-                <div class="dis-none panel-search w-full p-t-10 p-b-15">
+                <!-- <div class="dis-none panel-search w-full p-t-10 p-b-15">
                     <div class="bor8 dis-flex p-l-15">
                         <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
                             <i class="zmdi zmdi-search"></i>
@@ -329,33 +400,33 @@
                                 placeholder="Search">
                         </form>
                     </div>
-                </div>
+                </div> -->
             </div>
 
 
 
             <div class="products-container mt-4">
 
-                @foreach ($products->take(8) as $product)
-                    <div class="isotope-item {{ $product->categories->id }} js-show-modal1"
-                        onclick="showModal({{ $product->id }})">
-                        <div class="block2">
-                            <div class="block2-pic hov-img0">
-                                <img src="{{ url('images/' . $product->image1) }}" alt="IMG-PRODUCT">
-                            </div>
-                            <div class="block2-txt flex-w flex-t p-t-14">
-                                <div class="block2-txt-child1 flex-col-l">
-                                    <a href="product-detail.html"
-                                        class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                        {{ $product->name }}
-                                    </a>
-                                    <span class="stext-105 cl3">
-                                        Rp. {{ $product->price }}
-                                    </span>
-                                </div>
+                @foreach ($products->take(5) as $product)
+                <div class="isotope-item {{ $product->categories->id }} js-show-modal1"
+                    onclick="showModal({{ $product->id }})">
+                    <div class="block2">
+                        <div class="block2-pic hov-img0">
+                            <img src="{{ url('images/' . $product->image1) }}" alt="IMG-PRODUCT">
+                        </div>
+                        <div class="block2-txt flex-w flex-t p-t-14">
+                            <div class="block2-txt-child1 flex-col-l">
+                                <a href="product-detail.html"
+                                    class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                    {{ $product->name }}
+                                </a>
+                                <span class="stext-105 cl3">
+                                    Rp. {{ $product->price }}
+                                </span>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
 
@@ -459,45 +530,46 @@
 
     <!-- Modal1 -->
     @foreach ($products as $product)
-        <div class="wrap-modal1 js-modal1 p-t-60 p-b-20 {{ $loop->first ? 'modal-open' : '' }}"
-            id="modal-{{ $product->id }}">
-            <div class="overlay-modal1 js-hide-modal1"></div>
-            <div class="container">
-                <div class=" bg0 p-t-20 p-b-20 p-lr-15-lg how-pos3-parent">
-                    <div class="product-container">
-                        <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                            <img src="{{ url('images/icon-close.png') }}" alt="CLOSE">
-                        </button>
-                        <!-- Modal content here -->
-                        <ul class="image-list">
-                            <li class="image-list-items">
-                                <img src="{{ asset('images/' . $product->image1) }}" alt="Image 1"
-                                    onclick="changeImage('{{ asset('images/' . $product->image1) }}', {{ $product->id }})">
-                            </li>
-                            <li class="image-list-items">
-                                <img src="{{ asset('images/' . $product->image2) }}" alt="Image 2"
-                                    onclick="changeImage('{{ asset('images/' . $product->image2) }}', {{ $product->id }})">
-                            </li>
-                            <li class="image-list-items">
-                                <img src="{{ asset('images/' . $product->image3) }}" alt="Image 3"
-                                    onclick="changeImage('{{ asset('images/' . $product->image3) }}', {{ $product->id }})">
-                            </li>
-                        </ul>
-                        <div class="image-product">
-                            <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="{{ asset('images/' . $product->image1) }}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img id="mainProductImage-{{ $product->id }}"
-                                            src="{{ asset('images/' . $product->image1) }}" alt="IMG-PRODUCT">
-                                        <a id="mainProductLink-{{ $product->id }}"
-                                            href="{{ asset('images/' . $product->image1) }}">
-                                        </a>
-                                    </div>
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20 {{ $loop->first ? 'modal-open' : '' }}"
+        id="modal-{{ $product->id }}">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+        <div class="container">
+            <div class=" bg0 p-t-20 p-b-20 p-lr-15-lg how-pos3-parent">
+                <div class="product-container">
+                    <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                        <img src="{{ url('images/icon-close.png') }}" alt="CLOSE">
+                    </button>
+                    <!-- Modal content here -->
+                    <ul class="image-list">
+                        <li class="image-list-items">
+                            <img src="{{ asset('images/' . $product->image1) }}" alt="Image 1"
+                                onclick="changeImage('{{ asset('images/' . $product->image1) }}', {{ $product->id }})">
+                        </li>
+                        <li class="image-list-items">
+                            <img src="{{ asset('images/' . $product->image2) }}" alt="Image 2"
+                                onclick="changeImage('{{ asset('images/' . $product->image2) }}', {{ $product->id }})">
+                        </li>
+                        <li class="image-list-items">
+                            <img src="{{ asset('images/' . $product->image3) }}" alt="Image 3"
+                                onclick="changeImage('{{ asset('images/' . $product->image3) }}', {{ $product->id }})">
+                        </li>
+                    </ul>
+                    <div class="image-product">
+                        <div class="slick3 gallery-lb">
+                            <div class="item-slick3" data-thumb="{{ asset('images/' . $product->image1) }}">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img id="mainProductImage-{{ $product->id }}"
+                                        src="{{ asset('images/' . $product->image1) }}" alt="IMG-PRODUCT">
+                                    <a id="mainProductLink-{{ $product->id }}"
+                                        href="{{ asset('images/' . $product->image1) }}">
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-6 col-lg-5 p-b-30">
+                    <div class="col-md-6 col-lg-5 p-b-30">
+                        <form action="{{ route('cart.add') }}" id="cart-add" method="POST" class="form-elegant form-cart">
                             <div class="p-r-50 p-t-5 p-lr-0-lg product-list">
                                 <h4 class="name-product" id="modal-product-name">
                                     {{ $product->name }}
@@ -512,23 +584,56 @@
                                 </p>
 
                                 <div class="p-t-33">
-                                    <form action="{{ route('cart.add') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                        <label for="quantity">Quantity:</label>
-                                        <input type="number" name="quantity" class="text-disabled" value="1"
-                                            min="1" max="{{ $product->stock }}">
-                                        <button type="submit" class="btn">Tambah</button>
-                                    </form>
-                                </div>
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <label for="quantity" class="form-label">Quantity:</label>
+                                    <input type="number" name="quantity" class="form-input" value="1" min="1" max="{{ $product->stock }}">
+                                    <input type="submit" class="form-btn mt-3"></input>
+                        </form>
 
-                            </div>
-                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     @endforeach
+    <script>
+        $(".form-cart").on("submit", function(e) {
+            e.preventDefault(); // Mencegah form dikirim langsung
+            const form = $(this);
+
+            $.ajax({
+                url: form.attr("action"),
+                type: "POST",
+                data: form.serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        swal({
+                            title: "Sukses!",
+                            text: response.message,
+                            icon: "success",
+                            timer: 1000,
+                            buttons: false,
+                        }).then(() => location.reload());
+                    } else {
+                        swal(
+                            "Error!",
+                            response.message || "Terjadi kesalahan.",
+                            "error"
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    let errorMessage =
+                        xhr.responseJSON?.message || "Gagal menambahkan data.";
+                    swal("Error!", errorMessage, "error");
+                },
+            });
+        });
+    </script>
 </body>
 
 <x-script></x-script>

@@ -9,13 +9,25 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'total_price',
+        'status',
+    ];
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id'); // Pastikan foreign key adalah 'user_id'
     }
-
-    public function product()
+    
+    
+    public function orderitem()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->hasMany(OrderItem::class);
     }
+    public function items()
+{
+    return $this->hasMany(OrderItem::class, 'order_id');
 }
+
+}
+

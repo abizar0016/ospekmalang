@@ -133,47 +133,6 @@ window.onclick = function(event) {
     }
 };
 
-// Update total price based on selected checkboxes
-function updateTotal() {
-    let total = 0;
-    document
-        .querySelectorAll(".cart-checkbox:checked")
-        .forEach(function (checkbox) {
-            const price = parseInt(checkbox.getAttribute("data-price"));
-            const quantity = parseInt(checkbox.getAttribute("data-quantity"));
-            total += price * quantity;
-        });
-
-    document.getElementById("total-price").textContent =
-        total.toLocaleString("id-ID");
-}
-
-// Toggle all checkboxes when "Select All" checkbox is clicked
-function toggleSelectAll() {
-    const selectAllCheckbox = document.getElementById("select-all"); // "Select All" checkbox
-    const checkboxes = document.querySelectorAll(".cart-checkbox"); // All item checkboxes
-
-    // Set all item checkboxes to the same checked state as "Select All"
-    checkboxes.forEach(function (checkbox) {
-        checkbox.checked = selectAllCheckbox.checked;
-    });
-
-    // Update total price
-    updateTotal();
-}
-
-// Add event listener to "Select All" checkbox
-document.getElementById("select-all").addEventListener("change", function () {
-    // Select or deselect all checkboxes based on the "Select All" checkbox state
-    const checkboxes = document.querySelectorAll(".cart-checkbox");
-    checkboxes.forEach((checkbox) => {
-        checkbox.checked = this.checked;
-    });
-
-    // Update the total price
-    updateTotal();
-});
-
 function userImageUpdate() {
     const input = document.getElementById('imageUpload');
     const preview = document.getElementById('imgPreview');
@@ -187,5 +146,21 @@ function userImageUpdate() {
     } else {
         // Jika tidak ada file, atur ulang ke gambar default
         preview.src = "{{ asset('images/default-profile.jpg') }}";
+    }
+}
+
+function showPaymentModal() {
+    // Dapatkan produk yang dipilih
+    let selectedProducts = [];
+    document.querySelectorAll('.cart-checkbox:checked').forEach((checkbox) => {
+        selectedProducts.push(checkbox.dataset.id);
+    });
+
+    // Tampilkan modal jika ada produk yang dipilih
+    if (selectedProducts.length > 0) {
+        document.getElementById('selected_products').value = JSON.stringify(selectedProducts);
+        document.getElementById('recipientModal').style.display = 'block';
+    } else {
+        alert('Silakan pilih produk terlebih dahulu.');
     }
 }

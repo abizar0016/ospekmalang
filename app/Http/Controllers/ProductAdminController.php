@@ -14,7 +14,6 @@ class ProductAdminController extends Controller
     {
         $products = Product::orderBy('id', 'desc')->paginate(5);
         $categories = Category::all();
-        // dd($products); // Debugging untuk melihat data
         return view('admin.product.index', compact('products', 'categories'));
     }
 
@@ -24,51 +23,36 @@ class ProductAdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'descriptions' => 'required|string',
-            'image1' => 'required|image|mimes:jpeg,png,jpg,gif,webp,jfif',
-            'image2' => 'required|image|mimes:jpeg,png,jpg,gif,webp,jfif',
-            'image3' => 'required|image|mimes:jpeg,png,jpg,gif,webp,jfif',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,jfif',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,jfif',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,jfif',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
             'category_id' => 'required|exists:categorys,id'
         ]);
 
         // Memproses gambar 1
-        $imageName1 = null;
-        if ($request->hasFile('image1')) {
-            $image1 = $request->file('image1');
-            $imageName1 = time() . '.' . $image1->getClientOriginalExtension();
-            $image1->move(public_path('images'), $imageName1);
-        }
+        $imageName1 = $this->uploadImage($request, 'image1');
 
-        // Memproses gambar 2 (opsional)
-        $imageName2 = null;
-        if ($request->hasFile('image2')) {
-            $image2 = $request->file('image2');
-            $imageName2 = time() . '.' . $image2->getClientOriginalExtension();
-            $image2->move(public_path('images'), $imageName2);
-        }
+        // Memproses gambar 2
+        $imageName2 = $this->uploadImage($request, 'image2');
 
-        // Memproses gambar 3 (opsional)
-        $imageName3 = null;
-        if ($request->hasFile('image3')) {
-            $image3 = $request->file('image3');
-            $imageName3 = time() . '.' . $image3->getClientOriginalExtension();
-            $image3->move(public_path('images'), $imageName3);
-        }
+        // Memproses gambar 3
+        $imageName3 = $this->uploadImage($request, 'image3');
 
         // Simpan data produk ke database
         $product = new Product();
         $product->name = $request->name;
         $product->descriptions = $request->descriptions;
         $product->image1 = $imageName1;
-        $product->image2 = $imageName2; // Gambar kedua opsional
-        $product->image3 = $imageName3; // Gambar ketiga opsional
+        $product->image2 = $imageName2;
+        $product->image3 = $imageName3;
         $product->price = $request->price;
         $product->stock = $request->stock;
-        $product->category_id = $request->category_id; // Perbaikan bagian ini
+        $product->category_id = $request->category_id;
         $product->save(); 
 
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
+        return response()->json(['success' => true, 'message' => 'Produk berhasil ditambahkan']);
     }
 
     public function update(Request $request, $id)
@@ -79,36 +63,55 @@ class ProductAdminController extends Controller
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
             'category_id' => 'required|exists:categorys,id',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,jfif',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,jfif',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,jfif',
         ]);
     
         $product = Product::findOrFail($id);
     
-        // Memeriksa apakah ada file gambar yang diunggah
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $product->image = $imagePath;
-        }
+        // Memproses gambar 1
+        $imageName1 = $this->uploadImage($request, 'image1');
+        $imageName2 = $this->uploadImage($request, 'image2');
+        $imageName3 = $this->uploadImage($request, 'image3');
     
         // Memperbarui informasi produk
         $product->name = $request->input('name');
         $product->descriptions = $request->input('descriptions');
         $product->price = $request->input('price');
         $product->stock = $request->input('stock');
-        $product->category_id = $request->input('category_id');
+        $product->category_id =  $request->category_id;;
+    
+        // Update images only if new ones are uploaded
+        $product->image1 = $imageName1 ?: $product->image1;
+        $product->image2 = $imageName2 ?: $product->image2;
+        $product->image3 = $imageName3 ?: $product->image3;
     
         // Simpan perubahan
         $product->save();
     
-        return redirect()->back()->with('success', 'Produk berhasil diperbarui');
+        return response()->json(['success' => true, 'message' => 'Produk berhasil diperbarui']);
     }
     
 
     // Menghapus produk
     public function delete($id)
     {
-        $product = Product::findOrFail($id); // Cari produk berdasarkan ID
+        $product = Product::findOrFail($id);
         $product->delete();
 
-        return redirect()->back()->with('success', 'Produk berhasil dihapus');
+        return response()->json(['success' => true, 'message' => 'Produk berhasil dihapus']);
+    }
+
+    // Helper function to upload images
+    private function uploadImage(Request $request, $imageField)
+    {
+        if ($request->hasFile($imageField)) {
+            $image = $request->file($imageField);
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            return $imageName;
+        }
+        return null;
     }
 }

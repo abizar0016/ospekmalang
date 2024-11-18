@@ -51,6 +51,11 @@
                                     <span class="tittle">Edit Profil</span>
                                 </li>
                             </a>
+                            <a href="{{ route('user.order') }}">
+                            <li class="profil-list">
+                                    <span class="tittle">Pesanan</span>
+                                </li>
+                            </a>
                             @auth
                             @if (Auth::user()->status === 'admin')
                             <a href="{{ route('admin.index') }}">
